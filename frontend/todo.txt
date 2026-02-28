@@ -1,0 +1,11 @@
+1. API
+2. Frontend
+    - DONE create layous
+    - Questions
+        - create a qiestion
+        - report a Questions - search by ID, input what is the report, submit
+        - rate a quetion
+        
+3. DONE TO FIX AUTHENTICATION AND AUTHORIZATION
+4. DONE Questions become pending on creation. After admin check it may be confirmed or rejected. If Confirmed it will be in the playlist questions.
+5. restrict cirtain views on the FE if user is not loged in!
