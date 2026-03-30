@@ -15,11 +15,18 @@
 }
 
 @layer utilities {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+
   .nav {
     @apply px-2 py-0.5 rounded-lg border border-transparent;
   }
 
   .nav-hover {
-    @apply hover:bg-gradient-to-r hover:from-sky-100 to-sky-200 hover:border-black;
+    @apply hover:bg-gradient-to-r hover:from-sky-100 to-sky-200 hover:border-black hover:rounded-2xl;
   }
 }

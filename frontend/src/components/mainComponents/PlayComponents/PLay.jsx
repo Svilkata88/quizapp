@@ -6,6 +6,7 @@ import Spinner from "../../others/Spinner.jsx";
 import RatingStars from "../PlayComponents/RatingStars.jsx";
 import Cookies from "js-cookie";
 import { useUserContext } from "../../../hooks/userContext.jsx";
+import NoQuestions from "./NoQuestions.jsx";
 
 function Questions() {
   const [qIndex, setQIndex] = useState(0);
@@ -74,9 +75,12 @@ function Questions() {
     }
   }, [question?.rating]);
 
+  
   return loading ? (
     <Spinner />
   ) : (
+    questions.length > 1 
+    ? 
     <div className="bg-gradient-to-b from-zinc-100 to-cyan-400 p-10 flex-1 relative">
       <section ref={divRef} className="flex items-center gap-2 mb-8">
         <h2 className="text-xl font-bold ">{question?.text}</h2>
@@ -85,7 +89,7 @@ function Questions() {
           onMouseEnter={() =>
             showText(
               divRef,
-              `Question ID: ${question.id}`,
+              `Question ID: ${question?.id}`,
               "text-lg font-mono ",
             )
           }
@@ -107,7 +111,7 @@ function Questions() {
           fullStar="fullStarRating.png"
           isHidden={isHidden}
           setIsHidden={setIsHidden}
-          questionId={question.id}
+          questionId={question?.id}
           setRating={setRating}
         />
       </section>
@@ -165,7 +169,9 @@ function Questions() {
       >
         Restart
       </button>
-    </div>
+    </div> 
+    :
+     <NoQuestions /> 
   );
 }
 

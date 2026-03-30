@@ -15,7 +15,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="flex gap-5 justify-between pt-10 px-10 bg-gradient-to-b from-zinc-100 to-zinc-500 min-h-[571px]">
+    <div className="flex gap-5 justify-between pt-10 px-10 bg-gradient-to-b from-zinc-100 to-zinc-500 min-h-[calc(100vh-124px)]">
       <div className="h-[250px] mb-10">
         <h1 className="text-center text-2xl font-bold">
           Welcome to the Quiz App

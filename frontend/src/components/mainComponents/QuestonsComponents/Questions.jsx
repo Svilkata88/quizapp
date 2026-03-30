@@ -29,12 +29,21 @@ function Questions() {
     }
 
     const id = Number(inputValue);
-    fetchOneQuestions("http://localhost:8000/api/questions", id).then(
-      (response) => {
+    fetchOneQuestions("http://localhost:8000/api/questions", id)
+      .then((response) => {
         setQuestion(response.question);
         setAuthor(response.author);
-      },
-    );
+      })
+      .catch(() => {
+        showText(
+          searchInput,
+          "This question doesn't exist!",
+          "text-red-500 font-bold",
+        );
+        setTimeout(() => {
+          hideText(searchInput);
+        }, 2500);
+      });
   }
 
   function handleIssueSubmit(formData) {
@@ -47,7 +56,7 @@ function Questions() {
   }
 
   return (
-    <div className="flex flex-col gap-2 bg-zinc-100 min-h-[571px] items-center">
+    <div className="flex flex-col gap-2 bg-zinc-100 min-h-[calc(100vh-124px)] items-center">
       <div className="flex justify-center p-2 w-1/3 bg-zinc-100 w-[1000px] bg-white">
         <button
           className="hover:scale-110 transition-transform cursor-pointer"

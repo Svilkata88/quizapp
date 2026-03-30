@@ -11,6 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .utils import get_question_ids
 from users.utils import refresh_seed
+from django.shortcuts import get_object_or_404
 
 
 @authentication_classes([JWTAuthentication])
@@ -40,14 +41,14 @@ def question_list(request):
     # need improvment / in every call the view fetch the ids, make a paginator, set size and then filter again
     return response
 
+@api_view(["GET"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
-@api_view(["GET"])
 def get_question(request, id):
     id = int(id)
-    question = Question.objects.get(id=id)
+    question = get_object_or_404(Question, id=id)
     author = User.objects.get(id=question.author.id)
-    print(id)
+    
     serialized_question = QuestionSerializer(question)
     serialized_author = UserSerializer(author)
     return JsonResponse({'question': serialized_question.data, 'author': serialized_author.data})

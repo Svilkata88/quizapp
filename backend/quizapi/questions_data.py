@@ -96,7 +96,7 @@ import os
 import django
 
 # 1️⃣ Настройка на settings module
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quizapi.settings")  # смени с твоето settings.py
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quizapi.settings")  
 
 # 2️⃣ Django setup
 django.setup()
@@ -110,7 +110,7 @@ author = User.objects.get(id=1)
 
 # populate the db with the questions
 for item in questions:
-    q = Question.objects.create(text=item['question'], author=author)
+    q = Question.objects.create(text=item['question'], author=author, status='confirmed')
     for option in item['options']:
         answer = Answer.objects.create(question=q, text=option)
         answer.save()

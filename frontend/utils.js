@@ -2,18 +2,28 @@ import Cookies from "js-cookie";
 
 function apiFetch(url, options = {}) {
   const access = Cookies.get("access") || null;
+  const isFormData = options.body instanceof FormData;
   const headers = {
-    "Content-Type": "application/json",
+    ...(access && { Authorization: `Bearer ${access}` }),
+    ...(isFormData ? {} : { "Content-Type": "application/json" }),
     ...options.headers,
   };
 
-  if (access) {
-    headers.Authorization = `Bearer ${access}`;
-  }
+  const body = isFormData
+    ? options.body
+    : options.body
+      ? JSON.stringify(options.body)
+      : undefined;
 
-  return fetch(url, { ...options, headers, credentials: "include" }).then(
+  return fetch(url, { ...options, headers, body, credentials: "include" }).then(
     (res) => {
-      if (res.ok) return res.json();
+      if (res.ok) {
+        return res.status === 204 ? null : res.json();
+      }
+
+      if (res.status !== 401) {
+        throw new Error(`Request failed: ${res.status}`);
+      }
 
       // take new access
       return fetch("http://localhost:8000/api/token/refresh/", {
@@ -31,18 +41,22 @@ function apiFetch(url, options = {}) {
         })
         .then((refreshData) => {
           Cookies.set("access", refreshData.access);
-          headers.Authorization = `Bearer ${refreshData.access}`;
+          const retryHeaders = {
+            ...headers,
+            Authorization: `Bearer ${refreshData.access}`,
+          };
 
           // retry
           return fetch(url, {
             ...options,
-            headers,
+            headers: retryHeaders,
+            body,
             credentials: "include",
           }).then((retryRes) => {
             if (!retryRes.ok) {
               throw new Error("Refresh failed");
             }
-            return retryRes.json();
+            return retryRes.status === 204 ? null : retryRes.json();
           });
         });
     },
@@ -62,7 +76,7 @@ function fetchOneQuestions(url, id) {
 function createQuestion(url, body) {
   const data = apiFetch(`${url}`, {
     method: "POST",
-    body: JSON.stringify(body),
+    body: body,
   }).then((response) => response);
   return data;
 }
@@ -70,7 +84,15 @@ function createQuestion(url, body) {
 function apiLoginUser(url, credentials) {
   const data = apiFetch(`${url}`, {
     method: "POST",
-    body: JSON.stringify(credentials),
+    body: credentials,
+  }).then((response) => response);
+  return data;
+}
+
+function apiEditUser(url, newData) {
+  const data = apiFetch(`${url}`, {
+    method: "PUT",
+    body: newData,
   }).then((response) => response);
   return data;
 }
@@ -82,7 +104,7 @@ function apiRegisterUser(url, credentials) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(credentials),
+    body: credentials,
   }).then((response) => {
     return response.json().then((parsedData) => {
       if (!response.ok) {
@@ -150,4 +172,5 @@ export {
   apiLogoutUser,
   createRating,
   fetchTopFiveUsers,
+  apiEditUser,
 };
