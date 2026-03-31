@@ -1,7 +1,12 @@
 import Answer from "./../QuestonsComponents/Answer.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { fetchQuestions, hideText, showText } from "../../../../utils.js";
+import {
+  fetchQuestions,
+  apiEditUser,
+  hideText,
+  showText,
+} from "../../../../utils.js";
 import Spinner from "../../others/Spinner.jsx";
 import RatingStars from "../PlayComponents/RatingStars.jsx";
 import Cookies from "js-cookie";
@@ -9,6 +14,7 @@ import { useUserContext } from "../../../hooks/userContext.jsx";
 import NoQuestions from "./NoQuestions.jsx";
 
 function Questions() {
+  const { user, login } = useUserContext();
   const [qIndex, setQIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [disabled, setDisabled] = useState(false);
@@ -27,6 +33,25 @@ function Questions() {
   const { logout } = useUserContext();
 
   const handleReset = () => {
+    const newPoints = user.points + points;
+
+    apiEditUser(`http://localhost:8000/api/users/profile/edit/${user.id}`, {
+      points: newPoints,
+    })
+      .then((res) => {
+        if (res && res.points) {
+          login({
+            user: res,
+            access: Cookies.get("access"),
+            seed: Cookies.get("seed"),
+          });
+          console.log("reset successful. New points: ", res.points);
+        }
+      })
+      .catch((err) => {
+        console.error("User update failed:", err);
+      });
+
     const seed = fetchQuestions(
       "http://localhost:8000/api/questions/reset",
       page,
@@ -75,12 +100,9 @@ function Questions() {
     }
   }, [question?.rating]);
 
-  
   return loading ? (
     <Spinner />
-  ) : (
-    questions.length > 1 
-    ? 
+  ) : questions.length > 1 ? (
     <div className="bg-gradient-to-b from-zinc-100 to-cyan-400 p-10 flex-1 relative">
       <section ref={divRef} className="flex items-center gap-2 mb-8">
         <h2 className="text-xl font-bold ">{question?.text}</h2>
@@ -116,6 +138,7 @@ function Questions() {
         />
       </section>
       <section className="flex flex-col gap-2">
+        {/* to be done with map */}
         <Answer
           text={question?.answers[0]?.text}
           correct={question?.correct_answer.text === question?.answers[0]?.text}
@@ -169,9 +192,9 @@ function Questions() {
       >
         Restart
       </button>
-    </div> 
-    :
-     <NoQuestions /> 
+    </div>
+  ) : (
+    <NoQuestions />
   );
 }
 

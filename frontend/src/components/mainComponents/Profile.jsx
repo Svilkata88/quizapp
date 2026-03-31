@@ -33,7 +33,6 @@ function Profile() {
   };
 
   function handleProfileChange(formData) {
-    // Check if anything actually changed (optional but smart)
     const hasChanges = Array.from(formData.entries()).some(([key, value]) => {
       if (key === "image") {
         return value instanceof File && value.size > 0;
@@ -49,7 +48,7 @@ function Profile() {
     )
       .then((res) => {
         if (res) {
-          setUser({ ...res }); // ✅ update everything from backend
+          setUser({ ...res });
           hideShowBtns();
         }
       })
