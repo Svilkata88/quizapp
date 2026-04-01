@@ -20,7 +20,10 @@ function Home() {
         <h1 className="text-center text-2xl font-bold">
           Welcome to the Quiz App
         </h1>
-        <div ref={divRef}>
+        <div
+          ref={divRef}
+          className="bg-gradient-to-b from-zinc-100 to-zinc-400 min-h-60 rounded-xl mt-5"
+        >
           <button
             className="block cursor-pointer hover:scale-110 transition-transform mx-auto pt-10"
             onClick={() => navigate("/play")}

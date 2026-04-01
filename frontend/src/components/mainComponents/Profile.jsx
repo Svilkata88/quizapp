@@ -58,7 +58,7 @@ function Profile() {
   }
 
   return (
-    <div className="bg-zinc-100 min-h-[calc(100vh-124px)]">
+    <div className="bg-gradient-to-b from-zinc-100 to-zinc-500 min-h-[calc(100vh-124px)]">
       <section className="flex gap-30 border border-gray-300 rounded-xl w-1/2 h-[50vh] mx-auto mt-20 bg-gradient-to-b from-zinc-100 to-zinc-400 p-10">
         <div className="h-100 relative border-2 border-gray-300 rounded-full">
           <div className="rounded-full h-100 w-100 overflow-hidden border-2 border-white">

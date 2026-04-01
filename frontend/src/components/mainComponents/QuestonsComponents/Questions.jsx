@@ -56,8 +56,8 @@ function Questions() {
   }
 
   return (
-    <div className="flex flex-col gap-2 bg-zinc-100 min-h-[calc(100vh-124px)] items-center">
-      <div className="flex justify-center p-2 w-1/3 bg-zinc-100 w-[1000px] bg-white">
+    <div className="flex flex-col gap-2 bg-gradient-to-b from-zinc-100 to-zinc-500 min-h-[calc(100vh-124px)] items-center">
+      <div className="flex justify-center p-2 w-1/3 bg-gradient-to-b from-zinc-100 to-zinc-400 w-[1000px] bg-white rounded-lg">
         <button
           className="hover:scale-110 transition-transform cursor-pointer"
           onClick={() => navigate("./create")}

@@ -33,7 +33,12 @@ function Questions() {
   const { logout } = useUserContext();
 
   const handleReset = () => {
-    const newPoints = user.points + points;
+    let newPoints;
+
+    if (points <= 5) newPoints = user.points + points;
+    else if (5 < points <= 10) newPoints = user.points += points + 2;
+    else if (10 < points <= 15) newPoints = user.points += points + 5;
+    else newPoints = user.points += points + 15;
 
     apiEditUser(`http://localhost:8000/api/users/profile/edit/${user.id}`, {
       points: newPoints,
