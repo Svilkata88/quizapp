@@ -111,7 +111,9 @@ def get_user_profile(request, id):
     if request.method == 'GET':
         user = User.objects.get(id=id)
         serializer = UserSerializer(user)
-        return Response(serializer.data)
+        data = serializer.data
+        data['addedQuestions'] = Question.objects.filter(author=user).count()
+        return Response(data)
 
 @api_view(["PUT"])
 @authentication_classes([JWTAuthentication])
@@ -125,8 +127,9 @@ def edit_user_profile(request, id):
         serializer = UserSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            print(serializer.data)
-            return Response(serializer.data)
+            data = serializer.data
+            data['addedQuestions'] = Question.objects.filter(author=user).count()
+            return Response(data)
         return Response(serializer.errors, status=400)
 
 @api_view(["POST"])
@@ -146,7 +149,11 @@ def custom_refresh_token_view(request):
 def top_five(request):
     top_five_users = User.objects.order_by('-xp').exclude(username='quizadmin')[:5]
     serialized_users = UserSerializer(top_five_users, many=True)
-    return Response(serialized_users.data)
+    data = serialized_users.data
+    for user_data in data:
+        user_id = user_data['id']
+        user_data['addedQuestions'] = Question.objects.filter(author_id=user_id).count()
+    return Response(data)
 
 
 # toDo: implement Logout view that blacklists the refresh token
