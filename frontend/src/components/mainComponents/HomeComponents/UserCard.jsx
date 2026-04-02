@@ -17,7 +17,7 @@ function UserCard({ user }) {
           {user.username}
         </h2>
         <p className="text-start font-serif text-sm text-zinc-700">
-          Rank {user.rank}
+          Xp: {user.xp}
         </p>
         <p className="text-start font-serif text-sm text-zinc-700">
           Points: {user.points}

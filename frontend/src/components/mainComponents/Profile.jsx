@@ -128,7 +128,7 @@ function Profile() {
             </button>
           </div>
           <div className="flex flex-col gap-5">
-            <h2>rank: {user.rank}</h2>
+            <h2>Xp: {user.xp}</h2>
             <h2>points: {user.points}</h2>
             <h2>added questions: {user.addedQuestions}</h2>
           </div>

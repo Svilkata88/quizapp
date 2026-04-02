@@ -30,7 +30,7 @@ def register_user(request):
                 'user': {
                         'id': user.id,
                         'username': user.username,
-                        'rank': user.rank,
+                        'xp': user.xp,
                         'points': user.points,
                         'addedQuestions': userQuestions,
                         'profilePicture': user.image,
@@ -70,7 +70,7 @@ def login_user(request):
                     'user': {
                         'id': user.id,
                         'username': user.username,
-                        'rank': user.rank,
+                        'xp': user.xp,
                         'points': user.points,
                         'addedQuestions': userQuestions,
                          'image': user.image.url if user.image else None
@@ -144,7 +144,7 @@ def custom_refresh_token_view(request):
 
 @api_view(["GET"])
 def top_five(request):
-    top_five_users = User.objects.order_by('rank').exclude(username='quizadmin')[:5]
+    top_five_users = User.objects.order_by('-xp').exclude(username='quizadmin')[:5]
     serialized_users = UserSerializer(top_five_users, many=True)
     return Response(serialized_users.data)
 
