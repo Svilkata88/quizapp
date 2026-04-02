@@ -1,13 +1,18 @@
 from rest_framework import serializers
 from .models import User
+from questions.models import Question
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False) 
     password2 = serializers.CharField(write_only=True, required=False)
+    addedQuestions = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'password2', 'points', 'xp', 'image']
+        fields = ['id', 'username', 'email', 'password', 'password2', 'points', 'xp', 'image', 'addedQuestions']
+
+    def get_addedQuestions(self, obj):
+        return Question.objects.filter(author=obj).count()
 
     def validate(self, data):
         pw1 = data.get('password')

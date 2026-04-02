@@ -40,8 +40,11 @@ function Questions() {
     else if (10 < points <= 15) newPoints = user.points += points + 5;
     else newPoints = user.points += points + 15;
 
+    let xp = Math.floor(newPoints / 10);
+
     apiEditUser(`http://localhost:8000/api/users/profile/edit/${user.id}`, {
       points: newPoints,
+      xp: user.xp !== xp ? xp : user.xp,
     })
       .then((res) => {
         if (res && res.points) {

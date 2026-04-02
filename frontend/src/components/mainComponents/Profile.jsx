@@ -113,6 +113,7 @@ function Profile() {
                 </button>
                 <button
                   className="w-8 h-8 cursor-pointer hover:scale-120 transition-transform duration-300 bg-white p-1 rounded-full border-2 border-gray-300 flex items-center justify-center"
+                  type="button"
                   onClick={hideShowBtns}
                 >
                   <img src="/close.png" alt="edit" />
