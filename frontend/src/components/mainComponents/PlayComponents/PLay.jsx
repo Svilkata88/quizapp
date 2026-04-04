@@ -111,7 +111,8 @@ function Questions() {
   return loading ? (
     <Spinner />
   ) : questions.length > 1 ? (
-    <div className="bg-gradient-to-b from-zinc-100 to-cyan-400 p-10 flex-1 relative">
+    <div className="bg-transparent p-10 flex-1 relative">
+      {/* Question Section */}
       <section ref={divRef} className="flex items-center gap-2 mb-8">
         <h2 className="text-xl font-bold ">{question?.text}</h2>
         <div
@@ -145,6 +146,8 @@ function Questions() {
           setRating={setRating}
         />
       </section>
+
+      {/* Answers Section */}
       <section className="flex flex-col gap-2">
         {/* to be done with map */}
         <Answer
@@ -188,12 +191,18 @@ function Questions() {
           setPage={setPage}
         />
       </section>
-      <div className="flex gap-2 mt-4 text-xl  font-bold absolute top-6 right-4">
-        <img src="/points-64.png" alt="points" />
-        <p className="text-5xl py-2 bg-gradient-to-b from-stone-400 to-teal-800 text-transparent bg-clip-text">
+
+      {/* Points Indicator */}
+      <div className="flex gap-2 mt-4 text-xl  font-bold absolute top-6 right-4 flex items-center justify-center">
+        <div className="w-15 h-15">
+          <img src="/points.png" alt="points" />
+        </div>
+        <p className="text-6xl py-2 bg-gradient-to-r from-sky-200 to-sky-400 text-transparent bg-clip-text">
           {points}
         </p>
       </div>
+
+      {/* Restart Btn */}
       <button
         className="absolute bottom-6 right-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
         onClick={handleReset}

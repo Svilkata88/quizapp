@@ -1,4 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap");
 @import "tailwindcss";
+
+:root {
+  box-sizing: border-box;
+  --main-blue: linear-gradient(to right, #e0f2fe, #bae6fd);
+
+  --default-font-family: "Roboto Slab", serif;
+}
 
 @keyframes slide-in {
   0% {
@@ -27,6 +35,6 @@
   }
 
   .nav-hover {
-    @apply hover:bg-gradient-to-r hover:from-sky-100 to-sky-200 hover:border-black hover:rounded-2xl;
+    @apply hover:bg-gradient-to-r hover:from-sky-100 hover:to-sky-200 hover:border-black hover:rounded-2xl;
   }
 }

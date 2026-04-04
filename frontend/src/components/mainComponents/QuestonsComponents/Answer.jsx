@@ -17,14 +17,28 @@ function Answer({
     setIsHovered(false);
   }, [qIndex]);
 
-  const getColor = () => {
+  const getClasses = () => {
+    let baseClasses =
+      "mb-2 rounded-lg w-1/3 p-3 cursor-pointer border-black border rounded-2xl transition-all duration-300 ease-in-out";
+
     if (isAnswered) {
-      return correct ? "#22c55e" : "#ef4444";
+      baseClasses += correct ? " bg-green-500" : " bg-red-500";
+    } else if (isHovered) {
+      // Hover styles will be applied via inline styles
+    } else {
+      baseClasses += " bg-gray-100";
     }
-    if (isHovered) {
-      return "#14b8a6";
+
+    return baseClasses;
+  };
+
+  const getHoverStyles = () => {
+    if (isHovered && !isAnswered) {
+      return {
+        background: "var(--main-blue)",
+      };
     }
-    return "#e5e7eb";
+    return {};
   };
 
   const handleClick = () => {
@@ -40,11 +54,8 @@ function Answer({
 
   return (
     <button
-      style={{
-        backgroundColor: getColor(),
-        transition: "background-color 0.2s ease",
-      }}
-      className="mb-2 rounded-lg w-1/3 p-3 cursor-pointer"
+      className={getClasses()}
+      style={getHoverStyles()}
       onMouseEnter={() => !isAnswered && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}

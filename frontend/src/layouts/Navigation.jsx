@@ -4,7 +4,7 @@ import Info from "../components/navComponents/Info.jsx";
 
 function Navigation() {
   return (
-    <div className="flex items-center bg-zinc-100">
+    <div className="flex items-center bg-gradient-to-b from-zinc-100 to-zinc-150">
       <Info />
       <Nav />
       <Auth />

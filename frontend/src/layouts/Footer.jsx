@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="flex justify-between items-center h-[50px] font-style: italic tracking-wider font-serif text-sm m-auto bg-zinc-100 w-full text-center">
+    <footer className="flex justify-between items-center h-[50px] font-style: italic tracking-wider font-serif text-sm m-auto bg-gradient-to-t from-zinc-100 to-zinc-150 w-full text-center">
       <section className="w-1/3"></section>
       <section className="w-1/3">Game by: Svilen Ivanov</section>
       <ul className="flex gap-2 items-center justify-end w-1/3 mx-4">

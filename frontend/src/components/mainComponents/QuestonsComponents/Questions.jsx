@@ -56,8 +56,8 @@ function Questions() {
   }
 
   return (
-    <div className="flex flex-col gap-2 bg-gradient-to-b from-zinc-100 to-zinc-500 min-h-[calc(100vh-124px)] items-center">
-      <div className="flex justify-center p-2 w-1/3 bg-gradient-to-b from-zinc-100 to-zinc-400 w-[1000px] bg-white rounded-lg">
+    <div className="flex flex-col gap-2 bg-transparent min-h-[calc(100vh-124px)] items-center">
+      <div className="flex justify-center p-2 w-1/3 bg-gradient-to-b from-zinc-100 to-zinc-400 w-[1000px] bg-white rounded-lg shadow-[0px_7px_13px_4px_rgba(40,55,61,1)]">
         <button
           className="hover:scale-110 transition-transform cursor-pointer"
           onClick={() => navigate("./create")}
@@ -65,6 +65,7 @@ function Questions() {
           <img src="addbtn.png" alt="add button" />
           create
         </button>
+
         <button
           className="hover:scale-110 transition-transform cursor-pointer"
           onClick={() => searchInput.current.classList.toggle("hidden")}

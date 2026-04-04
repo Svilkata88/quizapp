@@ -17,6 +17,7 @@ function apiFetch(url, options = {}) {
 
   return fetch(url, { ...options, headers, body, credentials: "include" }).then(
     (res) => {
+      // when there is no content ( update or delete ) return null
       if (res.ok) {
         return res.status === 204 ? null : res.json();
       }

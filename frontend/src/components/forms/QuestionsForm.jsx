@@ -20,13 +20,6 @@ function QuestionsForm() {
       userId,
     };
 
-    // console.log({
-    //   question_text,
-    //   correct_answer,
-    //   option_one,
-    //   option_two,
-    //   option_three,
-    // });
     const q = createQuestion(
       "http://localhost:8000/api/questions/create/",
       body,
@@ -34,7 +27,7 @@ function QuestionsForm() {
   };
 
   return (
-    <div className="bg-zinc-100 flex flex-col min-h-[571px] items-center">
+    <div className="bg-transparent flex flex-col min-h-[571px] items-center">
       <form
         action={handleQuestionForm}
         className="flex flex-col bg-zinc-200 w-1/3 gap-1 mt-10 p-2"

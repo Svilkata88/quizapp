@@ -58,8 +58,8 @@ function Profile() {
   }
 
   return (
-    <div className="bg-gradient-to-b from-zinc-100 to-zinc-500 min-h-[calc(100vh-124px)]">
-      <section className="flex gap-30 border border-gray-300 rounded-xl w-1/2 h-[50vh] mx-auto mt-20 bg-gradient-to-b from-zinc-100 to-zinc-400 p-10">
+    <div className="bg-transparent min-h-[calc(100vh-124px)]">
+      <section className="flex gap-30 border border-gray-300 rounded-xl w-1/2 h-[50vh] mx-auto mt-20 bg-gradient-to-b from-zinc-300 to-zinc-500 p-10 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]">
         <div className="h-100 relative border-2 border-gray-300 rounded-full">
           <div className="rounded-full h-100 w-100 overflow-hidden border-2 border-white">
             <img
@@ -129,9 +129,26 @@ function Profile() {
             </button>
           </div>
           <div className="flex flex-col gap-5">
-            <h2>Xp: {user.xp}</h2>
-            <h2>points: {user.points}</h2>
-            <h2>added questions: {user.addedQuestions}</h2>
+            <div className="flex gap-2 items-center h-8">
+              <img src="/xp.png" alt="xp" className="w-8 h-8 object-contain" />
+              <h2>Xp: {user.xp}</h2>
+            </div>
+            <div className="flex gap-2 items-center h-8">
+              <img
+                src="/points.png"
+                alt="points"
+                className="w-8 h-8 object-contain"
+              />
+              <h2>points: {user.points}</h2>
+            </div>
+            <div className="flex gap-2 items-center h-8">
+              <img
+                src="/question.png"
+                alt="question"
+                className="w-8 h-6 object-contain"
+              />
+              <h2>added questions: {user.addedQuestions}</h2>
+            </div>
           </div>
         </div>
       </section>
