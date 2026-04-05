@@ -88,6 +88,8 @@ def create_question(request):
         question=question
     )
 
+    question.info = request.data["info"]
+
     answer_4 = Answer.objects.create(
         text=request.data["correct_answer"],
         question=question

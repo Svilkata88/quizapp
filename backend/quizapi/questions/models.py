@@ -25,7 +25,8 @@ class Question(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     difficulty = models.IntegerField(default=1)
-    
+    info = models.TextField(max_length=1000, null=True, blank=True)
+
     @property
     def rating(self):
         result = self.ratings.aggregate(avg=models.Avg("rating"))

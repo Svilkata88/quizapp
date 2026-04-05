@@ -190,6 +190,11 @@ function Questions() {
           setQIndex={setQIndex}
           setPage={setPage}
         />
+        {question?.info && (
+          <div className="bg-gray-100 p-3 border-black border rounded-2xl rounded-tl-none mt-10 w-1/2">
+            {question.info}
+          </div>
+        )}
       </section>
 
       {/* Points Indicator */}
