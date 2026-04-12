@@ -3,6 +3,7 @@ from django.db import models
 
 class User(AbstractUser):
     pass
+    email = models.EmailField(unique=True)
     points = models.SmallIntegerField(default=0)
     xp = models.SmallIntegerField(default=0)
     image = models.ImageField(upload_to='profile_images/', null=True, blank=True, default="profile_images/user.png")

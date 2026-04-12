@@ -3,10 +3,13 @@ import { useState } from "react";
 import { useUserContext } from "../../hooks/userContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { apiLoginUser } from "../../../utils.js";
+import FormButton from "../buttons/FormButton.jsx";
+import ErrorMessage from "../formsComponents/errorMessage.jsx";
 
 function Login() {
   const { login } = useUserContext();
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const handleLogin = (formData) => {
@@ -22,9 +25,15 @@ function Login() {
         login(data);
         navigate("/");
       })
-      .catch(() => {
-        console.error("Login failed! Check credentials.");
-        // to implement Toast or something for UI messages
+      .catch((resErrors) => {
+        const formattedErrors = {};
+
+        Object.entries(resErrors).forEach(([key, value]) => {
+          formattedErrors[key] = Array.isArray(value) ? value[0] : value;
+        });
+
+        setErrors(formattedErrors);
+
         navigate("/auth/login");
       })
       .finally(() => setLoading(false));
@@ -37,7 +46,7 @@ function Login() {
       <h1 className="text-2xl mb-4">Login</h1>
       <form
         action={handleLogin}
-        className="flex flex-col gap-2 w-1/4 bg-stone-200 p-2"
+        className="flex flex-col gap-2 w-1/4 bg-stone-200 form-container"
       >
         <input
           type="text"
@@ -51,9 +60,13 @@ function Login() {
           placeholder="password"
           className="bg-stone-100 p-1"
         />
-        <button type="submit" className="bg-green-300 p-1 rounded-sm">
-          Login
-        </button>
+        <FormButton text="Login" />
+        <div className="flex flex-col gap-2 mt-2">
+          {errors &&
+            Object.entries(errors).map((error, index) => (
+              <ErrorMessage key={index} error={error} />
+            ))}
+        </div>
       </form>
     </div>
   );

@@ -9,3 +9,4 @@
 3. DONE TO FIX AUTHENTICATION AND AUTHORIZATION
 4. DONE Questions become pending on creation. After admin check it may be confirmed or rejected. If Confirmed it will be in the playlist questions.
 5. DONE - restrict cirtain views on the FE if user is not loged in!
+6. restrict user nav to be accesible only if user is loged in.

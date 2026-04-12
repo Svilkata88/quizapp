@@ -39,4 +39,8 @@
   .nav-hover {
     @apply hover:bg-gradient-to-r hover:from-sky-100 hover:to-sky-200 hover:border-black hover:rounded-2xl;
   }
+
+  .form-container {
+    @apply p-5 rounded-lg shadow-[var(--blue-shadow)];
+  }
 }

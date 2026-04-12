@@ -33,7 +33,7 @@ def register_user(request):
                         'xp': user.xp,
                         'points': user.points,
                         'addedQuestions': userQuestions,
-                        'profilePicture': user.image,
+                        'profilePicture': user.image.url if user.image else None,
                         'image': user.image.url if user.image else None
                     }
             })
@@ -48,7 +48,6 @@ def register_user(request):
                 max_age=60 * 60 * 24 * 7     # 7 days
             )
             return response
-            
         return Response(serializer.errors, status=400)
 
 @api_view(["POST"])

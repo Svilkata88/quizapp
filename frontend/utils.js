@@ -23,7 +23,14 @@ function apiFetch(url, options = {}) {
       }
 
       if (res.status !== 401) {
-        throw new Error(`Request failed: ${res.status}`);
+        return res.text().then((text) => {
+          try {
+            const json = JSON.parse(text);
+            return Promise.reject(json);
+          } catch {
+            return Promise.reject({ general: text });
+          }
+        });
       }
 
       // take new access
@@ -99,21 +106,11 @@ function apiEditUser(url, newData) {
 }
 
 function apiRegisterUser(url, credentials) {
-  return fetch(url, {
-    credentials: "include",
+  const data = apiFetch(`${url}`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: credentials,
-  }).then((response) => {
-    return response.json().then((parsedData) => {
-      if (!response.ok) {
-        throw parsedData;
-      }
-      return parsedData;
-    });
-  });
+  }).then((response) => response);
+  return data;
 }
 
 function apiLogoutUser() {

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { apiRegisterUser } from "../../../utils.js";
 import useDebaunce from "../../hooks/useDebaunce.jsx";
 import Spinner from "../others/Spinner.jsx";
+import FormButton from "../buttons/FormButton.jsx";
+import ErrorMessage from "../formsComponents/errorMessage.jsx";
 
 function Register() {
   const { login } = useUserContext();
@@ -13,6 +15,7 @@ function Register() {
   const [usernameValue, setUsernameValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [password2Value, setPassword2Value] = useState("");
+  const [errors, setErrors] = useState({});
   const debauncedEmail = useDebaunce(emailValue, 500);
   const debauncedUsername = useDebaunce(usernameValue, 500);
   const debauncedPassword = useDebaunce(passwordValue, 500);
@@ -46,9 +49,14 @@ function Register() {
         navigate("/");
       })
       .catch((resErrors) => {
-        Object.values(resErrors).forEach((err) => {
-          err.forEach((msg) => console.error(msg));
+        const formattedErrors = {};
+
+        Object.entries(resErrors).forEach(([key, value]) => {
+          formattedErrors[key] = Array.isArray(value) ? value[0] : value;
         });
+
+        setErrors(formattedErrors);
+
         navigate("/auth/register");
       })
       .finally(() => setLoading(false));
@@ -79,7 +87,7 @@ function Register() {
       <h1 className="text-2xl mb-4">Register</h1>
       <form
         action={handleRegister}
-        className="flex flex-col gap-2 w-1/4 bg-stone-200 p-2"
+        className="flex flex-col gap-2 w-1/4 bg-stone-200 form-container"
       >
         <input
           type="text"
@@ -149,14 +157,13 @@ function Register() {
         >
           Passwords do not match
         </p>
-        <button
-          type="submit"
-          disabled={!isFormValid}
-          className={`p-1 rounded-sm transition-colors duration-150 
-            ${isFormValid ? "bg-green-500 hover:bg-green-600" : "bg-gray-300 cursor-not-allowed"}`}
-        >
-          Register
-        </button>
+        <FormButton text="Register" disabled={!isFormValid} />
+        <div className="flex flex-col gap-2 mt-2">
+          {errors &&
+            Object.entries(errors).map((error, index) => (
+              <ErrorMessage key={index} error={error} />
+            ))}
+        </div>
       </form>
     </div>
   );

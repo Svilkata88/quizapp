@@ -11,7 +11,7 @@ import Login from "./components/navComponents/Login.jsx";
 import Logout from "./components/navComponents/Logout.jsx";
 
 import Home from "./components/mainComponents/HomeComponents/Home.jsx";
-import QuestionsForm from "./components/forms/QuestionsForm.jsx";
+import QuestionsForm from "./components/formsComponents/QuestionsForm.jsx";
 
 export function App() {
   return (
