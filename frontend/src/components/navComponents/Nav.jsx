@@ -1,6 +1,12 @@
 import { NavLink } from "react-router-dom";
+import { useUserContext } from "../../hooks/userContext";
 
 function Nav() {
+  const { isAuthenticated } = useUserContext();
+
+  if (!isAuthenticated) {
+    return null;
+  }
   return (
     <nav className="w-1/3 flex justify-center">
       <ul className="flex gap-4 text-xl ">

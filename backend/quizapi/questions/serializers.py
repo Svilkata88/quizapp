@@ -9,6 +9,7 @@ class AnswerSerializer(serializers.ModelSerializer):
 
 
 class QuestionSerializer(serializers.ModelSerializer):
+    author = serializers.PrimaryKeyRelatedField(read_only=True)
     answers = AnswerSerializer(many=True, read_only=True)
     correct_answer = AnswerSerializer(read_only=True)
 

@@ -14,7 +14,7 @@ class Question(models.Model):
         db_index=True
     )
 
-    text = models.CharField(max_length=255)
+    text = models.CharField(max_length=255, unique=True)
     correct_answer = models.ForeignKey( 
         "Answer",
         on_delete=models.CASCADE,

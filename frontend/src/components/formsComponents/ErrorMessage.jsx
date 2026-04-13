@@ -1,6 +1,6 @@
 function ErrorMessage({ error }) {
   return (
-    <div className="flex items-center gap-2 border border-red-500 p-2 rounded mb-2">
+    <div className="flex items-center gap-2 border border-red-500 p-2 rounded-md mb-2 bg-zinc-50">
       <div className="h-10 w-10 flex items-center justify-center flex-shrink-0">
         <img
           src="/errorInfo.png"

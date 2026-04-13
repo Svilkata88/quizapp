@@ -12,6 +12,10 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from .utils import get_question_ids
 from users.utils import refresh_seed
 from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import QuestionSerializer
+from django.db import transaction
 
 
 @authentication_classes([JWTAuthentication])
@@ -65,40 +69,34 @@ def reset_game(request):
 @permission_classes([IsAuthenticated])
 @api_view(["POST"])
 def create_question(request):
-    user_id = int(request.data["userId"])
-    user = User.objects.get(id=user_id)
+    user = request.user
 
-    question = Question.objects.create(
-        text=request.data["question_text"],
-        author=user
+    serializer = QuestionSerializer(data=request.data)
+
+    if not serializer.is_valid():
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    with transaction.atomic():
+        question = serializer.save(
+            author=user,
+            status=Question.Status.PENDING
+        )
+
+        answers = Answer.objects.bulk_create([
+            Answer(text=request.data["option_one"], question=question),
+            Answer(text=request.data["option_two"], question=question),
+            Answer(text=request.data["option_three"], question=question),
+            Answer(text=request.data["correct_answer"], question=question),
+        ])
+
+        question.info = request.data.get("info", "")
+        question.correct_answer = answers[-1]
+        question.save()
+
+    return Response(
+        {"id": question.id},
+        status=status.HTTP_201_CREATED
     )
-
-    answer_1 = Answer.objects.create(
-        text=request.data["option_one"],
-        question=question
-    )
-
-    answer_2 = Answer.objects.create(
-        text=request.data["option_two"],
-        question=question
-    )
-
-    answer_3 = Answer.objects.create(
-        text=request.data["option_three"],
-        question=question
-    )
-
-    question.info = request.data["info"]
-
-    answer_4 = Answer.objects.create(
-        text=request.data["correct_answer"],
-        question=question
-    )
-
-    question.correct_answer = answer_4
-    question.save()
-
-    return JsonResponse({"id": question.id}, status=201)
 
 
 @authentication_classes([JWTAuthentication])
