@@ -118,10 +118,11 @@ def create_question_issue(request):
 @permission_classes([IsAuthenticated])
 @api_view(["POST"])
 def create_rating(request):
-    id = int(request.data['questionId'])
+    id = request.data["questionId"]
     question = Question.objects.get(id=id)
     rating_value = request.data['rating']
     rating = Rating.objects.create(question=question, rating=rating_value)
+
 
     return JsonResponse({"id": rating.id, "rating": question.rating}, status=201)
         

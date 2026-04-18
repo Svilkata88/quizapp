@@ -162,7 +162,7 @@ function createRating(questionId, rating) {
   return apiFetch(`http://localhost:8000/api/questions/create-rating/`, {
     method: "POST",
     credentials: "include",
-    body: JSON.stringify({ questionId, rating }),
+    body: { questionId, rating },
   });
 }
 
