@@ -77,7 +77,7 @@ function Questions() {
 
       <div
         ref={searchInput}
-        className="hidden flex flex-col gap-2 w-1/2 items-center"
+        className="hidden flex flex-col gap-2 w-1/2 items-center mt-2"
       >
         <input
           type="text"
@@ -85,7 +85,7 @@ function Questions() {
           className="border border-black bg-zinc-50 pl-2 p-1 rounded-md w-1/3"
         />
         <button
-          className="cursor-pointer p-1 hover:bg-teal-500 rounded-md w-1/3"
+          className="cursor-pointer p-1 bg-green-300 hover:bg-green-400 rounded-md w-1/3"
           onClick={searchQuestion}
         >
           Search
@@ -103,7 +103,9 @@ function Questions() {
               placeholder="what's wrong?"
               className="border border-black bg-zinc-50 pl-2 p-1 rounded-md "
             />
-            <button className="p-1 hover:bg-teal-500 rounded-md">Submit</button>
+            <button className="p-1 bg-green-300 hover:bg-green-400 rounded-md">
+              Submit
+            </button>
           </form>
         </div>
       </div>

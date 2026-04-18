@@ -14,7 +14,7 @@ import { useUserContext } from "../../../hooks/userContext.jsx";
 import NoQuestions from "./NoQuestions.jsx";
 
 function Questions() {
-  const { user, login } = useUserContext();
+  const { user, login, isAuthenticated } = useUserContext();
   const [qIndex, setQIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [disabled, setDisabled] = useState(false);
@@ -83,6 +83,10 @@ function Questions() {
 
   useEffect(() => {
     setLoading(true);
+    if (!isAuthenticated) {
+      navigate("/auth/login");
+      return;
+    }
     const data = fetchQuestions("http://localhost:8000/api/questions", page);
     data
       .then((res) => {

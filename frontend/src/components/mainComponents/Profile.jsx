@@ -92,9 +92,10 @@ function Profile() {
               className=""
               ref={usernameRef}
             >{`${user.username}\'s Profile`}</h1>
+
             <form
               action={handleProfileChange}
-              className="hidden flex gap-2 items-center"
+              className="hidden flex gap-1 items-center"
               ref={userInputRef}
             >
               <input
@@ -104,7 +105,7 @@ function Profile() {
                 className="bg-zinc-100 p-1 pl-3 rounded-sm"
               />
 
-              <div className="flex gap-2 hidden" ref={editButtonsBoxRef}>
+              <div className="flex gap-1 hidden" ref={editButtonsBoxRef}>
                 <button
                   className="w-8 h-8 cursor-pointer hover:scale-120 transition-transform duration-300 bg-white p-1 rounded-full border-2 border-gray-300 flex items-center justify-center"
                   type="submit"

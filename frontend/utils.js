@@ -43,7 +43,13 @@ function apiFetch(url, options = {}) {
       })
         .then((refreshRes) => {
           if (!refreshRes.ok) {
-            throw new Error("Refresh failed");
+            return refreshRes.text().then((text) => {
+              try {
+                return Promise.reject(JSON.parse(text));
+              } catch {
+                return Promise.reject({ general: text });
+              }
+            });
           }
           return refreshRes.json();
         })
@@ -65,6 +71,15 @@ function apiFetch(url, options = {}) {
               throw new Error("Refresh failed");
             }
             return retryRes.status === 204 ? null : retryRes.json();
+          });
+        })
+        .catch((error) => {
+          console.error("Error during token refresh or retry:", error);
+          Cookies.remove("access");
+          Cookies.remove("user");
+          Cookies.remove("seed");
+          return Promise.reject({
+            general: "Session expired. Please log in again.",
           });
         });
     },
