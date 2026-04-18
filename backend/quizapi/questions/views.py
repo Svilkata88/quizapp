@@ -1,6 +1,5 @@
 import random
 from django.http import JsonResponse 
-from django.db.models.functions import Random
 from .models import Question, Answer, QuestionIssues, Rating
 from users.models import User
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
@@ -26,7 +25,11 @@ def question_list(request):
 
     # make sure is send from the frontend
     seed = request.COOKIES.get("seed")
-    seed = int(seed)
+    try:
+        seed = int(seed)
+    except (TypeError, ValueError):
+        return Response({"error": "Invalid seed value"}, status=status.HTTP_400_BAD_REQUEST)  
+
 
     ids = get_question_ids()
     rnd = random.Random(seed)
