@@ -110,7 +110,7 @@ function Questions() {
     if (question) {
       setRating(question.rating);
     }
-  }, [question?.rating]);
+  }, [question?.id]);
 
   return loading ? (
     <Spinner />
@@ -119,6 +119,7 @@ function Questions() {
       {/* Question Section */}
       <section ref={divRef} className="flex items-center gap-2 mb-8">
         <h2 className="text-xl font-bold ">{question?.text}</h2>
+
         <div
           className="h-12 hover:scale-120 transition-transform cursor-pointer"
           onMouseEnter={() =>
@@ -132,6 +133,7 @@ function Questions() {
         >
           <img src="info.png" alt="info" className="w-[100%] h-[100%]" />
         </div>
+
         <div
           className="h-12 hover:scale-120 transition-transform cursor-pointer flex gap-1 relative"
           onClick={() => setIsHidden(!isHidden)}
@@ -141,6 +143,7 @@ function Questions() {
             {roundedRating}
           </p>
         </div>
+
         <RatingStars
           emptyStar="emptyStarRating.png"
           fullStar="fullStarRating.png"

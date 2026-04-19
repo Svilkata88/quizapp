@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function NoQuestions() {
   return (
-    <div className="bg-gradient-to-b from-zinc-100 to-cyan-400 p-10 flex-1 relative">
-     No questions loaded...
+    <div className="g-gradient-to-b from-zinc-300 to-zinc-50 p-10 flex-1 relative">
+      <h1 className="text-2xl font-bold">No questions loaded...</h1>
     </div>
-  )
+  );
 }
 
-export default NoQuestions
+export default NoQuestions;
