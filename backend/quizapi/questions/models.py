@@ -39,6 +39,7 @@ class Question(models.Model):
 class Rating(models.Model):
     rating = models.SmallIntegerField(default=0)
     question = models.ForeignKey(to=Question, on_delete=models.CASCADE, related_name='ratings')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 
 class Answer(models.Model):

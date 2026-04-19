@@ -119,9 +119,18 @@ def create_question_issue(request):
 @api_view(["POST"])
 def create_rating(request):
     id = request.data["questionId"]
+    user = request.user
     question = Question.objects.get(id=id)
     rating_value = request.data['rating']
-    rating = Rating.objects.create(question=question, rating=rating_value)
+    existing_rating = Rating.objects.filter(question=question, user=user).first()
+    if existing_rating:
+        existing_rating.rating = rating_value
+        existing_rating.save()
+        rating = existing_rating
+        print("updated existing rating")
+    else:
+        rating = Rating.objects.create(question=question, rating=rating_value, user=user)
+        print("created new rating")
 
 
     return JsonResponse({"id": rating.id, "rating": question.rating}, status=201)
