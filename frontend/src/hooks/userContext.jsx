@@ -11,7 +11,7 @@ const UserContext = createContext({
 });
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(JSON.parse(Cookies.get("user") || null));
+  const [user, setUser] = useState(JSON.parse(Cookies.get("user") || "null"));
   const [access, setAccess] = useState("");
   let refresh = undefined;
 

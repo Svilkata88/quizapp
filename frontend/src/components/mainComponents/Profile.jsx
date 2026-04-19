@@ -1,6 +1,7 @@
 import { useUserContext } from "../../hooks/userContext";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { apiEditUser } from "../../../utils";
+import Cookies from "js-cookie";
 
 function Profile() {
   const { user, setUser } = useUserContext();
@@ -30,6 +31,7 @@ function Profile() {
     formData.append("image", file);
 
     handleProfileChange(formData);
+    hideShowBtns();
   };
 
   function handleProfileChange(formData) {
@@ -49,6 +51,7 @@ function Profile() {
       .then((res) => {
         if (res) {
           setUser({ ...res });
+          Cookies.set("user", JSON.stringify(res), { path: "/" });
           hideShowBtns();
         }
       })
