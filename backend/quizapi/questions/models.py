@@ -22,15 +22,25 @@ class Question(models.Model):
         null=True,
         blank=True,
     )
+    correct_answers = models.PositiveIntegerField(default=1)    
+    wrong_answers = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    difficulty = models.IntegerField(default=1)
     info = models.TextField(max_length=1000, null=True, blank=True)
 
     @property
     def rating(self):
         result = self.ratings.aggregate(avg=models.Avg("rating"))
         return result["avg"] or 0
+    
+    @property
+    def difficulty(self):
+        if self.correct_answers / self.wrong_answers > 2:
+            return "easy"
+        elif self.correct_answers / self.wrong_answers < 0.5:
+            return "hard"
+        else:
+            return "medium"
 
     def __str__(self):
         return self.text

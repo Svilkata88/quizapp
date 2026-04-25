@@ -9,7 +9,7 @@ class AnswerInline(admin.TabularInline):
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('text', 'author', 'difficulty', 'created_at', 'rating_count', 'average_rating')
-    list_filter = ('difficulty', 'status', 'author')
+    list_filter = ('status', 'author')
     search_fields = ('text',)
     inlines = [AnswerInline]
     ordering = ('-created_at',)

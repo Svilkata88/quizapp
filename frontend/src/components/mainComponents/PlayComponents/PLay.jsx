@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import {
   fetchQuestions,
+  updateQuestions,
   apiEditUser,
   hideText,
   showText,
@@ -20,7 +21,7 @@ function Questions() {
   const [disabled, setDisabled] = useState(false);
   const [points, setPoints] = useState(0);
   const [loading, setLoading] = useState(true);
-
+  const [answeredCorrectly, setAnsweredCorrectly] = useState([]);
   const question = questions ? questions[qIndex] : {};
   const [rating, setRating] = useState(question?.rating || 0);
   const roundedRating = (Math.round(rating * 10) / 10 || 0).toFixed(1);
@@ -42,6 +43,15 @@ function Questions() {
 
     let xp = Math.floor(newPoints / 10);
 
+    // update all answswered questions with +1 to their answered_questions property and +1 to the one answered wrong
+    updateQuestions("http://localhost:8000/api/questions/update-questions/", {
+      answeredCorrectly: answeredCorrectly,
+      answeredWrong: questions[qIndex]?.id,
+    }).catch((err) => {
+      console.error("Failed to update questions: ", err);
+    });
+
+    // update user points and xp
     apiEditUser(`http://localhost:8000/api/users/profile/edit/${user.id}`, {
       points: newPoints,
       xp: user.xp !== xp ? xp : user.xp,
@@ -58,6 +68,9 @@ function Questions() {
       })
       .catch((err) => {
         console.error("User update failed:", err);
+      })
+      .finally(() => {
+        setAnsweredCorrectly([]);
       });
 
     const seed = fetchQuestions(
@@ -151,6 +164,8 @@ function Questions() {
           setIsHidden={setIsHidden}
           questionId={question?.id}
           setRating={setRating}
+          setAnsweredCorrectly={setAnsweredCorrectly}
+          qID={question?.id}
         />
       </section>
 
@@ -166,6 +181,8 @@ function Questions() {
           qIndex={qIndex}
           setQIndex={setQIndex}
           setPage={setPage}
+          setAnsweredCorrectly={setAnsweredCorrectly}
+          qID={question?.id}
         />
         <Answer
           text={question?.answers[1]?.text}
@@ -176,6 +193,8 @@ function Questions() {
           qIndex={qIndex}
           setQIndex={setQIndex}
           setPage={setPage}
+          setAnsweredCorrectly={setAnsweredCorrectly}
+          qID={question?.id}
         />
         <Answer
           text={question?.answers[2]?.text}
@@ -186,6 +205,8 @@ function Questions() {
           qIndex={qIndex}
           setQIndex={setQIndex}
           setPage={setPage}
+          setAnsweredCorrectly={setAnsweredCorrectly}
+          qID={question?.id}
         />
         <Answer
           text={question?.answers[3]?.text}
@@ -196,6 +217,8 @@ function Questions() {
           qIndex={qIndex}
           setQIndex={setQIndex}
           setPage={setPage}
+          setAnsweredCorrectly={setAnsweredCorrectly}
+          qID={question?.id}
         />
         {question?.info && (
           <div className="bg-gray-100 p-3 border-black border rounded-2xl rounded-tl-none mt-10 w-1/2">

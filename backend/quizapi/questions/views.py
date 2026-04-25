@@ -1,4 +1,5 @@
 import random
+from urllib import request
 from django.http import JsonResponse 
 from .models import Question, Answer, QuestionIssues, Rating
 from users.models import User
@@ -13,13 +14,14 @@ from users.utils import refresh_seed
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import QuestionSerializer
+from .serializers import QuestionSerializer, UpdateQuestionsSerializer
 from django.db import transaction
+from django.db.models import F
 
 
+@api_view(["GET"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
-@api_view(["GET"])
 def question_list(request):
     PAGE_SIZE = 5
 
@@ -68,9 +70,9 @@ def reset_game(request):
 
 
 #to be implemented verification to the question before it goes to Questions
+@api_view(["POST"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
-@api_view(["POST"])
 def create_question(request):
     user = request.user
 
@@ -102,9 +104,9 @@ def create_question(request):
     )
 
 
+@api_view(["POST"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
-@api_view(["POST"])
 def create_question_issue(request):
     id = int(request.data['questionId'])
     description = request.data['issue']
@@ -114,9 +116,9 @@ def create_question_issue(request):
     return JsonResponse({"id": issue.id}, status=201)
 
 
+@api_view(["POST"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
-@api_view(["POST"])
 def create_rating(request):
     id = request.data["questionId"]
     user = request.user
@@ -135,3 +137,29 @@ def create_rating(request):
 
     return JsonResponse({"id": rating.id, "rating": question.rating}, status=201)
         
+@api_view(["POST"])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+@transaction.atomic
+def update_questions(request):
+    serializer = UpdateQuestionsSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+
+    correct_ids = serializer.validated_data.get("answeredCorrectly", [])
+    wrong_id = serializer.validated_data.get("answeredWrong")
+
+    # Update correct answers
+    if correct_ids:
+        Question.objects.filter(id__in=correct_ids).update(
+            correct_answers=F("correct_answers") + 1
+        )
+        print(f"Updated correct answers for question IDs: {', '.join(str(id) for id in correct_ids)}")
+
+    # Update wrong answer
+    if wrong_id:
+        Question.objects.filter(id=wrong_id).update(
+            wrong_answers=F("wrong_answers") + 1
+        )
+        print(f"Updated wrong answers for question ID: {wrong_id}")     
+
+    return Response({"correct_ids": correct_ids, "wrong_id": wrong_id}, status=status.HTTP_200_OK)

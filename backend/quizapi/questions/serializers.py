@@ -17,6 +17,14 @@ class QuestionSerializer(serializers.ModelSerializer):
         model = Question
         fields = ['id', 'text', 'answers', 'correct_answer', 'author', 'rating', 'difficulty', 'info']
 
+
+class UpdateQuestionsSerializer(serializers.Serializer):
+    answeredCorrectly = serializers.ListField(
+        child=serializers.IntegerField(), required=False
+    )
+    answeredWrong = serializers.IntegerField(required=False)
+
+
 class QuestionIssueSerializer(serializers.ModelField):
     question = QuestionSerializer(read_only=True)
 

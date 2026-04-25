@@ -8,6 +8,8 @@ function Answer({
   setPoints,
   qIndex,
   setQIndex,
+  setAnsweredCorrectly,
+  qID,
 }) {
   const [isAnswered, setIsAnswered] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -48,6 +50,7 @@ function Answer({
     setTimeout(() => {
       setPoints((prev) => (correct ? prev + 1 : prev));
       setQIndex((prev) => (correct ? prev + 1 : prev));
+      setAnsweredCorrectly((prev) => (correct ? [...prev, qID] : prev));
       setDisabled(correct ? false : true);
     }, 1000);
   };
