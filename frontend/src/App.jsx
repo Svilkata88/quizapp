@@ -12,6 +12,7 @@ import Logout from "./components/navComponents/Logout.jsx";
 
 import Home from "./components/mainComponents/HomeComponents/Home.jsx";
 import QuestionsForm from "./components/formsComponents/QuestionsForm.jsx";
+import ChoseDifficulty from "./components/mainComponents/PlayComponents/ChoseDifficulty.jsx";
 
 export function App() {
   return (
@@ -19,6 +20,7 @@ export function App() {
       <Route path="/" element={<Main />}>
         <Route index element={<Home />} />
         <Route path="/play" element={<Play />} />
+        <Route path="/chose-difficulty" element={<ChoseDifficulty />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/auth">
           <Route path="register" element={<Register />} />

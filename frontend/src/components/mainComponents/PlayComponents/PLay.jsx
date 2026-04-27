@@ -13,6 +13,7 @@ import RatingStars from "../PlayComponents/RatingStars.jsx";
 import Cookies from "js-cookie";
 import { useUserContext } from "../../../hooks/userContext.jsx";
 import NoQuestions from "./NoQuestions.jsx";
+import { useDifficultyContext } from "../../../hooks/useDifficulty.jsx";
 
 function Questions() {
   const { user, login, isAuthenticated } = useUserContext();
@@ -32,6 +33,7 @@ function Questions() {
   const divRef = useRef(null);
   const navigate = useNavigate();
   const { logout } = useUserContext();
+  const { difficulty } = useDifficultyContext();
 
   const handleReset = () => {
     let newPoints;
@@ -100,7 +102,11 @@ function Questions() {
       navigate("/auth/login");
       return;
     }
-    const data = fetchQuestions("http://localhost:8000/api/questions", page);
+    const data = fetchQuestions(
+      "http://localhost:8000/api/questions",
+      page,
+      difficulty,
+    );
     data
       .then((res) => {
         setQuestions(res.results);

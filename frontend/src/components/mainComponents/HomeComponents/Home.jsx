@@ -2,11 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { showText, hideText, fetchTopFiveUsers } from "../../../../utils";
 import { useEffect, useState, useRef } from "react";
 import UserCard from "./UserCard";
+import { useUserContext } from "../../../hooks/userContext";
 
 function Home() {
   const navigate = useNavigate();
   const divRef = useRef(null);
   const [topFive, setTopFive] = useState([]);
+  const { logout } = useUserContext();
 
   useEffect(() => {
     fetchTopFiveUsers()
@@ -15,6 +17,7 @@ function Home() {
       })
       .catch((err) => {
         console.error("Failed to fetch top five users:", err);
+        logout();
         navigate("/auth/login");
       });
   }, []);
@@ -31,7 +34,7 @@ function Home() {
         >
           <button
             className="block cursor-pointer hover:scale-110 transition-transform mx-auto pt-10"
-            onClick={() => navigate("/play")}
+            onClick={() => navigate("/chose-difficulty")}
             onMouseEnter={() => {
               showText(
                 divRef,

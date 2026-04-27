@@ -86,8 +86,10 @@ function apiFetch(url, options = {}) {
   );
 }
 
-function fetchQuestions(url, page) {
-  const data = apiFetch(`${url}?page=${page}`).then((response) => response);
+function fetchQuestions(url, page, difficulty) {
+  const data = apiFetch(`${url}?page=${page}&difficulty=${difficulty}`).then(
+    (response) => response,
+  );
   return data;
 }
 

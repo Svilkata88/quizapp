@@ -1,4 +1,5 @@
 
+from datetime import timedelta
 from pathlib import Path
 import os
 
@@ -133,3 +134,8 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # React frontend
 ]
+
+# SIMPLE_JWT = {
+#     "ACCESS_TOKEN_LIFETIME": timedelta(seconds=10),   # optional for testing
+#     "REFRESH_TOKEN_LIFETIME": timedelta(seconds=30),  # 👈 what you want
+# }

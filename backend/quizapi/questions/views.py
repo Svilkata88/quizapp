@@ -16,7 +16,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import QuestionSerializer, UpdateQuestionsSerializer
 from django.db import transaction
-from django.db.models import F
+from django.db.models import Case, When, Value, CharField, F
 
 
 @api_view(["GET"])
@@ -32,16 +32,17 @@ def question_list(request):
     except (TypeError, ValueError):
         return Response({"error": "Invalid seed value"}, status=status.HTTP_400_BAD_REQUEST)  
 
+    difficulty = request.GET.get("difficulty")
 
-    ids = get_question_ids()
+    ids = get_question_ids(difficulty)
     rnd = random.Random(seed)
     rnd.shuffle(ids)
     
     paginator = PageNumberPagination()
     paginator.page_size = PAGE_SIZE
     page_ids = paginator.paginate_queryset(ids, request)
-
-    questions = Question.objects.filter(id__in=page_ids, status=Question.Status.CONFIRMED) 
+    
+    questions = Question.objects.filter(id__in=page_ids, status=Question.Status.CONFIRMED, difficulty=difficulty)
 
     serialized_questions = QuestionSerializer(questions, many=True)
 
@@ -151,14 +152,28 @@ def update_questions(request):
     # Update correct answers
     if correct_ids:
         Question.objects.filter(id__in=correct_ids).update(
-            correct_answers=F("correct_answers") + 1
+            correct_answers=F("correct_answers") + 1,
+            difficulty=Case(
+                When(wrong_answers=0, then=Value("easy")),
+                When(correct_answers__gt=F("wrong_answers") * 2, then=Value("easy")),
+                When(correct_answers__lt=F("wrong_answers") * 0.5, then=Value("hard")),
+                default=Value("easy"),
+                output_field=CharField(),
+            )
         )
         print(f"Updated correct answers for question IDs: {', '.join(str(id) for id in correct_ids)}")
 
     # Update wrong answer
     if wrong_id:
         Question.objects.filter(id=wrong_id).update(
-            wrong_answers=F("wrong_answers") + 1
+            wrong_answers=F("wrong_answers") + 1,
+            difficulty=Case(
+                When(wrong_answers=0, then=Value("easy")),
+                When(correct_answers__gt=F("wrong_answers") * 2, then=Value("easy")),
+                When(correct_answers__lt=F("wrong_answers") * 0.5, then=Value("hard")),
+                default=Value("easy"),
+                output_field=CharField(),
+            )
         )
         print(f"Updated wrong answers for question ID: {wrong_id}")     
 
