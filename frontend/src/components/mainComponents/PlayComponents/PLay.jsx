@@ -14,9 +14,18 @@ import Cookies from "js-cookie";
 import { useUserContext } from "../../../hooks/userContext.jsx";
 import NoQuestions from "./NoQuestions.jsx";
 import { useDifficultyContext } from "../../../hooks/useDifficulty.jsx";
+import GameStats from "./GameStats.jsx";
+import { useTimer } from "../../../hooks/useTimer.jsx";
 
 function Questions() {
   const { user, login, isAuthenticated } = useUserContext();
+  const { logout } = useUserContext();
+  const { difficulty } = useDifficultyContext();
+  const { time, start, reset } = useTimer();
+
+  const divRef = useRef(null);
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
   const [qIndex, setQIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [disabled, setDisabled] = useState(false);
@@ -25,23 +34,19 @@ function Questions() {
   const [answeredCorrectly, setAnsweredCorrectly] = useState([]);
   const question = questions ? questions[qIndex] : {};
   const [rating, setRating] = useState(question?.rating || 0);
-  const roundedRating = (Math.round(rating * 10) / 10 || 0).toFixed(1);
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
   const [isHidden, setIsHidden] = useState(true);
   const [page, setPage] = useState(query.get("page") || 1);
-  const divRef = useRef(null);
+
+  const roundedRating = (Math.round(rating * 10) / 10 || 0).toFixed(1);
   const navigate = useNavigate();
-  const { logout } = useUserContext();
-  const { difficulty } = useDifficultyContext();
 
   const handleReset = () => {
     let newPoints;
 
     if (points <= 5) newPoints = user.points + points;
-    else if (5 < points <= 10) newPoints = user.points += points + 2;
-    else if (10 < points <= 15) newPoints = user.points += points + 5;
-    else newPoints = user.points += points + 15;
+    else if (5 < points <= 10) newPoints = user.points + points + 2;
+    else if (10 < points <= 15) newPoints = user.points + points + 5;
+    else newPoints = user.points + points + 15;
 
     let xp = Math.floor(newPoints / 10);
 
@@ -57,15 +62,19 @@ function Questions() {
     apiEditUser(`http://localhost:8000/api/users/profile/edit/${user.id}`, {
       points: newPoints,
       xp: user.xp !== xp ? xp : user.xp,
+      time_played: parseInt(time),
     })
       .then((res) => {
+        console.log("User update response: ", res);
         if (res && res.points) {
           login({
             user: res,
             access: Cookies.get("access"),
             seed: Cookies.get("seed"),
           });
-          console.log("reset successful. New points: ", res.points);
+          // console.log("reset successful. New points: ", res.points);
+          // console.log("game FN time_played: ", parseInt(time));
+          navigate("/chose-difficulty");
         }
       })
       .catch((err) => {
@@ -111,9 +120,11 @@ function Questions() {
       .then((res) => {
         setQuestions(res.results);
         setLoading(false);
+        start();
       })
       .catch(() => {
         logout();
+        reset();
         navigate("/auth/login");
       });
   }, [page]);
@@ -234,14 +245,7 @@ function Questions() {
       </section>
 
       {/* Points Indicator */}
-      <div className="flex gap-2 mt-4 text-xl  font-bold absolute top-6 right-4 flex items-center justify-center">
-        <div className="w-15 h-15">
-          <img src="/points.png" alt="points" />
-        </div>
-        <p className="text-6xl py-2 bg-gradient-to-r from-sky-200 to-sky-400 text-transparent bg-clip-text">
-          {points}
-        </p>
-      </div>
+      <GameStats points={points} time={time} />
 
       {/* Restart Btn */}
       <button

@@ -1,3 +1,4 @@
+
 from rest_framework import serializers
 from .models import User
 
@@ -8,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'password2', 'points', 'xp', 'image', 'addedQuestions']
+        fields = ['id', 'username', 'email', 'password', 'password2', 'points', 'xp', 'image', 'addedQuestions', 'time_played']
 
     def validate(self, data):
         pw1 = data.get('password')
@@ -30,12 +31,17 @@ class UserSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         validated_data.pop('password2', None)
         password = validated_data.pop('password', None)
-        
+
+        time_played = validated_data.pop("time_played", None)
+
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
-        
+
         if password:
             instance.set_password(password)
-        
+
+        if time_played is not None:
+            instance.time_played += time_played  
+
         instance.save()
         return instance

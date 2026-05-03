@@ -183,6 +183,10 @@ function fetchTopFiveUsers() {
   }).then((response) => response);
 }
 
+function formatTime(seconds) {
+  return new Date(seconds * 1000).toISOString().slice(11, 19);
+}
+
 export {
   fetchQuestions,
   fetchOneQuestions,
@@ -197,4 +201,5 @@ export {
   createRating,
   fetchTopFiveUsers,
   apiEditUser,
+  formatTime,
 };

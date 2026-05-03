@@ -62,7 +62,7 @@ function Profile() {
 
   return (
     <div className="bg-transparent min-h-[calc(100vh-124px)]">
-      <section className="flex gap-30 border border-gray-300 rounded-xl w-1/2 h-[50vh] mx-auto mt-20 bg-gradient-to-b from-zinc-300 to-zinc-500 p-10 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]">
+      <section className="flex gap-20 border border-gray-300 rounded-xl w-1/2 h-[50vh] mx-auto mt-20 bg-gradient-to-b from-zinc-300 to-zinc-500 p-10 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]">
         <div className="h-100 relative border-2 border-gray-300 rounded-full">
           <div className="rounded-full h-100 w-100 overflow-hidden border-2 border-white">
             <img
@@ -152,6 +152,14 @@ function Profile() {
                 className="w-8 h-6 object-contain"
               />
               <h2>added questions: {user.addedQuestions}</h2>
+            </div>
+            <div className="flex gap-2 items-center h-8">
+              <img
+                src="/profileTimer.png"
+                alt="timer"
+                className="w-8 h-6 object-contain"
+              />
+              <h2>Time Played: {user.time_played}s</h2>
             </div>
           </div>
         </div>

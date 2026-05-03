@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from .models import User
+from datetime import timedelta    
 from questions.models import Question
 from .serializers import UserSerializer
 from django.contrib.auth import authenticate
@@ -34,7 +35,8 @@ def register_user(request):
                         'points': user.points,
                         'addedQuestions': userQuestions,
                         'profilePicture': user.image.url if user.image else None,
-                        'image': user.image.url if user.image else None
+                        'image': user.image.url if user.image else None,
+                        'time_played': user.time_played.total_seconds()
                     }
             })
 
@@ -72,7 +74,8 @@ def login_user(request):
                         'xp': user.xp,
                         'points': user.points,
                         'addedQuestions': userQuestions,
-                         'image': user.image.url if user.image else None
+                         'image': user.image.url if user.image else None,
+                         'time_played': user.time_played.total_seconds()
                     }
                 })
 
@@ -125,6 +128,7 @@ def edit_user_profile(request, id):
         if serializer.is_valid():
             serializer.save()
             data = serializer.data
+            print("Updated user time_played:", data.get("time_played"))
             data['addedQuestions'] = Question.objects.filter(author=user).count()
             return Response(data)
         return Response(serializer.errors, status=400)
