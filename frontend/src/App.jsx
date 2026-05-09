@@ -1,7 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Navigation from "./layouts/Navigation.jsx";
 import Main from "./layouts/Main.jsx";
-import Footer from "./layouts/Footer.jsx";
 
 import Play from "./components/mainComponents/PlayComponents/PLay.jsx";
 import Profile from "./components/mainComponents/Profile.jsx";
@@ -11,7 +9,7 @@ import Login from "./components/navComponents/Login.jsx";
 import Logout from "./components/navComponents/Logout.jsx";
 
 import Home from "./components/mainComponents/HomeComponents/Home.jsx";
-import QuestionsForm from "./components/formsComponents/QuestionsForm.jsx";
+import CreateQuestionsForm from "./components/formsComponents/CreateQuestionsForm.jsx";
 import ChoseDifficulty from "./components/mainComponents/PlayComponents/ChoseDifficulty.jsx";
 
 export function App() {
@@ -29,7 +27,7 @@ export function App() {
         </Route>
         <Route path="questions">
           <Route index element={<Questions />} />
-          <Route path="create" element={<QuestionsForm />} />
+          <Route path="create" element={<CreateQuestionsForm />} />
         </Route>
       </Route>
     </Routes>

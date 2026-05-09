@@ -105,6 +105,26 @@ def create_question(request):
     )
 
 
+@api_view(["PUT"])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def edit_question(request, id):
+    if request.method == 'PUT':
+        question = get_object_or_404(Question, id=id)
+        print("Editing question author ID:", question.author.id)
+        print("Current user ID:", request.user.id)
+        if request.user.id != question.author.id:
+            return Response({"error": "Unauthorized"}, status=403)
+        
+        serializer = QuestionSerializer(question, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            data = serializer.data
+            print("Updated question:", data.get("text"))
+            return Response(data)
+        return Response(serializer.errors, status=400)
+
+
 @api_view(["POST"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])

@@ -6,8 +6,8 @@ import FormButton from "../buttons/FormButton.jsx";
 import ErrorMessage from "./errorMessage.jsx";
 
 function QuestionsForm() {
-  const { user } = useUserContext();
   const Navigate = useNavigate();
+  const { user } = useUserContext();
   const [questionText, setQuestionText] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [optionOne, setOptionOne] = useState("");

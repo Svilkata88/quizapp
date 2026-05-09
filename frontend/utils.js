@@ -106,6 +106,14 @@ function createQuestion(url, body) {
   return data;
 }
 
+function apiEditQuestion(url, newData) {
+  const data = apiFetch(`${url}`, {
+    method: "PUT",
+    body: newData,
+  }).then((response) => response);
+  return data;
+}
+
 function updateQuestions(url, body) {
   const data = apiFetch(`${url}`, {
     method: "POST",
@@ -162,7 +170,7 @@ function createQuestionIssue(questionId, issue) {
   return apiFetch(`http://localhost:8000/api/questions/createIssue/`, {
     method: "POST",
     credentials: "include",
-    body: JSON.stringify({ questionId, issue }),
+    body: { questionId, issue },
   }).then(() => {
     // Cookies.remove("access");
   });
@@ -190,10 +198,11 @@ function formatTime(seconds) {
 export {
   fetchQuestions,
   fetchOneQuestions,
-  showText,
-  hideText,
+  apiEditQuestion,
   createQuestion,
   updateQuestions,
+  showText,
+  hideText,
   apiLoginUser,
   apiRegisterUser,
   createQuestionIssue,

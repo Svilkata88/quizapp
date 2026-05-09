@@ -1,63 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
-import {
-  fetchOneQuestions,
-  hideText,
-  showText,
-  createQuestionIssue,
-} from "../../../../utils.js";
+import { useRef } from "react";
+import SearchForm from "./SearchForm.jsx";
 
 function Questions() {
-  const [question, setQuestion] = useState(undefined);
-  const [author, setAuthor] = useState(undefined);
   const navigate = useNavigate();
-  const searchInput = useRef(null);
-
-  function searchQuestion() {
-    const inputValue = Number(searchInput.current.querySelector("input").value);
-    if (!inputValue || typeof inputValue !== "number") {
-      setQuestion(undefined);
-      showText(
-        searchInput,
-        "Please provide question ID (N)",
-        "text-red-500 font-bold",
-      );
-      setTimeout(() => {
-        hideText(searchInput);
-      }, 2500);
-      return;
-    }
-
-    const id = Number(inputValue);
-    fetchOneQuestions("http://localhost:8000/api/questions", id)
-      .then((response) => {
-        setQuestion(response.question);
-        setAuthor(response.author);
-      })
-      .catch(() => {
-        showText(
-          searchInput,
-          "This question doesn't exist!",
-          "text-red-500 font-bold",
-        );
-        setTimeout(() => {
-          hideText(searchInput);
-        }, 2500);
-      });
-  }
-
-  function handleIssueSubmit(formData) {
-    const issue = formData.get("issueText");
-
-    createQuestionIssue(question.id, issue).then((res) => {
-      searchInput.current.classList.toggle("hidden");
-      navigate("/questions");
-    });
-  }
+  // to be moved to SearchForm.jsx
+  const issueQuestionSearch = useRef(null);
+  const editQuestionSearch = useRef(null);
 
   return (
     <div className="flex flex-col gap-2 bg-transparent min-h-[calc(100vh-124px)] items-center">
+      {/* Questions dashboard navigation */}
       <div className="flex justify-center p-2 w-1/3 bg-gradient-to-b from-zinc-100 to-zinc-400 w-[1000px] bg-white rounded-lg shadow-[0px_7px_13px_4px_rgba(40,55,61,1)]">
+        {/* Create question */}
         <button
           className="hover:scale-110 transition-transform cursor-pointer"
           onClick={() => navigate("./create")}
@@ -65,50 +20,46 @@ function Questions() {
           <img src="addbtn.png" alt="add button" />
           create
         </button>
-
+        {/* Report question */}
         <button
           className="hover:scale-110 transition-transform cursor-pointer"
-          onClick={() => searchInput.current.classList.toggle("hidden")}
+          onClick={() => {
+            if (!editQuestionSearch.current.classList.contains("hidden")) {
+              editQuestionSearch.current.classList.add("hidden");
+            }
+            issueQuestionSearch.current.classList.toggle("hidden");
+          }}
         >
-          <img src="reportbtn.png" alt="report button" />
+          <img src="issue.png" alt="report button" className="w-16 h-16" />
           report
         </button>
-      </div>
-
-      <div
-        ref={searchInput}
-        className="hidden flex flex-col gap-2 w-1/2 items-center mt-2"
-      >
-        <input
-          type="text"
-          placeholder="question id"
-          className="border border-black bg-zinc-50 pl-2 p-1 rounded-md w-1/3"
-        />
+        {/* Edit question */}
         <button
-          className="cursor-pointer p-1 bg-green-300 hover:bg-green-400 rounded-md w-1/3"
-          onClick={searchQuestion}
+          className="hover:scale-110 transition-transform cursor-pointer"
+          onClick={() => {
+            if (!issueQuestionSearch.current.classList.contains("hidden")) {
+              issueQuestionSearch.current.classList.add("hidden");
+            }
+            editQuestionSearch.current.classList.toggle("hidden");
+          }}
         >
-          Search
+          <img src="editBtn.png" alt="edit button" className="w-16 h-16" />
+          edit
         </button>
-        <div
-          className={`flex flex-col gap-2 ${question ? "block" : "hidden"} w-full`}
-        >
-          <h2>{question?.text.slice(0, 20) + "..."}</h2>
-          <p>Author: {author?.username}</p>
-
-          <form action={handleIssueSubmit} className="flex flex-col gap-2">
-            <textarea
-              type="text"
-              name="issueText"
-              placeholder="what's wrong?"
-              className="border border-black bg-zinc-50 pl-2 p-1 rounded-md "
-            />
-            <button className="p-1 bg-green-300 hover:bg-green-400 rounded-md">
-              Submit
-            </button>
-          </form>
-        </div>
       </div>
+
+      {/* Questions issue form and info */}
+      <SearchForm
+        elementRef={issueQuestionSearch}
+        type={"issue"}
+        title={"Report question"}
+      />
+      {/* Questions edit form and info */}
+      <SearchForm
+        elementRef={editQuestionSearch}
+        type={"edit"}
+        title={"Edit question"}
+      />
     </div>
   );
 }

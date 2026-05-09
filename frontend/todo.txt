@@ -11,4 +11,5 @@
 5. DONE - restrict cirtain views on the FE if user is not loged in!
 6. DONE restrict user nav to be accesible only if user is loged in.
 7. DONE restrict user can't play if not logged in
-8. When pic of profile is changed not set immediatly in auth nav and in profile ( need constant update on ux )
+8. DONE When pic of profile is changed not set immediatly in auth nav and in profile ( need constant update on ux )
+9. construct edint question - search part with list of loged in author's qeustions

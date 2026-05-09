@@ -30,7 +30,6 @@ class AnswerAdmin(admin.ModelAdmin):
     search_fields = ('text', 'question__text')
     ordering = ('-created_at',)
 
-
 @admin.register(QuestionIssues)
 class QuestionIssuesAdmin(admin.ModelAdmin):
     list_display = ('status', 'question', 'description', 'decision')
