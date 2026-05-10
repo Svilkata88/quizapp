@@ -109,9 +109,8 @@ function EditQuestionForm({ question, setQuestion, author, setSearchValue }) {
       >
         <form
           action={handleQuestionForm}
-          className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 w-full mt-10 p-5 rounded-lg shadow-[var(--blue-shadow)]"
+          className="flex flex-col gap-1 w-full mt-10 p-5 rounded-lg"
         >
-          <h2 className="text-center text-gray-600">Edit a question</h2>
           <p className="text-center text-gray-600">
             Author: {author?.username}
           </p>

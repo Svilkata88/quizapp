@@ -76,8 +76,8 @@ function SearchForm({ type, title, elementRef }) {
 
   return (
     <div
+      className="flex flex-col gap-1 items-center  bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-5 rounded-lg shadow-[var(--blue-shadow)] w-[1000px] hidden"
       ref={elementRef}
-      className="hidden flex flex-col gap-2 w-1/2 items-center mt-2"
     >
       <h1>{title}</h1>
       <input

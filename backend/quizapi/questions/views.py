@@ -51,6 +51,17 @@ def question_list(request):
     # need improvment / in every call the view fetch the ids, make a paginator, set size and then filter again
     return response
 
+
+@api_view(["GET"])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def get_own_questions_list(request):
+    user = request.user
+    questions = Question.objects.filter(author=user)
+    serialized_questions = QuestionSerializer(questions, many=True)
+    response = Response(serialized_questions.data)  
+    return response
+
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])

@@ -4,6 +4,7 @@ import Main from "./layouts/Main.jsx";
 import Play from "./components/mainComponents/PlayComponents/PLay.jsx";
 import Profile from "./components/mainComponents/Profile.jsx";
 import Questions from "./components/mainComponents/QuestonsComponents/Questions.jsx";
+import QuestionDetail from "./components/mainComponents/QuestonsComponents/QuestionDetail.jsx";
 import Register from "./components/navComponents/Register.jsx";
 import Login from "./components/navComponents/Login.jsx";
 import Logout from "./components/navComponents/Logout.jsx";
@@ -27,6 +28,7 @@ export function App() {
         </Route>
         <Route path="questions">
           <Route index element={<Questions />} />
+          <Route path=":id" element={<QuestionDetail />} />
           <Route path="create" element={<CreateQuestionsForm />} />
         </Route>
       </Route>

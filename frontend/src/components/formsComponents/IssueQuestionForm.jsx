@@ -35,9 +35,9 @@ function IssueQuestionForm({ question, setQuestion, author, setSearchValue }) {
       className={`flex flex-col gap-2 ${question ? "block" : "hidden"} w-full`}
       ref={questionIssueContainer}
     >
-      <div className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 w-full mt-10 p-5 rounded-lg shadow-[var(--blue-shadow)]">
+      <div className="flex flex-col gap-1 w-full mt-10 p-5 rounded-lg">
         <h2>{question?.text.slice(0, 20) + "..."}</h2>
-        <p>Author: {author?.username}</p>
+        <p className="text-gray-600">Author: {author?.username}</p>
       </div>
 
       <form
