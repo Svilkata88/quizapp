@@ -12,6 +12,7 @@ import Logout from "./components/navComponents/Logout.jsx";
 import Home from "./components/mainComponents/HomeComponents/Home.jsx";
 import CreateQuestionsForm from "./components/formsComponents/CreateQuestionsForm.jsx";
 import ChoseDifficulty from "./components/mainComponents/PlayComponents/ChoseDifficulty.jsx";
+import GameOverview from "./components/mainComponents/PlayComponents/GameOverview.jsx";
 
 export function App() {
   return (
@@ -20,6 +21,7 @@ export function App() {
         <Route index element={<Home />} />
         <Route path="/play" element={<Play />} />
         <Route path="/chose-difficulty" element={<ChoseDifficulty />} />
+        <Route path="/game-overview" element={<GameOverview />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/auth">
           <Route path="register" element={<Register />} />

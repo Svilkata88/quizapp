@@ -47,7 +47,7 @@ def question_list(request):
     serialized_questions = QuestionSerializer(questions, many=True)
 
     response = paginator.get_paginated_response(serialized_questions.data)
-
+    
     # need improvment / in every call the view fetch the ids, make a paginator, set size and then filter again
     return response
 

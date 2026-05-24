@@ -16,9 +16,16 @@ import NoQuestions from "./NoQuestions.jsx";
 import { useDifficultyContext } from "../../../hooks/useDifficulty.jsx";
 import GameStats from "./GameStats.jsx";
 import { useTimer } from "../../../hooks/useTimer.jsx";
+import { useGameOverviewContext } from "../../../hooks/useGameOverview.jsx";
 
 function Questions() {
   const { user, login, isAuthenticated } = useUserContext();
+  const {
+    setPointsOverview,
+    setTimeOverview,
+    setCorrectlyAnsweredCountOverview,
+    setDifficultyOverview,
+  } = useGameOverviewContext();
   const { logout } = useUserContext();
   const { difficulty } = useDifficultyContext();
   const { time, start, reset } = useTimer();
@@ -65,16 +72,17 @@ function Questions() {
       time_played: parseInt(time),
     })
       .then((res) => {
-        console.log("User update response: ", res);
         if (res && res.points) {
+          setPointsOverview(points);
+          setTimeOverview(time);
+          setCorrectlyAnsweredCountOverview(answeredCorrectly.length);
+          setDifficultyOverview(difficulty);
+
           login({
             user: res,
             access: Cookies.get("access"),
             seed: Cookies.get("seed"),
           });
-          // console.log("reset successful. New points: ", res.points);
-          // console.log("game FN time_played: ", parseInt(time));
-          navigate("/chose-difficulty");
         }
       })
       .catch((err) => {
@@ -103,6 +111,8 @@ function Questions() {
       setQIndex(0);
       setPoints(0);
     });
+
+    console.log("Reset successful!");
   };
 
   useEffect(() => {
@@ -122,10 +132,15 @@ function Questions() {
         setLoading(false);
         start();
       })
-      .catch(() => {
-        logout();
-        reset();
-        navigate("/auth/login");
+      .catch((e) => {
+        if (e.detail === "Invalid page.") {
+          handleReset();
+          navigate("/");
+        } else {
+          logout();
+          reset();
+          navigate("/auth/login");
+        }
       });
   }, [page]);
 
@@ -250,7 +265,10 @@ function Questions() {
       {/* Restart Btn */}
       <button
         className="absolute bottom-6 right-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-        onClick={handleReset}
+        onClick={() => {
+          handleReset();
+          navigate("/game-overview");
+        }}
       >
         Restart
       </button>

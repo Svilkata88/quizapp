@@ -87,10 +87,9 @@ function apiFetch(url, options = {}) {
 }
 
 function fetchQuestions(url, page, difficulty) {
-  const data = apiFetch(`${url}?page=${page}&difficulty=${difficulty}`).then(
+  return apiFetch(`${url}?page=${page}&difficulty=${difficulty}`).then(
     (response) => response,
   );
-  return data;
 }
 
 function fetchOwnQuestions(url) {
