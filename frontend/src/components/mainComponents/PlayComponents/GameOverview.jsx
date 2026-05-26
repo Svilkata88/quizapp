@@ -84,6 +84,16 @@ function GameOverview() {
             }}
           />
         </button>
+        <button>
+          <img
+            src="start.png"
+            alt="start"
+            className="absolute top-4 right-12 cursor-pointer hover:scale-110 transition-transform h-6 w-6"
+            onClick={() => {
+              navigate("/chose-difficulty");
+            }}
+          />
+        </button>
       </div>
     </div>
   );
