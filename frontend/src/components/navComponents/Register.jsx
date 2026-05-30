@@ -67,7 +67,7 @@ function Register() {
 
     if (type === "email") {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(data);
+      return emailRegex.test(data.trim());
     }
     if (type === "username") {
       return data.length >= 3;

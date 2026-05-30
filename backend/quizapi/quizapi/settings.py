@@ -2,19 +2,28 @@
 from datetime import timedelta
 from pathlib import Path
 import os
+import environ
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env(
+    DEBUG=(bool, False)
+)
 
+environ.Env.read_env(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#7@v8a7%5tht$09%(3ugt*2r*u8ltsbe8k(xt8gff)ddihsazf'
+environ.Env.read_env(BASE_DIR / ".env")
+
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -76,16 +85,10 @@ WSGI_APPLICATION = 'quizapi.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+MODE = env("MODE", default="development")
 
 DATABASES = {
-     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "quizdb",
-        "USER": "quizuser",
-        "PASSWORD": "answerthequiz",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
+    "default": env.db("DB_URL") if MODE == "production" else env.db("DEV_DB_URL")
 }
 
 
@@ -139,3 +142,4 @@ CORS_ALLOWED_ORIGINS = [
 #     "ACCESS_TOKEN_LIFETIME": timedelta(seconds=10),   # optional for testing
 #     "REFRESH_TOKEN_LIFETIME": timedelta(seconds=30),  # 👈 what you want
 # }
+
