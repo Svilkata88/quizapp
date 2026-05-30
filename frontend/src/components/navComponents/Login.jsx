@@ -42,11 +42,11 @@ function Login() {
   return loading ? (
     <Spinner />
   ) : (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center p-4">
       <h1 className="text-2xl mb-4">Login</h1>
       <form
         action={handleLogin}
-        className="flex flex-col gap-2 w-1/4 bg-stone-200 form-container"
+        className="flex flex-col gap-2 w-full md:w-1/2 lg:w-1/3 bg-stone-200 form-container"
       >
         <input
           type="text"

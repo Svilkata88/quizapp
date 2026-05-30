@@ -8,6 +8,7 @@ import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 env = environ.Env(
     DEBUG=(bool, False)
 )
@@ -18,8 +19,6 @@ environ.Env.read_env(BASE_DIR / ".env")
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-environ.Env.read_env(BASE_DIR / ".env")
-
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -139,7 +138,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # SIMPLE_JWT = {
-#     "ACCESS_TOKEN_LIFETIME": timedelta(seconds=10),   # optional for testing
-#     "REFRESH_TOKEN_LIFETIME": timedelta(seconds=30),  # 👈 what you want
+#     "ACCESS_TOKEN_LIFETIME": timedelta(seconds=10),   
+#     "REFRESH_TOKEN_LIFETIME": timedelta(seconds=30),  
 # }
 

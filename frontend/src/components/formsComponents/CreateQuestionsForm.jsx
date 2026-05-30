@@ -76,10 +76,10 @@ function QuestionsForm() {
   };
 
   return (
-    <div className="bg-transparent flex flex-col min-h-[571px] items-center">
+    <div className="bg-transparent flex flex-col min-h-[571px] items-center p-4">
       <form
         action={handleQuestionForm}
-        className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 w-1/3 mt-10 p-5 rounded-lg shadow-[var(--blue-shadow)]"
+        className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 w-full md:w-1/2 lg:w-1/3 mt-10 p-5 rounded-lg shadow-[var(--blue-shadow)]"
       >
         <h2 className="text-center text-gray-600">Create a question</h2>
         <textarea

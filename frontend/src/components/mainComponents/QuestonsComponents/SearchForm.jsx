@@ -76,19 +76,19 @@ function SearchForm({ type, title, elementRef }) {
 
   return (
     <div
-      className="flex flex-col gap-1 items-center  bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-5 rounded-lg shadow-[var(--blue-shadow)] w-[1000px] hidden"
+      className="flex flex-col gap-1 items-center  bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-5 rounded-lg shadow-[var(--blue-shadow)] w-full md:w-1/2 lg:w-1/3 xl:w-[600px] hidden"
       ref={elementRef}
     >
       <h1>{title}</h1>
       <input
         type="text"
         placeholder="question id"
-        className="border border-black bg-zinc-50 pl-2 p-1 rounded-md w-1/3"
+        className="border border-black bg-zinc-50 pl-2 p-1 rounded-md w-2/3"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />
       <button
-        className="cursor-pointer p-1 bg-green-300 hover:bg-green-400 rounded-md w-1/3"
+        className="cursor-pointer p-1 bg-green-300 hover:bg-green-400 rounded-md w-2/3"
         onClick={() => handleSearch(searchValue, elementRef)}
       >
         Search

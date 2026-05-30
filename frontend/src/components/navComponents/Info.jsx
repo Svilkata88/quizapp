@@ -2,7 +2,7 @@ import logo from "/fivicons/favicon-96x96.png?url";
 
 function Info() {
   return (
-    <div className="w-1/3 pl-2 pt-2">
+    <div className="flex w-1/3 md:pl-2 md:pt-2 top-5 left-5 justify-center md:justify-start">
       <div className="w-18 h-18">
         <img
           src="/logo.png"

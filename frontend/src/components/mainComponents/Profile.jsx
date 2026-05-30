@@ -62,9 +62,9 @@ function Profile() {
 
   return (
     <div className="bg-transparent min-h-[calc(100vh-124px)]">
-      <section className="flex gap-20 border border-gray-300 rounded-xl w-1/2 h-[50vh] mx-auto mt-20 bg-gradient-to-b from-zinc-300 to-zinc-500 p-10 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]">
-        <div className="h-100 relative border-2 border-gray-300 rounded-full">
-          <div className="rounded-full h-100 w-100 overflow-hidden border-2 border-white">
+      <section className="flex flex-col md:flex-row items-center gap-10 lg:gap-20 border border-gray-300 rounded-xl lg:h-[50vh] lg:w-[1000px] mx-4 lg:mx-auto mt-20 bg-gradient-to-b from-zinc-300 to-zinc-500 p-10 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]">
+        <div className="h-43 w-43 p-1 md:h-88 md:w-88 lg:h-104 lg:w-104 relative border-2 border-gray-300 rounded-full bg-zinc-400">
+          <div className="rounded-full h-full w-full overflow-hidden border-2 border-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <img
               src={imageUrl}
               alt="profile-pic"
@@ -83,7 +83,7 @@ function Profile() {
           <button
             type="button"
             onClick={handleClick}
-            className="w-15 h-15 absolute bottom-5 right-10 hover:scale-110 transition-transform duration-300 bg-white p-2 rounded-full border-2 border-gray-300 flex items-center justify-center"
+            className="w-15 h-15 absolute bottom-0 right-0 md:bottom-5 md:right-6 lg:bottom-5 lg:right-10 hover:scale-110 transition-transform duration-300 bg-white p-2 rounded-full border-2 border-gray-300 flex items-center justify-center"
           >
             <img src="/imageUpload.png" alt="imageUpload" />
           </button>
@@ -92,7 +92,7 @@ function Profile() {
         <div className="flex gap-2 flex-col justify-start my-10">
           <div className="flex gap-2 items-center mb-10">
             <h1
-              className=""
+              className="lg:text-4xl xl:text-4xl"
               ref={usernameRef}
             >{`${user.username}\'s Profile`}</h1>
 

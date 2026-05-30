@@ -23,7 +23,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="flex gap-5 justify-between pt-10 px-10 min-h-[calc(100vh-124px)]">
+    <div className="flex flex-col gap-5 md:flex-row justify-between pt-10 px-10 min-h-[calc(100vh-124px)]">
       <div className="h-[250px] mb-10">
         <h1 className="text-center text-2xl font-bold">
           Welcome to the Quiz App
@@ -50,7 +50,9 @@ function Home() {
       </div>
 
       <div className="mx-10 mb-10">
-        <h3 className="text-xl font-bold text-center">Top 5 players</h3>
+        <h3 className="text-xl font-bold text-center text-sky-200 md:text-black">
+          Top 5 players
+        </h3>
         <ul className="flex flex-col mt-4 flex gap-2">
           {topFive.map((user) => (
             <UserCard key={user.id} user={user} />

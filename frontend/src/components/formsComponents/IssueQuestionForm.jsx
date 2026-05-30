@@ -42,7 +42,7 @@ function IssueQuestionForm({ question, setQuestion, author, setSearchValue }) {
 
       <form
         action={handleIssueSubmit}
-        className="flex flex-col gap-2"
+        className="flex flex-col gap-2 w-full md:w-1/2 lg:w-1/3"
         ref={questionIssueForm}
       >
         <textarea

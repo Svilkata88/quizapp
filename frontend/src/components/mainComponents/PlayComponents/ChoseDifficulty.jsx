@@ -5,9 +5,9 @@ function ChoseDifficulty() {
   const navigate = useNavigate();
   const { difficulty, setDifficulty } = useDifficultyContext();
   return (
-    <div className="absolute inset-0 h-screen flex items-center justify-center">
+    <div className="absolute inset-0 h-screen flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black backdrop-blur-md opacity-30 "></div>
-      <div className="chose-difficulty-container">
+      <div className="chose-difficulty-container ">
         <section className="text-center">
           <p>Choose Difficulty:</p>
           <select
