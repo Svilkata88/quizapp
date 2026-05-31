@@ -14,3 +14,7 @@
 8. DONE When pic of profile is changed not set immediatly in auth nav and in profile ( need constant update on ux )
 9. DONE construct edint question - search part with list of loged in author's qeustions
 10. move hide text / show text to separate util func
+
+
+
+deployed app: https://quizzy-98bc5.web.app/auth/login

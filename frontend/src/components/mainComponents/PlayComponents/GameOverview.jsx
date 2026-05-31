@@ -16,7 +16,7 @@ function GameOverview() {
   } = useGameOverviewContext();
 
   return (
-    <div className="absolute inset-0 h-screen flex items-center justify-center">
+    <div className="absolute inset-0 h-screen flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black backdrop-blur-md opacity-30 "></div>
       <div className="chose-difficulty-container !h-70">
         <section className="text-center">

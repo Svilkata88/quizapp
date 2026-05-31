@@ -160,33 +160,38 @@ function Questions() {
   return loading ? (
     <Spinner />
   ) : questions.length > 1 ? (
-    <div className="bg-transparent p-10 flex-1 relative">
+    <div className="bg-transparent p-2 md:p-10 flex-1 relative">
       {/* Question Section */}
-      <section ref={divRef} className="flex items-center gap-2 mb-8">
-        <h2 className="text-xl font-bold ">{question?.text}</h2>
+      <section
+        ref={divRef}
+        className="flex flex-col md:flex-row items-center gap-2 mb-2 md:mb-8"
+      >
+        <h2 className="font-bold text-md md:text-xl">{question?.text}</h2>
 
-        <div
-          className="h-12 hover:scale-120 transition-transform cursor-pointer"
-          onMouseEnter={() =>
-            showText(
-              divRef,
-              `Question ID: ${question?.id}`,
-              "text-lg font-mono ",
-            )
-          }
-          onMouseLeave={() => hideText(divRef)}
-        >
-          <img src="info.png" alt="info" className="w-[100%] h-[100%]" />
-        </div>
+        <div className="flex gap-2">
+          <div
+            className="h-12 hover:scale-120 transition-transform cursor-pointer"
+            onMouseEnter={() =>
+              showText(
+                divRef,
+                `Question ID: ${question?.id}`,
+                "text-lg font-mono ",
+              )
+            }
+            onMouseLeave={() => hideText(divRef)}
+          >
+            <img src="info.png" alt="info" className="w-[100%] h-[100%]" />
+          </div>
 
-        <div
-          className="h-12 hover:scale-120 transition-transform cursor-pointer flex gap-1 relative"
-          onClick={() => setIsHidden(!isHidden)}
-        >
-          <img src="star.png" alt="info" className="w-[100%] h-[100%]" />
-          <p className="absolute inset-0 flex items-center justify-center tex-[6px] font-bold">
-            {roundedRating}
-          </p>
+          <div
+            className="h-12 hover:scale-120 transition-transform cursor-pointer flex gap-1 relative"
+            onClick={() => setIsHidden(!isHidden)}
+          >
+            <img src="star.png" alt="info" className="w-[100%] h-[100%]" />
+            <p className="absolute inset-0 flex items-center justify-center tex-[6px] font-bold">
+              {roundedRating}
+            </p>
+          </div>
         </div>
 
         <RatingStars

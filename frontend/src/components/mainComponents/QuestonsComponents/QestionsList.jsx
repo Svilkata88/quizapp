@@ -19,7 +19,7 @@ function QestionsList({ elementRef, type }) {
 
   return (
     <div
-      className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-4 rounded-lg shadow-[var(--blue-shadow)] scrollable xl:w-[1000px] max-h-150 hidden"
+      className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-4 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:w-[1000px] max-h-150 hidden"
       ref={elementRef}
     >
       <h2 className="text-2xl font-bold mb-4">

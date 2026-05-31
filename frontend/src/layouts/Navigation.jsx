@@ -4,7 +4,7 @@ import Info from "../components/navComponents/Info.jsx";
 
 function Navigation() {
   return (
-    <div className="flex items-start justify-between bg-gradient-to-b from-zinc-100 to-zinc-150 pt-5 md:pt-0">
+    <div className="flex items-start justify-between bg-gradient-to-b from-zinc-100 to-zinc-150 pt-5 pb-5 md:pb-2 md:pt-0">
       <Info />
       <Nav />
       <Auth />

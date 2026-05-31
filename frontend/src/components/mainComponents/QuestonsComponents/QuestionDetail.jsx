@@ -18,7 +18,7 @@ function QuestionDetail() {
       });
   }, [id]);
   return (
-    <div className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-5 rounded-lg shadow-[var(--blue-shadow)] w-[1000px] mx-auto min-h-150">
+    <div className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-1 py-3 lg:p-5 rounded-lg shadow-[var(--blue-shadow)] xl:w-[1000px] mx-4 md:mx-auto min-h-150">
       <div className="flex gap-2 items-center justify-center border-b border-gray-300 pb-5">
         <div className="w-16 h-16">
           <img src="/question.png" alt="question" />
@@ -27,17 +27,17 @@ function QuestionDetail() {
       </div>
       <p className="text-center text-gray-600">Author: {author?.username}</p>
       <section className="flex gap-10 items-center justify-center pb-5 mt-10">
-        <div className="w-16 h-16 flex flex-col items-center justify-center">
+        <div className="w-10 w-10 lg:w-16 lg:h-16 flex flex-col items-center justify-center">
           <p className="text-center text-xs text-gray-600">id</p>
           <img src="/id.png" alt="id" />
           <p className="text-2xl">{question?.id}</p>
         </div>
-        <div className="w-16 h-16 flex flex-col items-center justify-center">
+        <div className="w-10 w-10 lg:w-16 lg:h-16 flex flex-col items-center justify-center">
           <p className="text-center text-xs text-gray-600">rating</p>
           <img src="/fullStarRating.png" alt="full star rating" />
           <p className="text-2xl">{question?.rating}</p>
         </div>
-        <div className="w-16 h-16 flex flex-col items-center justify-center">
+        <div className="w-10 w-10 lg:w-16 lg:h-16 flex flex-col items-center justify-center">
           <p className="text-center text-xs text-gray-600">difficulty</p>
           <img src="/difficulty.png" alt="difficulty" />
           <p className="text-2xl">{question?.difficulty}</p>

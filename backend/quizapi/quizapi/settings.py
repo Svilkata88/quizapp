@@ -84,11 +84,17 @@ WSGI_APPLICATION = 'quizapi.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-MODE = env("MODE", default="development")
 
 DATABASES = {
-    "default": env.db("DB_URL") if MODE == "production" else env.db("DEV_DB_URL")
+    "default": env.db("DEV_DB_URL")
 }
+
+# DATABASES = {
+#     "default": env.db(
+#         "DEV_DB_URL"
+#     )
+# }
+
 
 
 # Password validation
