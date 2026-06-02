@@ -4,7 +4,8 @@ import { useState } from "react";
 
 function Auth() {
   const { user, isAuthenticated } = useUserContext();
-  const imageUrl = user?.image ? `http://localhost:8000${user.image}` : null;
+  // const imageUrl = user?.image ? `http://localhost:8000${user.image}` : null;
+  const imageUrl = user?.image ? `${user.image}` : null;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (

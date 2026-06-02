@@ -8,8 +8,13 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     points = models.SmallIntegerField(default=0)
     xp = models.SmallIntegerField(default=0)
-    image = models.ImageField(upload_to='profile_images/', null=True, blank=True, default="profile_images/user.png")
+    image = models.ImageField(upload_to='quizzy/profile_images/', null=True, blank=True, default="quizzy/profile_images/user_hir4cn", max_length=500)
     time_played = models.DurationField(default=timedelta(0))
 
     def __str__(self):
         return self.username
+    
+    
+
+
+

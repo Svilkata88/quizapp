@@ -5,7 +5,8 @@ import Cookies from "js-cookie";
 
 function Profile() {
   const { user, setUser } = useUserContext();
-  const imageUrl = user.image ? `http://localhost:8000${user.image}` : null;
+  // const imageUrl = user.image ? `http://localhost:8000${user.image}` : null;
+  const imageUrl = user.image ? `${user.image}` : null;
   const fileInputRef = useRef(null);
   const usernameRef = useRef(null);
   const userInputRef = useRef(null);

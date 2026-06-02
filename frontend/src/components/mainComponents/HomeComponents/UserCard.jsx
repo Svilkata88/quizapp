@@ -4,9 +4,7 @@ function UserCard({ user }) {
       <section>
         <div className="w-15 h-15 p-1 overflow-hidden flex items-center justify-center flex-shrink-0 border border-gray-300 rounded-full">
           <img
-            src={
-              user.image ? `http://localhost:8000${user.image}` : "/user.png"
-            }
+            src={user.image ? `${user.image}` : "/user.png"}
             alt="user profile"
             className="w-full h-full object-cover rounded-full "
           />
