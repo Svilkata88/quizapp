@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'quizapi.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    "default": env.db("DEV_DB_URL")
+    "default": env.db("DB_URL"),
 }
 
 
