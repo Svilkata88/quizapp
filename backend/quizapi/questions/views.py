@@ -43,7 +43,7 @@ def question_list(request):
     page_ids = paginator.paginate_queryset(ids, request)
     
     questions = Question.objects.filter(id__in=page_ids, status=Question.Status.CONFIRMED, difficulty=difficulty)
-
+    
     serialized_questions = QuestionSerializer(questions, many=True)
 
     response = paginator.get_paginated_response(serialized_questions.data)

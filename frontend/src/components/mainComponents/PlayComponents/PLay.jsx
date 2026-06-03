@@ -131,6 +131,7 @@ function Questions() {
         if (e.detail === "Invalid page.") {
           handleReset();
           navigate("/");
+          // inform user that game is refreshed because no more questions
         } else {
           logout();
           reset();
@@ -140,7 +141,7 @@ function Questions() {
   }, [page]);
 
   useEffect(() => {
-    if (qIndex === questions.length - 1) {
+    if (questions.length > 0 && qIndex >= questions.length) {
       setPage((prev) => prev + 1);
       setQIndex(0);
     }
@@ -154,7 +155,7 @@ function Questions() {
 
   return loading ? (
     <Spinner />
-  ) : questions.length > 1 ? (
+  ) : questions.length > 0 ? (
     <div className="bg-transparent p-2 md:p-10 flex-1 relative">
       {/* Question Section */}
       <section
