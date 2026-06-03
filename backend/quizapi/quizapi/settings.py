@@ -134,6 +134,7 @@ CSRF_COOKIE_SAMESITE = "None"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  
     "https://quizapp-production-a36e.up.railway.app",
+    "https://quizzy-98bc5.web.app/"
 ]
 
 # SIMPLE_JWT = {
