@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchOneQuestions } from "../../../../utils";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function QuestionDetail() {
   const [question, setQuestion] = useState(null);
   const [author, setAuthor] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
-    fetchOneQuestions(`http://localhost:8000/api/questions`, id)
+    fetchOneQuestions(`${BASE_URL}/api/questions`, id)
       .then((res) => {
         setQuestion(res.question);
         setAuthor(res.author);

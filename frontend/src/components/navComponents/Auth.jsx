@@ -19,7 +19,7 @@ function Auth() {
             <img
               src={imageUrl}
               alt="user"
-              className="md:h-8 md:w-8 object-cover rounded-full"
+              className="h-full w-full object-cover rounded-full"
             />
           </div>
           <span className="hidden md:block px-3 rounded-md">

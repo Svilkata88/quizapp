@@ -3,12 +3,14 @@ import { fetchOwnQuestions } from "../../../../utils";
 import { useUserContext } from "../../../hooks/userContext";
 import { Link } from "react-router-dom";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function QestionsList({ elementRef, type }) {
   const [questions, setQuestions] = useState([]);
   const { user } = useUserContext();
 
   useEffect(() => {
-    fetchOwnQuestions("http://localhost:8000/api/questions/list_own_questions/")
+    fetchOwnQuestions(`${BASE_URL}/api/questions/list_own_questions/`)
       .then((res) => {
         setQuestions(res);
       })

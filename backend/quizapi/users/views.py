@@ -45,8 +45,8 @@ def register_user(request):
                 key="refresh",
                 value=refresh['refresh'],
                 httponly=True,
-                secure=False,      # True in production (HTTPS)
-                samesite="Lax",
+                secure=True,     
+                samesite="None",
                 path="/",  
                 max_age=60 * 60 * 24 * 7     # 7 days
             )
@@ -84,8 +84,8 @@ def login_user(request):
                     key="refresh",
                     value=refresh['refresh'],
                     httponly=True,
-                    secure=False,      # True in production (HTTPS)
-                    samesite="Lax",
+                    secure=True,     
+                    samesite="None",
                     path="/",  
                     max_age=60 * 60 * 24 * 7     # 7 days
                 )

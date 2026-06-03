@@ -7,6 +7,8 @@ import Spinner from "../others/Spinner.jsx";
 import FormButton from "../buttons/FormButton.jsx";
 import ErrorMessage from "../formsComponents/errorMessage.jsx";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function Register() {
   const { login } = useUserContext();
   const [loading, setLoading] = useState(false);
@@ -38,7 +40,7 @@ function Register() {
 
     setLoading(true);
 
-    apiRegisterUser("http://localhost:8000/api/users/register", {
+    apiRegisterUser(`${BASE_URL}/api/users/register`, {
       email,
       username,
       password,

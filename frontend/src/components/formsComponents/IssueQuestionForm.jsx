@@ -2,6 +2,8 @@ import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createQuestionIssue, showText, hideText } from "../../../utils.js";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function IssueQuestionForm({ question, setQuestion, author, setSearchValue }) {
   const questionIssueContainer = useRef(null);
   const questionIssueForm = useRef(null);
@@ -14,7 +16,11 @@ function IssueQuestionForm({ question, setQuestion, author, setSearchValue }) {
   const handleIssueSubmit = (formData) => {
     const issue = formData.get("issueText");
 
-    createQuestionIssue(question.id, issue).then((res) => {
+    createQuestionIssue(
+      `${BASE_URL}/api/questions/createIssue/`,
+      question.id,
+      issue,
+    ).then((res) => {
       questionIssueForm.current.classList.add("hidden");
 
       showText(

@@ -4,6 +4,8 @@ import { fetchOneQuestions, hideText, showText } from "../../../../utils.js";
 import { useState, useEffect } from "react";
 import { useUserContext } from "../../../hooks/userContext.jsx";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function SearchForm({ type, title, elementRef }) {
   const [searchValue, setSearchValue] = useState("");
   const [author, setAuthor] = useState(undefined);
@@ -42,7 +44,7 @@ function SearchForm({ type, title, elementRef }) {
     const id = checkSearchValue(inputValue);
     if (id === null) return;
 
-    fetchOneQuestions("http://localhost:8000/api/questions", id)
+    fetchOneQuestions(`${BASE_URL}/api/questions`, id)
       .then((response) => {
         if (response.author.id !== user.id) {
           showText(

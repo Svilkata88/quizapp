@@ -3,6 +3,8 @@ import { useRef } from "react";
 import { apiEditUser } from "../../../utils";
 import Cookies from "js-cookie";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function Profile() {
   const { user, setUser } = useUserContext();
   // const imageUrl = user.image ? `http://localhost:8000${user.image}` : null;
@@ -45,10 +47,7 @@ function Profile() {
 
     if (!hasChanges) return;
 
-    apiEditUser(
-      `http://localhost:8000/api/users/profile/edit/${user.id}`,
-      formData,
-    )
+    apiEditUser(`${BASE_URL}/api/users/profile/edit/${user.id}`, formData)
       .then((res) => {
         if (res) {
           setUser({ ...res });

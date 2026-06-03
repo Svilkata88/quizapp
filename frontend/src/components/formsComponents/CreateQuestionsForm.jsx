@@ -5,6 +5,8 @@ import { useState } from "react";
 import FormButton from "../buttons/FormButton.jsx";
 import ErrorMessage from "./errorMessage.jsx";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function QuestionsForm() {
   const Navigate = useNavigate();
   const { user } = useUserContext();
@@ -57,10 +59,7 @@ function QuestionsForm() {
       userId,
     };
 
-    const q = createQuestion(
-      "http://localhost:8000/api/questions/create/",
-      body,
-    )
+    const q = createQuestion(`${BASE_URL}/api/questions/create/`, body)
       .then((res) => {
         Navigate("/questions");
       })

@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function apiFetch(url, options = {}) {
   const access = Cookies.get("access") || null;
@@ -34,7 +35,7 @@ function apiFetch(url, options = {}) {
       }
 
       // take new access
-      return fetch("http://localhost:8000/api/token/refresh/", {
+      return fetch(`${BASE_URL}/api/token/refresh/`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -87,7 +88,24 @@ function apiFetch(url, options = {}) {
 }
 
 function fetchQuestions(url, page, difficulty) {
-  return apiFetch(`${url}?page=${page}&difficulty=${difficulty}`).then(
+  const normalizedUrl = url.endsWith("/") ? url : `${url}/`;
+  const params = new URLSearchParams();
+  const seed = Cookies.get("seed");
+
+  if (page !== undefined && page !== null) {
+    params.set("page", page);
+  }
+
+  if (difficulty !== undefined && difficulty !== null && difficulty !== "") {
+    params.set("difficulty", difficulty);
+  }
+
+  if (seed) {
+    params.set("seed", seed);
+  }
+
+  const query = params.toString();
+  return apiFetch(`${normalizedUrl}${query ? `?${query}` : ""}`).then(
     (response) => response,
   );
 }
@@ -98,7 +116,7 @@ function fetchOwnQuestions(url) {
 }
 
 function fetchOneQuestions(url, id) {
-  const data = apiFetch(`${url}/${id}`, {}).then((response) => response);
+  const data = apiFetch(`${url}/${id}/`, {}).then((response) => response);
   return data;
 }
 
@@ -151,7 +169,7 @@ function apiRegisterUser(url, credentials) {
 }
 
 function apiLogoutUser() {
-  return fetch("http://localhost:8000/api/users/logout", {
+  return fetch(`${BASE_URL}/api/users/logout`, {
     method: "POST",
     credentials: "include",
   }).then(() => {
@@ -170,26 +188,24 @@ function hideText(divRef) {
   divRef.current.lastChild.remove();
 }
 
-function createQuestionIssue(questionId, issue) {
-  return apiFetch(`http://localhost:8000/api/questions/createIssue/`, {
+function createQuestionIssue(url, questionId, issue) {
+  return apiFetch(url, {
     method: "POST",
     credentials: "include",
     body: { questionId, issue },
-  }).then(() => {
-    // Cookies.remove("access");
-  });
+  }).then(() => {});
 }
 
-function createRating(questionId, rating) {
-  return apiFetch(`http://localhost:8000/api/questions/create-rating/`, {
+function createRating(url, questionId, rating) {
+  return apiFetch(url, {
     method: "POST",
     credentials: "include",
     body: { questionId, rating },
   });
 }
 
-function fetchTopFiveUsers() {
-  return apiFetch(`http://localhost:8000/api/users/top-five/`, {
+function fetchTopFiveUsers(url) {
+  return apiFetch(url, {
     method: "GET",
     credentials: "include",
   }).then((response) => response);

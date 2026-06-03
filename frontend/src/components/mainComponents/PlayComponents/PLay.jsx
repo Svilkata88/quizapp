@@ -18,6 +18,8 @@ import GameStats from "./GameStats.jsx";
 import { useTimer } from "../../../hooks/useTimer.jsx";
 import { useGameOverviewContext } from "../../../hooks/useGameOverview.jsx";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function Questions() {
   const { user, login, isAuthenticated } = useUserContext();
   const {
@@ -58,7 +60,7 @@ function Questions() {
     let xp = Math.floor(newPoints / 10);
 
     // update all answswered questions with +1 to their answered_questions property and +1 to the one answered wrong
-    updateQuestions("http://localhost:8000/api/questions/update-questions/", {
+    updateQuestions(`${BASE_URL}/api/questions/update-questions/`, {
       answeredCorrectly: answeredCorrectly,
       answeredWrong: questions[qIndex]?.id,
     }).catch((err) => {
@@ -66,7 +68,7 @@ function Questions() {
     });
 
     // update user points and xp
-    apiEditUser(`http://localhost:8000/api/users/profile/edit/${user.id}`, {
+    apiEditUser(`${BASE_URL}/api/users/profile/edit/${user.id}`, {
       points: newPoints,
       xp: user.xp !== xp ? xp : user.xp,
       time_played: parseInt(time),
@@ -92,15 +94,12 @@ function Questions() {
         setAnsweredCorrectly([]);
       });
 
-    const seed = fetchQuestions(
-      "http://localhost:8000/api/questions/reset",
-      page,
-    );
+    const seed = fetchQuestions(`${BASE_URL}/api/questions/reset/`, page);
     seed.then((res) => {
       Cookies.set("seed", res.seed);
       if (page === 1) {
         setLoading(true);
-        fetchQuestions("http://localhost:8000/api/questions", page).then(
+        fetchQuestions(`${BASE_URL}/api/questions`, page, difficulty).then(
           (res) => {
             setQuestions(res.results);
             setLoading(false);
@@ -121,11 +120,7 @@ function Questions() {
       navigate("/auth/login");
       return;
     }
-    const data = fetchQuestions(
-      "http://localhost:8000/api/questions",
-      page,
-      difficulty,
-    );
+    const data = fetchQuestions(`${BASE_URL}/api/questions`, page, difficulty);
     data
       .then((res) => {
         setQuestions(res.results);

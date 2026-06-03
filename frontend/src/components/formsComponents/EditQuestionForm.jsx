@@ -3,6 +3,8 @@ import { apiEditQuestion, showText, hideText } from "../../../utils.js";
 import FormButton from "../buttons/FormButton.jsx";
 import ErrorMessage from "./errorMessage.jsx";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function EditQuestionForm({ question, setQuestion, author, setSearchValue }) {
   const questionEditContainer = useRef(null);
   const questionEditForm = useRef(null);
@@ -60,10 +62,7 @@ function EditQuestionForm({ question, setQuestion, author, setSearchValue }) {
   const handleQuestionForm = (formData) => {
     // think how to change only the eddited fields for better performance
 
-    apiEditQuestion(
-      "http://localhost:8000/api/questions/edit/" + question.id + "/",
-      formData,
-    )
+    apiEditQuestion(`${BASE_URL}/api/questions/edit/${question.id}/`, formData)
       .then((res) => {
         console.log(`Question: "${question.text}" updated successfully!`);
         questionEditForm.current.classList.add("hidden");

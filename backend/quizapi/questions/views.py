@@ -26,7 +26,7 @@ def question_list(request):
     PAGE_SIZE = 5
 
     # make sure is send from the frontend
-    seed = request.COOKIES.get("seed")
+    seed = request.COOKIES.get("seed") or request.GET.get("seed")
     try:
         seed = int(seed)
     except (TypeError, ValueError):

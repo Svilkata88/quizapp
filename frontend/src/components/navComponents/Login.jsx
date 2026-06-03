@@ -6,6 +6,8 @@ import { apiLoginUser } from "../../../utils.js";
 import FormButton from "../buttons/FormButton.jsx";
 import ErrorMessage from "../formsComponents/errorMessage.jsx";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function Login() {
   const { login } = useUserContext();
   const [loading, setLoading] = useState(false);
@@ -17,7 +19,7 @@ function Login() {
     const password = formData.get("password");
     setLoading(true);
 
-    apiLoginUser("http://localhost:8000/api/users/login", {
+    apiLoginUser(`${BASE_URL}/api/users/login`, {
       username,
       password,
     })

@@ -4,6 +4,8 @@ import { useEffect, useState, useRef } from "react";
 import UserCard from "./UserCard";
 import { useUserContext } from "../../../hooks/userContext";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function Home() {
   const navigate = useNavigate();
   const divRef = useRef(null);
@@ -11,7 +13,7 @@ function Home() {
   const { logout } = useUserContext();
 
   useEffect(() => {
-    fetchTopFiveUsers()
+    fetchTopFiveUsers(`${BASE_URL}/api/users/top-five/`)
       .then((data) => {
         setTopFive(data);
       })

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { createRating } from "../../../../utils.js";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function RatingStars({
   emptyStar,
   fullStar,
@@ -34,7 +36,11 @@ function RatingStars({
         <button
           className="bg-amber-300 p-1 text-sm rounded-sm hover:scale-120 transition-transform cursor-pointer w-[100%] h-[100%]"
           onClick={() => {
-            createRating(questionId, starIndex).then((data) => {
+            createRating(
+              `${BASE_URL}/api/questions/create-rating/`,
+              questionId,
+              starIndex,
+            ).then((data) => {
               console.log("Rating submitted successfully");
               setRating(data.rating);
             });
