@@ -24,6 +24,9 @@ function Nav() {
         <NavLink to="/" className="nav nav-hover">
           Home
         </NavLink>
+        <NavLink to="/info" className="nav nav-hover">
+          Info
+        </NavLink>
         <NavLink to="/profile" className="nav nav-hover">
           Profile
         </NavLink>

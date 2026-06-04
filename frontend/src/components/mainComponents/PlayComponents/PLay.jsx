@@ -152,7 +152,7 @@ function Questions() {
       setRating(question.rating);
     }
   }, [question?.id]);
-
+  console.log(answeredCorrectly);
   return loading ? (
     <Spinner />
   ) : questions.length > 0 ? (
@@ -253,11 +253,13 @@ function Questions() {
           setAnsweredCorrectly={setAnsweredCorrectly}
           qID={question?.id}
         />
-        {question?.info && (
-          <div className="bg-gray-100 p-3 border-black border rounded-2xl rounded-tl-none mt-10 w-1/2">
-            {question.info}
-          </div>
-        )}
+        {question?.info &&
+          disabled &&
+          !answeredCorrectly.includes(question?.id) && (
+            <div className="bg-gray-100 w-full md:w-1/2 lg:w-1/3 p-3 border-black border rounded-2xl rounded-tl-none mt-10 w-1/2">
+              {question.info}
+            </div>
+          )}
       </section>
 
       {/* Points Indicator */}

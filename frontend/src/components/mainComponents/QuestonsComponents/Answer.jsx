@@ -46,11 +46,13 @@ function Answer({
   const handleClick = () => {
     setIsAnswered(true);
     setDisabled(true);
+    setAnsweredCorrectly((prev) =>
+      correct && !prev.includes(qID) ? [...prev, qID] : prev,
+    );
 
     setTimeout(() => {
       setPoints((prev) => (correct ? prev + 1 : prev));
       setQIndex((prev) => (correct ? prev + 1 : prev));
-      setAnsweredCorrectly((prev) => (correct ? [...prev, qID] : prev));
       setDisabled(correct ? false : true);
     }, 1000);
   };

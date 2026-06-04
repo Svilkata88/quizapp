@@ -55,7 +55,7 @@ function Home() {
         <h3 className="text-xl font-bold text-center text-sky-200 md:text-black">
           Top 5 players
         </h3>
-        <ul className="flex flex-col mt-4 flex gap-2">
+        <ul className="flex flex-col items-center mt-4 flex gap-2">
           {topFive.map((user) => (
             <UserCard key={user.id} user={user} />
           ))}

@@ -10,6 +10,7 @@ import Login from "./components/navComponents/Login.jsx";
 import Logout from "./components/navComponents/Logout.jsx";
 
 import Home from "./components/mainComponents/HomeComponents/Home.jsx";
+import Info from "./components/navComponents/Info.jsx";
 import CreateQuestionsForm from "./components/formsComponents/CreateQuestionsForm.jsx";
 import ChoseDifficulty from "./components/mainComponents/PlayComponents/ChoseDifficulty.jsx";
 import GameOverview from "./components/mainComponents/PlayComponents/GameOverview.jsx";
@@ -22,6 +23,7 @@ export function App() {
         <Route path="/play" element={<Play />} />
         <Route path="/chose-difficulty" element={<ChoseDifficulty />} />
         <Route path="/game-overview" element={<GameOverview />} />
+        <Route path="/info" element={<Info />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/auth">
           <Route path="register" element={<Register />} />
