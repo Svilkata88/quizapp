@@ -132,6 +132,7 @@ def edit_user_profile(request, id):
             data = serializer.data
             print("Updated user time_played:", data.get("time_played"))
             data['addedQuestions'] = Question.objects.filter(author=user).count()
+            data['time_played'] = user.time_played.total_seconds()
             return Response(data)
         return Response(serializer.errors, status=400)
 

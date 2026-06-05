@@ -2,12 +2,12 @@ import { useUserContext } from "../../hooks/userContext";
 import { useRef } from "react";
 import { apiEditUser } from "../../../utils";
 import Cookies from "js-cookie";
+import { formatTime } from "../../../utils";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function Profile() {
   const { user, setUser } = useUserContext();
-  // const imageUrl = user.image ? `http://localhost:8000${user.image}` : null;
   const imageUrl = user.image ? `${user.image}` : null;
   const fileInputRef = useRef(null);
   const usernameRef = useRef(null);
@@ -160,7 +160,7 @@ function Profile() {
                 alt="timer"
                 className="w-8 h-6 object-contain"
               />
-              <h2>Time Played: {user.time_played}s</h2>
+              <h2>Time Played: {formatTime(user.time_played)}s</h2>
             </div>
           </div>
         </div>
