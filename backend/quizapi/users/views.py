@@ -89,6 +89,7 @@ def login_user(request):
                     path="/",  
                     max_age=60 * 60 * 24 * 7     # 7 days
                 )
+                print("COOKIES:", request.COOKIES)
                 return response
         
             else:
