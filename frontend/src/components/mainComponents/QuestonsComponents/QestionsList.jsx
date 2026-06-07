@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchOwnQuestions } from "../../../../utils";
 import { useUserContext } from "../../../hooks/userContext";
 import { Link } from "react-router-dom";
+import Spinner from "../../others/Spinner";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -19,13 +20,19 @@ function QestionsList({ elementRef, type }) {
       });
   }, []);
 
-  return (
+  if (!questions) {
+    return <Spinner />;
+  }
+
+  return !questions ? (
+    <Spinner />
+  ) : (
     <div
       className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-4 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:w-[1000px] max-h-150 hidden"
       ref={elementRef}
     >
       <h2 className="text-2xl font-bold mb-4">
-        {questions.length > 0
+        {questions && questions.length > 0
           ? `${user?.username}'s Questions`
           : "Still no added questions!"}
       </h2>

@@ -19,7 +19,7 @@ function Nav() {
         <img src="/burgermenu.png" alt="burger" />
       </div>
       <ul
-        className={`flex flex-col md:flex-row items-center gap-2 text-xl ${isOpen ? "flex" : "hidden"} md:flex`}
+        className={`flex flex-col md:flex-row items-center justify-center gap-1 text-xl ${isOpen ? "flex" : "hidden"} md:flex`}
       >
         <NavLink to="/" className="nav nav-hover">
           Home

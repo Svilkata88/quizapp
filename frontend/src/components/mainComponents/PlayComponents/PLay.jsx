@@ -48,7 +48,7 @@ function Questions() {
 
   const roundedRating = (Math.round(rating * 10) / 10 || 0).toFixed(1);
   const navigate = useNavigate();
-  console.log(time);
+
   const handleReset = () => {
     let newPoints;
 

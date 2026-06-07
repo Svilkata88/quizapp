@@ -37,7 +37,8 @@ def register_user(request):
                         'addedQuestions': userQuestions,
                         'profilePicture': user.image.url if user.image else None,
                         'image': user.image.url if user.image else None,
-                        'time_played': user.time_played.total_seconds()
+                        'time_played': user.time_played.total_seconds(),
+                        "staff": user.is_staff,
                     }
             })
 
@@ -57,7 +58,6 @@ def register_user(request):
 def login_user(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
-        print(data)
         username = data.get('username')
         password = data.get('password')
         try:
@@ -76,7 +76,8 @@ def login_user(request):
                         'points': user.points,
                         'addedQuestions': userQuestions,
                          'image': user.image.url if user.image else None,
-                         'time_played': user.time_played.total_seconds()
+                         'time_played': user.time_played.total_seconds(),
+                         "staff": user.is_staff,
                     }
                 })
 
@@ -89,7 +90,7 @@ def login_user(request):
                     path="/",  
                     max_age=60 * 60 * 24 * 7     # 7 days
                 )
-                print("COOKIES:", request.COOKIES)
+                # print("COOKIES:", request.COOKIES)
                 return response
         
             else:

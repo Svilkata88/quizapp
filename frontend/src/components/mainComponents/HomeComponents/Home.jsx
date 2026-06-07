@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { showText, hideText, fetchTopFiveUsers } from "../../../../utils";
 import { useEffect, useState, useRef } from "react";
 import UserCard from "./UserCard";
+import UserSkeletonCard from "./UserSkeletonCard";
 import { useUserContext } from "../../../hooks/userContext";
-
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function Home() {
@@ -55,10 +55,12 @@ function Home() {
         <h3 className="text-xl font-bold text-center text-sky-200 md:text-black">
           Top 5 players
         </h3>
-        <ul className="flex flex-col items-center mt-4 flex gap-2">
-          {topFive.map((user) => (
-            <UserCard key={user.id} user={user} />
-          ))}
+        <ul className="flex flex-col items-center mt-4 gap-2 relative">
+          {topFive.length === 0
+            ? Array.from({ length: 5 }).map((_, i) => (
+                <UserSkeletonCard key={i} />
+              ))
+            : topFive.map((user) => <UserCard key={user.id} user={user} />)}
         </ul>
       </div>
     </div>
