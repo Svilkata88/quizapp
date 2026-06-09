@@ -28,7 +28,7 @@ function Info() {
           trivia enthusiast or just looking for a fun way to pass the time.
         </div>
         <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
-          <img src="/arrowdown.png" alt="arrow down" />
+          <img src="arrowdown.png" alt="arrow down" />
         </div>
       </div>
       <div className="relative bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 overflow-y-auto p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
@@ -56,7 +56,7 @@ function Info() {
           </li>
         </ul>
         <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
-          <img src="/arrowdown.png" alt="arrow down" />
+          <img src="arrowdown.png" alt="arrow down" />
         </div>
       </div>
       <div className="relative bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 overflow-y-auto p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
@@ -74,7 +74,7 @@ function Info() {
           pass the time, Quizzy has something for everyone.
         </div>
         <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
-          <img src="/arrowdown.png" alt="arrow down" />
+          <img src="arrowdown.png" alt="arrow down" />
         </div>
       </div>
       <div className="relative bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 overflow-y-auto p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
@@ -88,7 +88,7 @@ function Info() {
           question.
         </div>
         <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
-          <img src="/arrowdown.png" alt="arrow down" />
+          <img src="arrowdown.png" alt="arrow down" />
         </div>
       </div>
       <div className="relative bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 overflow-y-auto p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
@@ -122,7 +122,7 @@ function Info() {
           experience point (xp)
         </div>
         <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
-          <img src="/arrowdown.png" alt="arrow down" />
+          <img src="arrowdown.png" alt="arrow down" />
         </div>
       </div>
       <div className="relative bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 overflow-y-auto p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
@@ -136,7 +136,7 @@ function Info() {
           click on Report, write the question ID and describe the issue.
         </div>
         <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
-          <img src="/arrowdown.png" alt="arrow down" />
+          <img src="arrowdown.png" alt="arrow down" />
         </div>
       </div>
     </div>
