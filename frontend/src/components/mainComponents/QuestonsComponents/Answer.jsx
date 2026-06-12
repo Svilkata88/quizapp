@@ -21,7 +21,7 @@ function Answer({
 
   const getClasses = () => {
     let baseClasses =
-      "mb-2 rounded-lg w-full md:w-1/2 lg:w-1/3 p-3 cursor-pointer border-black border rounded-2xl transition-all duration-300 ease-in-out";
+      "mb-2 rounded-lg w-full md:w-3/4 xl:w-1/3 p-3 cursor-pointer border-black border rounded-2xl transition-all duration-300 ease-in-out";
 
     if (isAnswered) {
       baseClasses += correct ? " bg-green-500" : " bg-red-500";

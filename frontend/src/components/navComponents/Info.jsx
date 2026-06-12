@@ -17,7 +17,7 @@ function Info() {
 
   return (
     <div className="flex flex-col items-center bg-transparent p-2 md:p-8 flex-1 relative">
-      <div className="relative text-sm bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 overflow-y-auto p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
+      <div className="relative overflow-hidden bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
         <h2 className="text-sm md:text-base font-semibold">What is Quizzy? </h2>
         <br />
         <div className="text-sm md:text-base">
@@ -28,10 +28,10 @@ function Info() {
           trivia enthusiast or just looking for a fun way to pass the time.
         </div>
         <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
-          <img src="arrowdown.png" alt="arrow down" />
+          <img src="arrdown.png" alt="arrow down" />
         </div>
       </div>
-      <div className="relative bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 overflow-y-auto p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
+      <div className="relative overflow-hidden bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
         <h2 className="text-sm md:text-base font-semibold">How to Navigate</h2>
         <br />
         <ul className="text-sm md:text-base">
@@ -56,10 +56,10 @@ function Info() {
           </li>
         </ul>
         <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
-          <img src="arrowdown.png" alt="arrow down" />
+          <img src="arrdown.png" alt="arrow down" />
         </div>
       </div>
-      <div className="relative bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 overflow-y-auto p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
+      <div className="relative overflow-hidden bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
         <h2 className="text-sm md:text-base font-semibold">
           What you can do in the app?{" "}
         </h2>
@@ -74,10 +74,10 @@ function Info() {
           pass the time, Quizzy has something for everyone.
         </div>
         <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
-          <img src="arrowdown.png" alt="arrow down" />
+          <img src="arrdown.png" alt="arrow down" />
         </div>
       </div>
-      <div className="relative bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 overflow-y-auto p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
+      <div className="relative overflow-hidden bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
         <h2 className="text-sm md:text-base font-semibold">
           If you have any questions?{" "}
         </h2>
@@ -88,10 +88,10 @@ function Info() {
           question.
         </div>
         <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
-          <img src="arrowdown.png" alt="arrow down" />
+          <img src="arrdown.png" alt="arrow down" />
         </div>
       </div>
-      <div className="relative bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 overflow-y-auto p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
+      <div className="relative overflow-hidden bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
         <h2 className="text-sm md:text-base font-semibold">
           How can earn points and experience (xp)?{" "}
         </h2>
@@ -100,7 +100,7 @@ function Info() {
           <span className=" ml-2">When</span> answer a question correctly you
           earn points for every question as follows:
         </div>
-        <ul className="list-disc ml-10">
+        <ul className="list-disc ml-10 text-sm md:text-base">
           <li className="mb-1">
             up to 5 correct questions in a row - 1 point for every question
           </li>
@@ -122,10 +122,10 @@ function Info() {
           experience point (xp)
         </div>
         <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
-          <img src="arrowdown.png" alt="arrow down" />
+          <img src="arrdown.png" alt="arrow down" />
         </div>
       </div>
-      <div className="relative bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 overflow-y-auto p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
+      <div className="relative overflow-hidden bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
         <h2 className="text-sm md:text-base max-w-[300px] md:max-w-none font-semibold">
           What if I see something wrong with any of the questions or
           answers?{" "}
@@ -136,7 +136,7 @@ function Info() {
           click on Report, write the question ID and describe the issue.
         </div>
         <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
-          <img src="arrowdown.png" alt="arrow down" />
+          <img src="arrdown.png" alt="arrow down" />
         </div>
       </div>
     </div>

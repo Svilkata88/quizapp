@@ -8,12 +8,15 @@ import QuestionDetail from "./components/mainComponents/QuestonsComponents/Quest
 import Register from "./components/navComponents/Register.jsx";
 import Login from "./components/navComponents/Login.jsx";
 import Logout from "./components/navComponents/Logout.jsx";
+import ProtectAdminRoute from "./layouts/ProtectAdminRoute.jsx";
+import AdminRedirectRoute from "./layouts/AdminRedirectRoute.jsx";
 
 import Home from "./components/mainComponents/HomeComponents/Home.jsx";
 import Info from "./components/navComponents/Info.jsx";
 import CreateQuestionsForm from "./components/formsComponents/CreateQuestionsForm.jsx";
 import ChoseDifficulty from "./components/mainComponents/PlayComponents/ChoseDifficulty.jsx";
 import GameOverview from "./components/mainComponents/PlayComponents/GameOverview.jsx";
+import AdminDashboard from "./components/navComponents/AdminDashboard.jsx";
 
 export function App() {
   return (
@@ -30,10 +33,15 @@ export function App() {
           <Route path="login" element={<Login />} />
           <Route path="logout" element={<Logout />} />
         </Route>
-        <Route path="questions">
-          <Route index element={<Questions />} />
-          <Route path=":id" element={<QuestionDetail />} />
-          <Route path="create" element={<CreateQuestionsForm />} />
+        <Route element={<AdminRedirectRoute />}>
+          <Route path="questions">
+            <Route index element={<Questions />} />
+            <Route path=":id" element={<QuestionDetail />} />
+            <Route path="create" element={<CreateQuestionsForm />} />
+          </Route>
+        </Route>
+        <Route element={<ProtectAdminRoute />}>
+          <Route path="admin" element={<AdminDashboard />} />
         </Route>
       </Route>
     </Routes>

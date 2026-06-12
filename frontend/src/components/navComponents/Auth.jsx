@@ -13,7 +13,7 @@ function Auth() {
       {isAuthenticated ? (
         <div className="flex flex-col md:flex-row gap-1 md:border border-gray-300 md:rounded-full items-center">
           <div
-            className="rounded-full w-16 h-16 md:h-10 md:w-10 p-1 overflow-hidden flex items-center justify-center"
+            className="rounded-full w-16 h-16 md:h-10 md:w-10 md:p-1 overflow-hidden flex items-center justify-center border border-gray-300 md:border-none cursor-pointer"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <img
@@ -26,7 +26,7 @@ function Auth() {
             {user ? user.username : "Anonymus User"}
           </span>
           <NavLink
-            className={`nav nav-hover hover:rounded-2xl ${isMenuOpen ? "block" : "hidden"} md:block`}
+            className={`nav nav-hover text-xs md:text-base font-bold md:font-normal hover:rounded-2xl ${isMenuOpen ? "block" : "hidden"} md:block`}
             to="/auth/logout"
           >
             Logout

@@ -5,6 +5,7 @@ import { useUserContext } from "../../hooks/userContext";
 function Nav() {
   const { isAuthenticated } = useUserContext();
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useUserContext();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -14,7 +15,7 @@ function Nav() {
     return null;
   }
   return (
-    <nav className="w-1/3 flex flex-col md:flex-row justify-center items-center">
+    <nav className="w-1/3 flex flex-col md:flex-row justify-start md:justify-center items-center">
       <div className="w-16 h-16 md:hidden" onClick={toggleMenu}>
         <img src="/burgermenu.png" alt="burger" />
       </div>
@@ -30,9 +31,16 @@ function Nav() {
         <NavLink to="/profile" className="nav nav-hover">
           Profile
         </NavLink>
-        <NavLink to="/questions" className="nav nav-hover">
-          Questions
-        </NavLink>
+        {user && !user.staff && (
+          <NavLink to="/questions" className="nav nav-hover">
+            Questions
+          </NavLink>
+        )}
+        {user && user.staff && (
+          <NavLink to="/admin" className="nav nav-hover">
+            Admin
+          </NavLink>
+        )}
       </ul>
     </nav>
   );

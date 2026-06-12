@@ -35,6 +35,7 @@ function apiFetch(url, options = {}) {
       }
 
       // take new access
+      // handles if refresh succeed but retry fails
       return fetch(`${BASE_URL}/api/token/refresh/`, {
         method: "POST",
         credentials: "include",

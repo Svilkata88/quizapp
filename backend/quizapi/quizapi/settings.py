@@ -131,16 +131,10 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = "None"
 CSRF_COOKIE_SAMESITE = "None"
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  
-    "https://quizapp-production-a36e.up.railway.app",
-    "https://quizzy-98bc5.web.app"
-]
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://quizzy-98bc5.web.app",
-    "https://quizapp-production-a36e.up.railway.app",
-]
+CORS_ALLOWED_ORIGINS = env["CORS_ALLOWED_ORIGINS"].split('')
+
+CSRF_TRUSTED_ORIGINS = env["CSRF_TRUSTED_ORIGINS"].split('')
 
 # SIMPLE_JWT = {
 #     "ACCESS_TOKEN_LIFETIME": timedelta(seconds=10),   

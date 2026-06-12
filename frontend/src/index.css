@@ -40,7 +40,7 @@
     @apply px-2 py-0.5 rounded-lg border border-transparent;
   }
   .nav-hover {
-    @apply hover:bg-gradient-to-r hover:from-sky-100 hover:to-sky-200 hover:border-black hover:rounded-2xl;
+    @apply hover:bg-gradient-to-r hover:from-sky-100 hover:to-sky-200 transform transition-transform duration-300 ease-out  hover:border-black hover:rounded-2xl;
   }
 
   .form-container {

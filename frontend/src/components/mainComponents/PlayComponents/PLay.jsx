@@ -162,8 +162,10 @@ function Questions() {
         ref={divRef}
         className="flex flex-col md:flex-row items-center gap-2 mb-2 md:mb-8"
       >
+        {/* Question */}
         <h2 className="font-bold text-md md:text-xl">{question?.text}</h2>
 
+        {/* Id and Stars icons */}
         <div className="flex gap-2">
           <div
             className="h-12 hover:scale-120 transition-transform cursor-pointer"
@@ -256,25 +258,13 @@ function Questions() {
         {question?.info &&
           disabled &&
           !answeredCorrectly.includes(question?.id) && (
-            <div className="bg-gray-100 w-full md:w-1/2 lg:w-1/3 p-3 border-black border rounded-2xl rounded-tl-none mt-10 w-1/2">
+            <div className="bg-gray-100 w-full md:w-1/2 lg:w-1/3 p-3 border-black border rounded-2xl rounded-tl-none mt-5 mb-5 w-1/2">
               {question.info}
             </div>
           )}
+        {/* Points Indicator */}
+        <GameStats points={points} time={time} handleReset={handleReset} />
       </section>
-
-      {/* Points Indicator */}
-      <GameStats points={points} time={time} />
-
-      {/* Restart Btn */}
-      <button
-        className="absolute bottom-6 right-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-        onClick={() => {
-          handleReset();
-          navigate("/game-overview");
-        }}
-      >
-        Restart
-      </button>
     </div>
   ) : (
     <NoQuestions />

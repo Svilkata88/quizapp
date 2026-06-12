@@ -25,9 +25,9 @@ function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-5 md:flex-row justify-between pt-10 px-10 min-h-[calc(100vh-124px)]">
-      <div className="h-[250px] mb-10">
-        <h1 className="text-center text-2xl font-bold">
+    <div className="flex flex-col gap-5 md:flex-row justify-between mb-5 md:pt-10 px-10 min-h-[calc(100vh-124px)]">
+      <div className="h-[250px] mb-5">
+        <h1 className="text-center text-2xl font-bold text-gray-900 md:text-black">
           Welcome to the Quiz App
         </h1>
         <div
@@ -52,7 +52,7 @@ function Home() {
       </div>
 
       <div className="mx-10 mb-10">
-        <h3 className="text-xl font-bold text-center text-sky-200 md:text-black">
+        <h3 className="text-2xl font-bold text-center text-sky-700 md:text-black mb-5">
           Top 5 players
         </h3>
         <ul className="flex flex-col items-center mt-4 gap-2 relative">
