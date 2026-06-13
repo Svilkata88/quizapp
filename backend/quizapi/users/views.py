@@ -14,6 +14,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
 from .utils import create_quiz_token
 from django.shortcuts import get_object_or_404
+from quizapi.settings import DEBUG
 
 
 @api_view(["POST"])
@@ -140,7 +141,8 @@ def edit_user_profile(request, id):
 @api_view(["POST"])
 def custom_refresh_token_view(request):
     refresh_token = request.COOKIES.get("refresh")
-
+    if DEBUG:
+        print('Refresh token: ',refresh_token)
     if not refresh_token:
         return Response({"error": "No refresh cookie"}, status=401)
     try:
