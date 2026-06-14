@@ -153,6 +153,10 @@ function apiFetchAllUsers(url) {
   return apiFetch(url).then((response) => response);
 }
 
+function apiFetchOneUser(url) {
+  return apiFetch(url).then((response) => response);
+}
+
 function apiLoginUser(url, credentials) {
   const data = apiFetch(`${url}`, {
     method: "POST",
@@ -235,6 +239,7 @@ export {
   showText,
   hideText,
   apiFetchAllUsers,
+  apiFetchOneUser,
   apiLoginUser,
   apiRegisterUser,
   createQuestionIssue,

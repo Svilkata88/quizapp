@@ -121,10 +121,13 @@ def logout_user(request):
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def get_user_profile(request, id):
-    if request.method == 'GET':
-        user = User.objects.get(id=id)
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
+    user = User.objects.get(id=id)
+    questions_count = Question.objects.filter(user_id=id).count()
+    serializer = UserSerializer(user)
+    data = serializer.data
+    data["addedQuestions"] = questions_count
+
+    return Response(data)
 
 @api_view(["PUT"])
 @authentication_classes([JWTAuthentication])

@@ -14,7 +14,7 @@ function AdminUsers() {
 
     apiFetchAllUsers(`${BASE_URL}/api/users/admin/all-users/`)
       .then((res) => {
-        useState(res);
+        serUsers(res);
       })
       .catch((err) => {
         console.error("Error fetching all users:", err);
@@ -36,9 +36,16 @@ function AdminUsers() {
             className="w-full flex items-center justify-between px-3 py-2 rounded-md shadow-sm"
           >
             <Link
-              to={`/${user?.id}`}
-              className="flex w-full min-w-0 transition-all hover:text-sky-700 hover:font-semibold"
+              to={`/admin/users/${user?.id}`}
+              className="flex gap-2 w-full min-w-0 transition-all hover:text-sky-700 hover:font-semibold"
             >
+              <div className="rounded-full w-6 h-6 overflow-hidden">
+                <img
+                  src={user.image}
+                  alt="user image"
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <span className="truncate min-w-0">{user?.username}</span>
             </Link>
           </li>

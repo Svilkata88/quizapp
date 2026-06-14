@@ -152,7 +152,7 @@ function Profile() {
                 alt="question"
                 className="w-8 h-6 object-contain"
               />
-              <h2>added questions: {user.addedQuestions}</h2>
+              <h2>added questions: {user?.addedQuestions}</h2>
             </div>
             <div className="flex gap-2 items-center h-8">
               <img
