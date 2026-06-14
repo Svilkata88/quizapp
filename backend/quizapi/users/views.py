@@ -20,11 +20,9 @@ from quizapi.settings import DEBUG
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def get_all_users(request):
-    all_users = User.objects.all()
-    serializer = UserSerializer(data=all_users, many=True)
-    if serializer.is_valid():
-        return Response(serializer.data)
-    return Response(serializer.errors, status=400)
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
 
 @api_view(["POST"])
 def register_user(request):
