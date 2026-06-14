@@ -12,7 +12,7 @@ function AdminDashboard() {
           className="hover:scale-110 transition-transform cursor-pointer"
           onClick={() => navigate("./users")}
         >
-          <img src="adminUser.png" alt="admin user" className="w-16 h-16" />
+          <img src="/adminUser.png" alt="admin user" className="w-16 h-16" />
           Users
         </button>
         {/* Questions Button  */}
@@ -21,7 +21,7 @@ function AdminDashboard() {
           onClick={() => navigate("./questions")}
         >
           <img
-            src="questionsList.png"
+            src="/questionsList.png"
             alt="list questions button"
             className="w-16 h-16"
           />
@@ -32,7 +32,7 @@ function AdminDashboard() {
           className="hover:scale-110 transition-transform cursor-pointer"
           onClick={() => navigate("./issues")}
         >
-          <img src="issue.png" alt="issue" className="w-16 h-16" />
+          <img src="/issue.png" alt="issue" className="w-16 h-16" />
           Issues
         </button>
       </section>

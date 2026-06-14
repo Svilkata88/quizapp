@@ -13,7 +13,8 @@ import AdminRedirectRoute from "./layouts/AdminRedirectRoute.jsx";
 
 import Home from "./components/mainComponents/HomeComponents/Home.jsx";
 import Info from "./components/navComponents/Info.jsx";
-import Users from "./components/mainComponents/AdminComponents/Users.jsx";
+import AdminUsers from "./components/mainComponents/AdminComponents/AdminUsers.jsx";
+import AdminQuestions from "./components/mainComponents/AdminComponents/AdminQuestions.jsx";
 import CreateQuestionsForm from "./components/formsComponents/CreateQuestionsForm.jsx";
 import ChoseDifficulty from "./components/mainComponents/PlayComponents/ChoseDifficulty.jsx";
 import GameOverview from "./components/mainComponents/PlayComponents/GameOverview.jsx";
@@ -43,8 +44,8 @@ export function App() {
         </Route>
         <Route element={<ProtectAdminRoute />}>
           <Route path="admin" element={<AdminDashboard />}>
-            <Route path="users" element={<Users />}></Route>
-            <Route path="questions"></Route>
+            <Route path="users" element={<AdminUsers />}></Route>
+            <Route path="questions" element={<AdminQuestions />}></Route>
             <Route path="issues"></Route>
           </Route>
           <Route />

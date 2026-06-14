@@ -16,6 +16,15 @@ from .utils import create_quiz_token
 from django.shortcuts import get_object_or_404
 from quizapi.settings import DEBUG
 
+@api_view(["GET"])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def get_all_users(request):
+    all_users = User.objects.all()
+    serializer = UserSerializer(data=all_users)
+    if serializer.is_valid():
+        return Response(serializer.data)
+    return Response(serializer.errors, status=400)
 
 @api_view(["POST"])
 def register_user(request):
