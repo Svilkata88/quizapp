@@ -17,7 +17,7 @@ function AdminUsers() {
         useState(res);
       })
       .catch((err) => {
-        console.error("Error fetching all questions:", err);
+        console.error("Error fetching all users:", err);
       })
       .finally(() => {
         setLoading(false);

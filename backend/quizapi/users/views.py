@@ -21,7 +21,7 @@ from quizapi.settings import DEBUG
 @permission_classes([IsAuthenticated])
 def get_all_users(request):
     all_users = User.objects.all()
-    serializer = UserSerializer(data=all_users)
+    serializer = UserSerializer(data=all_users, many=True)
     if serializer.is_valid():
         return Response(serializer.data)
     return Response(serializer.errors, status=400)
