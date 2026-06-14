@@ -111,6 +111,10 @@ function fetchQuestions(url, page, difficulty) {
   );
 }
 
+function fetchAllQuestions(url) {
+  return apiFetch(url).then((response) => response);
+}
+
 function fetchOwnQuestions(url) {
   const data = apiFetch(`${url}`).then((response) => response);
   return data;
@@ -218,6 +222,7 @@ function formatTime(seconds) {
 
 export {
   fetchQuestions,
+  fetchAllQuestions,
   fetchOwnQuestions,
   fetchOneQuestions,
   apiEditQuestion,

@@ -106,16 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -140,12 +133,6 @@ CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS").split(',')
 #     "ACCESS_TOKEN_LIFETIME": timedelta(seconds=10),   
 #     "REFRESH_TOKEN_LIFETIME": timedelta(seconds=30),  
 # }
-
-# cloudinary.config(
-#     cloud_name=config('CLOUD_NAME'),
-#     api_key=config('API_KEY'),
-#     api_secret=config('API_SECRET'),
-# )
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME' : env('CLOUDINARY_NAME'),

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import get_own_questions_list, question_list, reset_game, get_question, create_question, create_question_issue, create_rating, update_questions, edit_question
+from .views import get_own_questions_list, question_list, reset_game, get_question, create_question, create_question_issue, create_rating, update_questions, edit_question, all_questions
 
 
 urlpatterns = [
@@ -12,4 +12,6 @@ urlpatterns = [
     path('create-rating/', create_rating, name='create_rating'),
     path('update-questions/', update_questions, name='update_questions'),
     path('<int:id>/', get_question, name='get_question'),
+
+    path('admin/all-questions/', all_questions, name="all_questions")
 ]

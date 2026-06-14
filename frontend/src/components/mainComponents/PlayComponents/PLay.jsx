@@ -15,6 +15,7 @@ import { useUserContext } from "../../../hooks/userContext.jsx";
 import NoQuestions from "./NoQuestions.jsx";
 import { useDifficultyContext } from "../../../hooks/useDifficulty.jsx";
 import GameStats from "./GameStats.jsx";
+import QuestionInfo from "./QuestionInfo.jsx";
 import { useTimer } from "../../../hooks/useTimer.jsx";
 import { useGameOverviewContext } from "../../../hooks/useGameOverview.jsx";
 
@@ -32,7 +33,6 @@ function Questions() {
   const { difficulty } = useDifficultyContext();
   const { time, start, reset } = useTimer();
 
-  const divRef = useRef(null);
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const [qIndex, setQIndex] = useState(0);
@@ -43,7 +43,8 @@ function Questions() {
   const [answeredCorrectly, setAnsweredCorrectly] = useState([]);
   const question = questions ? questions[qIndex] : {};
   const [rating, setRating] = useState(question?.rating || 0);
-  const [isHidden, setIsHidden] = useState(true);
+  const [isInfoHidden, setInfoIsHidden] = useState(true);
+  const [isStarsHidden, setStarsIsHidden] = useState(true);
   const [page, setPage] = useState(query.get("page") || 1);
 
   const roundedRating = (Math.round(rating * 10) / 10 || 0).toFixed(1);
@@ -152,38 +153,38 @@ function Questions() {
       setRating(question.rating);
     }
   }, [question?.id]);
-  console.log(answeredCorrectly);
+
   return loading ? (
     <Spinner />
   ) : questions.length > 0 ? (
-    <div className="bg-transparent p-2 md:p-10 flex-1 relative">
+    <div className="flex flex-col flex-1 bg-transparent p-2 md:p-10">
       {/* Question Section */}
-      <section
-        ref={divRef}
-        className="flex flex-col md:flex-row items-center gap-2 mb-2 md:mb-8"
-      >
+      <section className="flex flex-col gap-2 items-center">
         {/* Question */}
-        <h2 className="font-bold text-md md:text-xl">{question?.text}</h2>
+        <h2 className="font-bold text-md md:text-xl text-stone-100 border border-gray-300 rounded-4xl w-full md:w-3/4 xl:w-1/3 bg-gradient-to-b from-zinc-400/70 to-zinc-600/70 p-1 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)] pl-5 text-center">
+          {question?.text}
+        </h2>
 
-        {/* Id and Stars icons */}
+        {/* Id and Stars Buttons */}
         <div className="flex gap-2">
+          {/* Info Button */}
           <div
             className="h-12 hover:scale-120 transition-transform cursor-pointer"
-            onMouseEnter={() =>
-              showText(
-                divRef,
-                `Question ID: ${question?.id}`,
-                "text-lg font-mono ",
-              )
-            }
-            onMouseLeave={() => hideText(divRef)}
+            onClick={() => {
+              if (!isStarsHidden) setStarsIsHidden(true);
+              setInfoIsHidden(!isInfoHidden);
+            }}
           >
             <img src="info.png" alt="info" className="w-[100%] h-[100%]" />
           </div>
 
+          {/* Stars Button */}
           <div
             className="h-12 hover:scale-120 transition-transform cursor-pointer flex gap-1 relative"
-            onClick={() => setIsHidden(!isHidden)}
+            onClick={() => {
+              if (!isInfoHidden) setInfoIsHidden(true);
+              setStarsIsHidden(!isStarsHidden);
+            }}
           >
             <img src="star.png" alt="info" className="w-[100%] h-[100%]" />
             <p className="absolute inset-0 flex items-center justify-center tex-[6px] font-bold">
@@ -192,20 +193,29 @@ function Questions() {
           </div>
         </div>
 
-        <RatingStars
-          emptyStar="emptyStarRating.png"
-          fullStar="fullStarRating.png"
-          isHidden={isHidden}
-          setIsHidden={setIsHidden}
-          questionId={question?.id}
-          setRating={setRating}
-          setAnsweredCorrectly={setAnsweredCorrectly}
-          qID={question?.id}
-        />
+        {/* Info and Stars Icons */}
+        <div className="flex gap-2 justify-center items-center relative">
+          <QuestionInfo
+            isHidden={isInfoHidden}
+            setIsHidden={setInfoIsHidden}
+            questionId={question?.id}
+          />
+
+          <RatingStars
+            emptyStar="emptyStarRating.png"
+            fullStar="fullStarRating.png"
+            isHidden={isStarsHidden}
+            setIsHidden={setStarsIsHidden}
+            questionId={question?.id}
+            setRating={setRating}
+            setAnsweredCorrectly={setAnsweredCorrectly}
+            qID={question?.id}
+          />
+        </div>
       </section>
 
       {/* Answers Section */}
-      <section className="flex flex-col gap-2">
+      <section className="flex flex-col gap-2 items-center flex-1">
         {/* to be done with map */}
         <Answer
           text={question?.answers[0]?.text}

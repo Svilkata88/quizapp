@@ -5,7 +5,7 @@ function GameStats({ points, time, handleReset }) {
   const navigate = useNavigate();
 
   return (
-    <section className="flex gap-2 justify-between border border-gray-300 rounded-4xl w-full md:w-3/4 xl:w-1/3 bg-gradient-to-b from-zinc-400/70 to-zinc-600/70 p-1  shadow-[0px_0px_13px_4px_rgba(52,115,138,1)] md:bottom-auto md:left-auto md:top-6 md:right-4 mt-2">
+    <section className="flex gap-2 justify-between border border-gray-300 rounded-4xl w-full md:w-3/4 xl:w-1/3 bg-gradient-to-b from-zinc-400/70 to-zinc-600/70 p-1 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)] mt-auto md:left-auto md:top-6 md:right-4">
       <div className="flex gap-1 text-xl font-bold flex items-center border border-gray-300 rounded-4xl px-3 bg-gradient-to-b from-zinc-300 to-zinc-500">
         <div className="w-10 h-10">
           <img src="/points.png" alt="points" />

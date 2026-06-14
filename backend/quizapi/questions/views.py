@@ -22,6 +22,15 @@ from django.db.models import Case, When, Value, CharField, F
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
+def all_questions(request): 
+    questions = Question.objects.all()  
+    serialized_questions = QuestionSerializer(questions, many=True)
+
+    return Response(serialized_questions.data)
+
+@api_view(["GET"])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def question_list(request):
     PAGE_SIZE = 5
 
@@ -50,7 +59,6 @@ def question_list(request):
     
     # need improvment / in every call the view fetch the ids, make a paginator, set size and then filter again
     return response
-
 
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])

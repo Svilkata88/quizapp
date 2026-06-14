@@ -20,37 +20,41 @@ function RatingStars({
   // implement rerender of the component when rating is submitted, so that the user can see the new rating without refreshing the page
 
   return (
-    <div className="flex gap-2">
-      <div className={"ml-8 h-7 flex gap-2 " + (isHidden ? "hidden" : "")}>
+    <div
+      className={`flex gap-2 items-center relative left-1/2 top-1/2 -translate-x-1/2 ${
+        isHidden ? "hidden" : "mb-2"
+      }`}
+    >
+      <div className="flex gap-1 justify-center items-center">
         {indexes.map((i) => {
           return (
             <img
               key={i}
               src={starIndex >= i ? fullStar : emptyStar}
               alt={emptyStar.split(".")[0]}
-              className="w-[100%] h-[100%]"
+              className="w-6 h-6"
               onClick={() => setStarIndex(i)}
             />
           );
         })}
-        <button
-          className="bg-amber-300 p-1 text-sm rounded-sm hover:scale-120 transition-transform cursor-pointer w-[100%] h-[100%]"
-          onClick={() => {
-            createRating(
-              `${BASE_URL}/api/questions/create-rating/`,
-              questionId,
-              starIndex,
-            ).then((data) => {
-              console.log("Rating submitted successfully");
-              setRating(data.rating);
-            });
-            setIsHidden(true);
-            setStarIndex(0);
-          }}
-        >
-          Rate!
-        </button>
       </div>
+      <button
+        className="bg-amber-300 px-2 py-auto text-sm rounded-lg hover:scale-110 transition-transform cursor-pointer w-auto h-6"
+        onClick={() => {
+          createRating(
+            `${BASE_URL}/api/questions/create-rating/`,
+            questionId,
+            starIndex,
+          ).then((data) => {
+            console.log("Rating submitted successfully");
+            setRating(data.rating);
+          });
+          setIsHidden(true);
+          setStarIndex(0);
+        }}
+      >
+        Rate!
+      </button>
     </div>
   );
 }
