@@ -122,7 +122,7 @@ def logout_user(request):
 @permission_classes([IsAuthenticated])
 def get_user_profile(request, id):
     user = User.objects.get(id=id)
-    questions_count = Question.objects.filter(user_id=id).count()
+    questions_count = Question.objects.filter(author_id=id).count()
     serializer = UserSerializer(user)
     data = serializer.data
     data["addedQuestions"] = questions_count
