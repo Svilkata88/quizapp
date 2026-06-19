@@ -159,8 +159,9 @@ def custom_refresh_token_view(request):
         refresh = RefreshToken(refresh_token)
         access = str(refresh.access_token)
         return Response({"access": access})
-    except TokenError:
-        return Response({"error": "Invalid refresh token"}, status=401)
+    except TokenError as e:
+        print("TOKEN ERROR:", str(e))
+        return Response({"error": str(e)}, status=401)
 
 @api_view(["GET"])
 def top_five(request):
