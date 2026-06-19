@@ -25,7 +25,7 @@ function Login() {
     })
       .then((data) => {
         login(data);
-        navigate("/");
+        data.user.staff ? navigate("/admin") : navigate("/");
       })
       .catch((resErrors) => {
         const formattedErrors = {};

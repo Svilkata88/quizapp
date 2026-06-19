@@ -61,9 +61,9 @@ function Profile() {
   }
 
   return (
-    <div className="bg-transparent min-h-[calc(100vh-124px)]">
-      <section className="flex flex-col md:flex-row items-center gap-10 lg:gap-20 border border-gray-300 rounded-xl lg:h-[50vh] lg:w-[1000px] mx-4 lg:mx-auto mt-20 bg-gradient-to-b from-zinc-300 to-zinc-500 p-10 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]">
-        <div className="h-43 w-43 p-1 md:h-88 md:w-88 lg:h-104 lg:w-104 relative border-2 border-gray-300 rounded-full bg-zinc-400">
+    <div className="main-children-wrapper">
+      <section className="flex flex-col md:flex-row items-center gap-10 lg:gap-20 border border-gray-300 rounded-2xl lg:h-[40vh] lg:w-[800px] mx-4 md:mx-auto mt-20 bg-gradient-to-b from-zinc-300 to-zinc-500 p-6 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]">
+        <div className="h-40 w-40 p-1 md:h-68 md:w-68 lg:h-88 lg:w-88 relative border-2 border-gray-300 rounded-full bg-zinc-400">
           <div className="rounded-full h-full w-full overflow-hidden border-2 border-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <img
               src={imageUrl}
@@ -89,8 +89,8 @@ function Profile() {
           </button>
         </div>
 
-        <div className="flex gap-2 flex-col justify-start my-10">
-          <div className="flex gap-2 items-center mb-10">
+        <div className="flex gap-2 flex-col justify-start mt-4">
+          <div className="flex gap-2 items-center mb-5 lg:mb-10">
             <h1
               className="lg:text-4xl xl:text-4xl"
               ref={usernameRef}

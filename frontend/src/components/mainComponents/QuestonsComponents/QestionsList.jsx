@@ -52,13 +52,13 @@ function QestionsList({ elementRef, type }) {
     <Spinner />
   ) : (
     <div
-      className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-4 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:w-[1000px] max-h-150"
+      className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-4 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:max-w-[1000px] max-h-130 md:max-h-120 lg:max-h-160"
       ref={elementRef}
     >
       {/* ДА се имплементира search с натискане на enter  */}
       {/* Title and search section */}
-      <section className="flex items-center justify-between mb-4">
-        <h2 className="text-base   md:text-2xl font-bold">
+      <section className="flex items-center gap-1 justify-between mb-4">
+        <h2 className="text-base md:text-xl font-bold">
           {questions?.length === 0
             ? "Still no added questions!"
             : `${user?.username}'s Questions`}
@@ -112,7 +112,7 @@ function QestionsList({ elementRef, type }) {
         </ul>
 
         {/* gradient overlay INSIDE scroll container */}
-        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-zinc-400 to-transparent" />
+        <div className="pointer-events-none absolute -bottom-5 -left-4 -right-4 h-28 bg-gradient-to-t from-stone-700 to-transparent" />
       </section>
     </div>
   );

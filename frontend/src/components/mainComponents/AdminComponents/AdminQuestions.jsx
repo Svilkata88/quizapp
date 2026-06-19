@@ -27,7 +27,9 @@ function AdminQuestions() {
   return loading ? (
     <Spinner />
   ) : (
-    <div>
+    <section
+      className={`relative ${questions ? "" : " hidden"} flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 mx-auto p-4 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:w-[1000px] max-h-150`}
+    >
       <h2>All questions</h2>
       <ul className="max-h-[60vh] overflow-y-auto space-y-1 pb-10">
         {questions?.map((question) => (
@@ -41,6 +43,8 @@ function AdminQuestions() {
             >
               <span className="truncate min-w-0">{question.text}</span>
             </Link>
+            {/* Question's Rating */}
+            <div>{question?.author}</div>
             <div className="w-8 h-8 relative">
               <img src="/fullStarRating.png" alt="full star rating" />
               <p className="absolute inset-0 flex items-center justify-center text-xs font-bold">
@@ -52,7 +56,7 @@ function AdminQuestions() {
       </ul>
       {/* gradient overlay INSIDE scroll container */}
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-zinc-400 to-transparent" />
-    </div>
+    </section>
   );
 }
 

@@ -23,7 +23,7 @@ from django.db.models import Case, When, Value, CharField, F
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def all_questions(request): 
-    questions = Question.objects.all()  
+    questions = Question.objects.select_related("author").all()
     serialized_questions = QuestionSerializer(questions, many=True)
 
     return Response(serialized_questions.data)

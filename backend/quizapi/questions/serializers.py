@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Question, Answer, QuestionIssues
+from users.serializers import UserSerializer
 
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -9,7 +10,7 @@ class AnswerSerializer(serializers.ModelSerializer):
 
 
 class QuestionSerializer(serializers.ModelSerializer):
-    author = serializers.PrimaryKeyRelatedField(read_only=True)
+    author = UserSerializer(read_only=True)
     answers = AnswerSerializer(many=True, read_only=True)
     correct_answer = AnswerSerializer(read_only=True)
 

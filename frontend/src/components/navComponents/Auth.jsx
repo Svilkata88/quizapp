@@ -9,7 +9,7 @@ function Auth() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="flex gap-2 md:justify-end mx-4 md:items-center text-lg md:w-1/3 md:ml-auto">
+    <div className="flex gap-2 justify-end mr-4 md:items-center text-lg w-1/3 md:ml-auto">
       {isAuthenticated ? (
         <div className="flex flex-col md:flex-row gap-1 md:border border-gray-300 md:rounded-full items-center">
           <div

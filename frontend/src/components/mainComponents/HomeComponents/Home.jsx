@@ -25,14 +25,14 @@ function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-5 md:flex-row justify-between mb-5 md:pt-10 px-10 min-h-[calc(100vh-124px)]">
-      <div className="h-[250px] mb-5">
+    <div className="main-children-wrapper w-full gap-10 md:justify-between">
+      <div className="h-[250px] mb-5 md:mb-0 lg:pl-auto">
         <h1 className="text-center text-2xl font-bold text-gray-900 md:text-black">
           Welcome to the Quiz App
         </h1>
         <div
           ref={divRef}
-          className="bg-gradient-to-b from-zinc-100/30 to-zinc-400/0 min-h-50 rounded-xl mt-5"
+          className="bg-gradient-to-b from-zinc-100/30 to-zinc-400/0 min-h-50 lg:w-[300px] rounded-xl mt-5 mx-auto"
         >
           <button
             className="block cursor-pointer hover:scale-110 transition-transform mx-auto pt-10"
@@ -51,7 +51,7 @@ function Home() {
         </div>
       </div>
 
-      <div className="mx-10 mb-10">
+      <div className="mb-10 md:mb-0 md:mx-0">
         <h3 className="text-2xl font-bold text-center text-sky-700 md:text-black mb-5">
           Top 5 players
         </h3>
@@ -68,3 +68,5 @@ function Home() {
 }
 
 export default Home;
+
+// flex flex-col gap-5 md:flex-row justify-between mb-5 md:pt-10 px-10 min-h-[calc(100vh-124px)]

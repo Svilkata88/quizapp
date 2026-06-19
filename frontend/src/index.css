@@ -37,10 +37,14 @@
   }
 
   .nav {
-    @apply px-2 py-0.5 rounded-lg border border-transparent;
+    @apply py-0.5 rounded-lg border border-transparent text-lg;
   }
   .nav-hover {
     @apply hover:bg-gradient-to-r hover:from-sky-100 hover:to-sky-200 transform transition-transform duration-300 ease-out  hover:border-black hover:rounded-2xl;
+  }
+
+  .main-children-wrapper {
+    @apply flex flex-col md:flex-row items-center md:items-start bg-transparent p-2 md:p-8 flex-1;
   }
 
   .form-container {

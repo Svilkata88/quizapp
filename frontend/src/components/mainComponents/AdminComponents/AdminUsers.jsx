@@ -27,7 +27,9 @@ function AdminUsers() {
   return loading ? (
     <Spinner />
   ) : (
-    <div>
+    <section
+      className={`relative ${users ? "" : " hidden"} flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 mx-auto p-4 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:w-[1000px] max-h-150`}
+    >
       <h2>All users</h2>
       <ul className="max-h-[60vh] overflow-y-auto space-y-1 pb-10">
         {users?.map((user) => (
@@ -53,7 +55,7 @@ function AdminUsers() {
       </ul>
       {/* gradient overlay INSIDE scroll container */}
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-zinc-400 to-transparent" />
-    </div>
+    </section>
   );
 }
 
