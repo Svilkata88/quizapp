@@ -137,7 +137,7 @@ def edit_question(request, id):
         question = get_object_or_404(Question, id=id)
         print("Editing question author ID:", question.author.id)
         print("Current user ID:", request.user.id)
-        if request.user.id != question.author.id:
+        if request.user.id != question.author.id or not request.user.is_staff:
             return Response({"error": "Unauthorized"}, status=403)
         
         serializer = QuestionSerializer(question, data=request.data, partial=True)

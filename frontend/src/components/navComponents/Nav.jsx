@@ -18,7 +18,7 @@ function Nav() {
   return (
     <nav className="w-1/3 flex items-center justify-center">
       {user && user.staff ? (
-        <NavLink to="/admin" className="nav nav-hover">
+        <NavLink to="/admin" className="nav nav-hover text-center">
           Admin Dashboard
         </NavLink>
       ) : (
