@@ -15,6 +15,7 @@ import Home from "./components/mainComponents/HomeComponents/Home.jsx";
 import Info from "./components/navComponents/Info.jsx";
 import AdminUsers from "./components/mainComponents/AdminComponents/AdminUsers.jsx";
 import AdminQuestions from "./components/mainComponents/AdminComponents/AdminQuestions.jsx";
+import AdminQuestionDetails from "./components/mainComponents/AdminComponents/AdminQuestiondetails.jsx";
 import AdminUserDetails from "./components/mainComponents/AdminComponents/AdminUserDetails.jsx";
 import CreateQuestionsForm from "./components/formsComponents/CreateQuestionsForm.jsx";
 import ChoseDifficulty from "./components/mainComponents/PlayComponents/ChoseDifficulty.jsx";
@@ -49,7 +50,10 @@ export function App() {
               <Route index element={<AdminUsers />} />
               <Route path=":id" element={<AdminUserDetails />} />
             </Route>
-            <Route path="questions" element={<AdminQuestions />} />
+            <Route path="questions">
+              <Route index element={<AdminQuestions />} />
+              <Route path=":id" element={<AdminQuestionDetails />} />
+            </Route>
             <Route path="issues" />
             <Route path=":id" element={<AdminUserDetails />} />
           </Route>

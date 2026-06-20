@@ -16,7 +16,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ['id', 'text', 'answers', 'correct_answer', 'author', 'rating', 'difficulty', 'info']
+        fields = ['id', 'text', 'answers', 'correct_answer', 'author', 'rating', 'difficulty', 'info', 'status']
 
 
 class UpdateQuestionsSerializer(serializers.Serializer):

@@ -5,13 +5,15 @@ import Spinner from "../../others/Spinner";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-function AdminQuestiondetails() {
+function AdminQuestionDetails() {
   const [question, setQuestion] = useState(null);
   const [author, setAuthor] = useState(null);
   const { id } = useParams();
+  const QUESTION_URL = `/api/questions/admin/all-questions`;
+  console.log(question);
 
   useEffect(() => {
-    fetchOneQuestions(`${BASE_URL}/api/questions/admin/all-questions/${id}`)
+    fetchOneQuestions(`${BASE_URL}${QUESTION_URL}`, id)
       .then((res) => {
         setQuestion(res.question);
         setAuthor(res.author);
@@ -24,15 +26,17 @@ function AdminQuestiondetails() {
   return !author || !question ? (
     <Spinner />
   ) : (
-    <div className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-3 md:p-5 rounded-lg shadow-[var(--blue-shadow)] lg:w-[800px] mx-4 lg:mx-auto min-h-150">
-      <div className="flex gap-2 items-center justify-center border-b border-gray-300 pb-5">
-        <div className="w-16 h-16">
-          <img src="/question.png" alt="question" />
+    <div className="flex flex-col gap-2 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-3 md:p-4 rounded-lg shadow-[var(--blue-shadow)] lg:w-[800px] lg:mx-auto min-h-130 lg:min-h-150">
+      {/* Question Section */}
+      <div className="flex gap-3 items-center justify-center border-b border-gray-300 pb-5">
+        <div className="flex items-center w-18 md:w-14 float-left">
+          <img src="/question.png" alt="question" className="w-full h-full" />
         </div>
-        <h1 className="text-center">{question?.text}</h1>
+        <h2 className="text-center">{question?.text}</h2>
       </div>
       <p className="text-center text-gray-600">Author: {author?.username}</p>
-      <section className="flex gap-10 items-center justify-center pb-5 mt-10">
+      {/* Icons Section */}
+      <section className="flex gap-5 items-center justify-around mx:4 md:mx-16 pb-5 mt-8">
         <div className="w-10 h-10 lg:w-16 lg:h-16 flex flex-col items-center justify-center">
           <p className="text-center text-xs text-gray-600">id</p>
           <img src="/id.png" alt="id" />
@@ -49,32 +53,39 @@ function AdminQuestiondetails() {
           <p className="text-lg lg:text-2xl">{question?.difficulty}</p>
         </div>
       </section>
-      <div className="my-5 mx-3 lg:mx-20">
-        <div className="flex flex-col items-center justify-center float-left mb-2 mr-2">
+      {/* Info Section */}
+      <div className="my-2 mx:4 md:mx-16">
+        <div className="float-left mr-2">
           <img
             src="/info.png"
             alt="info"
-            className={question?.info ? "w-15" : "w-6"}
+            className={question?.info ? "w-12" : "w-6"}
           />
         </div>
-        <p className="">
+        <p className="text-base text-justify">
           {question?.info ? question.info : "No additional info."}
         </p>
       </div>
-      <div className="mx-20">
+      {/* Answers Section */}
+      <div className="flex flex-col items-center mx-auto md:mx-16 md:mt-2 lg:mt-10">
         <h2 className="mb-2">Answers:</h2>
-        <ul>
+        <ul className="flex gap-1 md:gap-5 flex-col md:flex-row">
           {question?.answers?.map((answer, index) => (
-            <li key={answer.id ?? index} className="flex gap-5">
-              <p>{index + 1}.</p>
+            <li key={answer.id ?? index} className="flex gap-1">
+              <div className="">
+                <p className="flex items-center justify-center w-6 h-6 bg-gray-600 rounded-full p-1 text-zinc-300">
+                  <span>{index + 1}</span>
+                </p>
+              </div>
               <p>{answer.text}</p>
             </li>
           ))}
         </ul>
       </div>
-      <div className="mx-20 mt-5 mb-5">
+      {/* Correct Answer Section */}
+      <div className="flex flex-col items-center mx-auto md:mx-16 mt-5">
         <h2 className="mb-2">Correct answer:</h2>
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-center">
           <img
             src="/ok.png"
             alt="ok check"
@@ -87,4 +98,4 @@ function AdminQuestiondetails() {
   );
 }
 
-export default AdminQuestiondetails;
+export default AdminQuestionDetails;
