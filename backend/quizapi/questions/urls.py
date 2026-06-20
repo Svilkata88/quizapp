@@ -13,5 +13,6 @@ urlpatterns = [
     path('update-questions/', update_questions, name='update_questions'),
     path('<int:id>/', get_question, name='get_question'),
 
-    path('admin/all-questions/', all_questions, name="all_questions")
+    path('admin/all-questions/', all_questions, name="all_questions"),
+    path('admin/all-questions/<int:id>/', get_question, name="admin_get_question")
 ]

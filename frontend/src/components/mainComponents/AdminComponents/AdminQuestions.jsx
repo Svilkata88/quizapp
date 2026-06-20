@@ -35,16 +35,19 @@ function AdminQuestions() {
         {questions?.map((question) => (
           <li
             key={question.id}
-            className="w-full flex items-center justify-between px-3 py-2 rounded-md shadow-sm"
+            className="w-full flex gap-2 items-center justify-between px-3 py-2 rounded-md shadow-sm"
           >
             <Link
-              to={`/${question.id}`}
+              to={`./${question.id}`}
               className="flex w-full min-w-0 transition-all hover:text-sky-700 hover:font-semibold"
             >
               <span className="truncate min-w-0">{question.text}</span>
             </Link>
             {/* Question's Rating */}
-            <div>{question?.author}</div>
+            <div className="flex gap-2 min-w-35 justify-between">
+              <span className="text-gray-500">author: </span>
+              {question?.author.username}
+            </div>
             <div className="w-8 h-8 relative">
               <img src="/fullStarRating.png" alt="full star rating" />
               <p className="absolute inset-0 flex items-center justify-center text-xs font-bold">

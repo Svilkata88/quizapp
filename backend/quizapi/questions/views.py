@@ -74,13 +74,18 @@ def get_own_questions_list(request):
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def get_question(request, id):
-    id = int(id)
-    question = get_object_or_404(Question, id=id)
-    author = User.objects.get(id=question.author.id)
-    
+    question = get_object_or_404(
+        Question.objects.select_related("author"),
+        id=id,
+    )
+
     serialized_question = QuestionSerializer(question)
-    serialized_author = UserSerializer(author)
-    return JsonResponse({'question': serialized_question.data, 'author': serialized_author.data})
+    serialized_author = UserSerializer(question.author)
+
+    return JsonResponse({
+        "question": serialized_question.data,
+        "author": serialized_author.data,
+    })
 
 
 def reset_game(request):

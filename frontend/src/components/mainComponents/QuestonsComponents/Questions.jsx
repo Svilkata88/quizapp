@@ -13,7 +13,7 @@ function Questions() {
   return (
     <div className="flex flex-col bg-transparent p-2 md:p-8 flex-1 items-center">
       {/* Questions dashboard navigation */}
-      <div className="flex gap-3 justify-center mt-5 md:mt-2 p-2 md:w-3/4 lg:w-1/3 bg-gradient-to-b from-zinc-100 to-zinc-400 lg:w-[000px] bg-white rounded-lg shadow-[0px_7px_13px_4px_rgba(40,55,61,1)]">
+      <div className="flex gap-3 justify-center mt-5 md:mt-2 p-2 md:w-3/4 lg:w-1/3 bg-gradient-to-b from-zinc-100 to-zinc-400 lg:w-[1000px] bg-white rounded-lg shadow-[0px_7px_13px_4px_rgba(40,55,61,1)]">
         {/* Create question */}
         <button
           className="hover:scale-110 transition-transform cursor-pointer"
