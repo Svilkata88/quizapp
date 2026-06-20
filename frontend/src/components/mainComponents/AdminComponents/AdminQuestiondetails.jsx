@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchOneQuestions } from "../../../../utils";
 import { apiEditQuestion } from "../../../../utils";
+import FormButton from "../../buttons/FormButton";
 import Spinner from "../../others/Spinner";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -24,7 +25,7 @@ function AdminQuestionDetails() {
         setAuthor(res.author.username);
         setStatus(res.question.status);
         setQtext(res.question.text);
-        setAnswers(res.question.answers);
+        setAnswers(res.question.answers.map((answer) => ({ ...answer })));
         setCorrectAnswer(res.question.correct_answer.text);
         setInfoText(res.question.info);
       })
@@ -41,35 +42,37 @@ function AdminQuestionDetails() {
     }
   }
 
-  const checkingAnswers = answers.slice();
-  checkingAnswers?.pop(correctAnswer);
+  const normalizedAnswers = answers.map((answer) => answer.text?.trim() ?? "");
+  const normalizedCorrectAnswer = correctAnswer.trim();
+  const optionAnswers = normalizedAnswers.filter(
+    (answer) => answer.toLowerCase() !== normalizedCorrectAnswer.toLowerCase(),
+  );
   const isFormValid =
-    validate(question?.text, "text") &&
+    validate(qText, "text") &&
     validate(correctAnswer, "text") &&
-    validate(checkingAnswers[0]?.text, "text") &&
-    validate(checkingAnswers[1]?.text, "text") &&
-    validate(checkingAnswers[2]?.text, "text") &&
     validate(infoText, "text") &&
-    correctAnswer !== checkingAnswers[0] &&
-    correctAnswer !== checkingAnswers[1] &&
-    correctAnswer !== checkingAnswers[2] &&
-    checkingAnswers[0] !== checkingAnswers[1] &&
-    checkingAnswers[1] !== checkingAnswers[2] &&
-    checkingAnswers[0] !== checkingAnswers[2];
+    optionAnswers.length === 3 &&
+    optionAnswers.every((answer) => validate(answer, "text")) &&
+    new Set(optionAnswers.map((answer) => answer.toLowerCase())).size ===
+      optionAnswers.length &&
+    !optionAnswers.some(
+      (answer) =>
+        answer.toLowerCase() === normalizedCorrectAnswer.toLowerCase(),
+    );
 
   const handleSubmit = (formData) => {
-    console.log(Array.from(formData.entries()));
+    // console.log(Array.from(formData.entries()));
     // console.log(question);
 
     apiEditQuestion(`${BASE_URL}/api/questions/edit/${id}/`, formData)
       .then((res) => {
         console.log(`Question: "${question.text}" updated successfully!`);
 
-        showText(
-          questionEditContainer,
-          `Question: "${question.text}" updated successfully!`,
-          "text-green-500 font-bold bg-gray-300 p-2 rounded-md border border-green-500",
-        );
+        // showText(
+        //   questionEditContainer,
+        //   `Question: "${question.text}" updated successfully!`,
+        //   "text-green-500 font-bold bg-gray-300 p-2 rounded-md border border-green-500",
+        // );
         // setTimeout(() => {
         //   hideText(questionEditContainer);
 
@@ -109,20 +112,20 @@ function AdminQuestionDetails() {
 
         {/* Textarea */}
         <textarea
-          name="question_text"
+          name="text"
           className="w-full h-[120px] bg-zinc-100 rounded-lg p-4 md:p-6 resize-none"
           value={qText}
           onChange={(e) => setQtext(e.target.value)}
         />
       </div>
       <div className="flex gap-3 justify-center items-start">
-        <div className="flex flex-col gap-1 justify-center items-center">
-          <label htmlFor="statusInput" className="text-gray-500">
+        <div className="flex flex-col gap-2 justify-center items-center">
+          <label htmlFor="statusInput" className="text-gray-500 text-sm">
             Author:
           </label>
           <input
             name="author"
-            className="text-black bg-zinc-100 rounded-lg font-semibold w-25 text-center"
+            className="text-black bg-zinc-100 rounded-lg font-semibold w-25 p-1 text-center"
             id="authorInput"
             value={author ?? ""}
             onChange={(e) => setAuthor(e.target.value)}
@@ -188,7 +191,7 @@ function AdminQuestionDetails() {
       <div className="flex flex-col items-center mx-auto md:mx-16 md:mt-2 lg:mt-10">
         <h2 className="mb-2">Answers:</h2>
         <ul className="flex gap-1 md:gap-3 flex-col">
-          {question?.answers?.map((answer, index) => (
+          {answers.map((answer, index) => (
             <li
               key={answer.id ?? index}
               className="flex gap-1 md:gap-3 items-center"
@@ -198,19 +201,19 @@ function AdminQuestionDetails() {
               </p>
               <input
                 name={
-                  index === 0 && answers[index].text !== correctAnswer
+                  index === 0
                     ? "option_one"
-                    : index === 1 && answers[index].text !== correctAnswer
+                    : index === 1
                       ? "option_two"
-                      : index === 2 && answers[index].text !== correctAnswer
-                        ? "option_three"
-                        : ""
+                      : "option_three"
                 }
                 type="text"
-                value={answers[index].text || ""}
+                value={answer.text || ""}
                 onChange={(e) =>
                   setAnswers((prev) =>
-                    prev.map((a, i) => (i === index ? e.target.value : a)),
+                    prev.map((a, i) =>
+                      i === index ? { ...a, text: e.target.value } : a,
+                    ),
                   )
                 }
                 className="bg-zinc-100 pl-1 rounded-lg"
@@ -237,7 +240,7 @@ function AdminQuestionDetails() {
           />
         </div>
       </div>
-      <button>submit</button>
+      <FormButton text="Edit" disabled={!isFormValid} />
     </form>
   );
 }

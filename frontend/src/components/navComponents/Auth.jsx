@@ -11,7 +11,7 @@ function Auth() {
   return (
     <div className="flex gap-2 justify-end mr-4 md:items-center text-lg w-1/3 md:ml-auto">
       {isAuthenticated ? (
-        <div className="flex flex-col md:flex-row gap-1 md:border border-gray-300 md:rounded-full items-center">
+        <div className="flex flex-col md:flex-row gap-1 md:border border-gray-300 md:rounded-full items-center md:bg-stone-900/10">
           <div
             className="rounded-full w-16 h-16 md:h-10 md:w-10 md:p-1 overflow-hidden flex items-center justify-center border border-gray-300 md:border-none cursor-pointer"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -22,11 +22,11 @@ function Auth() {
               className="h-full w-full object-cover rounded-full"
             />
           </div>
-          <span className="hidden md:block px-3 rounded-md">
+          <span className="hidden md:block px-2 rounded-md">
             {user ? user.username : "Anonymus User"}
           </span>
           <NavLink
-            className={`nav nav-hover text-xs md:text-base font-bold md:font-normal hover:rounded-2xl ${isMenuOpen ? "block" : "hidden"} md:block`}
+            className={`nav nav-hover text-xs mr-3 md:text-base font-bold md:font-normal hover:rounded-2xl ${isMenuOpen ? "block" : "hidden"} md:block`}
             to="/auth/logout"
           >
             Logout
