@@ -26,10 +26,12 @@ function QuestionDetail() {
   ) : (
     <div className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-3 md:p-5 rounded-lg shadow-[var(--blue-shadow)] lg:w-[800px] mx-4 lg:mx-auto min-h-150">
       <div className="flex gap-2 items-center justify-center border-b border-gray-300 pb-5">
-        <div className="w-16 h-16">
-          <img src="/question.png" alt="question" />
+        <div className="w-14 float-left">
+          <img src="/question.png" alt="question" className="w-full min-w-8" />
         </div>
-        <h1 className="text-center">{question?.text}</h1>
+        <h1 className="text-justify text-base md:text-md lg:text-xl font-semibold">
+          {question?.text}
+        </h1>
       </div>
       <p className="text-center text-gray-600">Author: {author?.username}</p>
       <section className="flex gap-10 items-center justify-center pb-5 mt-10">
@@ -57,22 +59,24 @@ function QuestionDetail() {
             className={question?.info ? "w-15" : "w-6"}
           />
         </div>
-        <p className="">
+        <p className="xl:text-lg text-justify">
           {question?.info ? question.info : "No additional info."}
         </p>
       </div>
-      <div className="mx-20">
+      <div className="flex flex-col items-center mx-20">
         <h2 className="mb-2">Answers:</h2>
         <ul>
           {question?.answers?.map((answer, index) => (
-            <li key={answer.id ?? index} className="flex gap-5">
-              <p>{index + 1}.</p>
-              <p>{answer.text}</p>
+            <li key={answer.id ?? index} className="flex gap-2 mb-1">
+              <p className="flex items-center justify-center w-6 h-6 bg-gray-600 rounded-full p-1 text-zinc-300">
+                {index + 1}
+              </p>
+              <p className="xl:text-lg">{answer.text}</p>
             </li>
           ))}
         </ul>
       </div>
-      <div className="mx-20 mt-5 mb-5">
+      <div className="flex flex-col items-center mx-20 mt-5 mb-5">
         <h2 className="mb-2">Correct answer:</h2>
         <div className="flex gap-2">
           <img
@@ -80,7 +84,7 @@ function QuestionDetail() {
             alt="ok check"
             className="w-6 h-6 bg-gray-600 rounded-full p-1"
           />
-          <p>{question?.correct_answer?.text}</p>
+          <p className="xl:text-lg">{question?.correct_answer?.text}</p>
         </div>
       </div>
     </div>

@@ -15,6 +15,7 @@ from rest_framework_simplejwt.exceptions import TokenError
 from .utils import create_quiz_token
 from django.shortcuts import get_object_or_404
 from quizapi.settings import DEBUG
+from django.views.decorators.cache import cache_page
 
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
@@ -163,6 +164,7 @@ def custom_refresh_token_view(request):
         print("TOKEN ERROR:", str(e))
         return Response({"error": str(e)}, status=401)
 
+@cache_page(60 * 15)
 @api_view(["GET"])
 def top_five(request):
     top_five_users = User.objects.order_by('-xp').exclude(username='quizadmin')[:5]

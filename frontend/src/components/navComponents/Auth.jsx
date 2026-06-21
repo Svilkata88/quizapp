@@ -9,7 +9,7 @@ function Auth() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="flex gap-2 justify-end mr-4 md:items-center text-lg w-1/3 md:ml-auto">
+    <div className="flex gap-2 justify-end mr-4 md:items-center text-lg w-1/3 md:ml-auto h-26">
       {isAuthenticated ? (
         <div className="flex flex-col md:flex-row gap-1 md:border border-gray-300 md:rounded-full items-center md:bg-stone-900/10">
           <div
@@ -26,7 +26,7 @@ function Auth() {
             {user ? user.username : "Anonymus User"}
           </span>
           <NavLink
-            className={`nav nav-hover text-xs mr-3 md:text-base font-bold md:font-normal hover:rounded-2xl ${isMenuOpen ? "block" : "hidden"} md:block`}
+            className={`nav nav-hover text-xs md:mr-3 md:text-base font-bold md:font-normal hover:rounded-2xl ${isMenuOpen ? "block" : "hidden"} md:block`}
             to="/auth/logout"
           >
             Logout
