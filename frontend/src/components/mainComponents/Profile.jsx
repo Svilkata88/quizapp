@@ -1,13 +1,35 @@
 import { useUserContext } from "../../hooks/userContext";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { apiEditUser } from "../../../utils";
 import Cookies from "js-cookie";
 import { formatTime } from "../../../utils";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+const DEFAULT_COL =
+  "bg-gradient-to-b from-zinc-300 to-zinc-500 rounded-md p-1 border border-gray-400 cursor-pointer";
+const LIGHT_PINC =
+  "bg-gradient-to-r from-pink-800 to-pink-500 rounded-md p-1 border border-gray-400 cursor-pointer";
+const PURPLE =
+  "bg-gradient-to-r from-purple-800 to-purple-500 rounded-md p-1 border border-gray-400 cursor-pointer";
+const LIGHT_BLUE =
+  "bg-gradient-to-r from-blue-800 to-blue-500 rounded-md p-1 border border-gray-400 cursor-pointer";
+const RED =
+  "bg-gradient-to-r from-red-800 to-red-500 rounded-md p-1 border border-gray-400 cursor-pointer";
+const GRAY =
+  "bg-gradient-to-r from-gray-800 to-gray-500 rounded-md p-1 border border-gray-400 cursor-pointer";
+const LIGHT_GRAY =
+  "bg-gradient-to-r from-gray-500 to-gray-300 rounded-md p-1 border border-gray-400 cursor-pointer";
+const GRASS_GREEN =
+  "bg-gradient-to-r from-green-600 to-green-300 rounded-md p-1 border border-gray-400 cursor-pointer";
+const ORANGE =
+  "bg-gradient-to-r from-amber-800 to-amber-500 rounded-md p-1 border border-gray-400 cursor-pointer";
 
 function Profile() {
   const { user, setUser } = useUserContext();
+  const [isColorsOpen, setIsColorsOpen] = useState(false);
+  const [cardBG, setCardBG] = useState(
+    localStorage.getItem("cardBG") || DEFAULT_COL,
+  );
   const imageUrl = user.image ? `${user.image}` : null;
   const fileInputRef = useRef(null);
   const usernameRef = useRef(null);
@@ -62,7 +84,9 @@ function Profile() {
 
   return (
     <div className="main-children-wrapper">
-      <section className="flex flex-col md:flex-row items-center gap-10 lg:gap-20 border border-gray-300 rounded-2xl lg:h-[40vh] lg:w-[800px] mx-4 md:mx-auto mt-20 bg-gradient-to-b from-zinc-300 to-zinc-500 p-6 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]">
+      <section
+        className={`${cardBG} flex flex-col md:flex-row items-center gap-10 lg:gap-20 border border-gray-300 rounded-2xl lg:h-[40vh] lg:w-[800px] mx-4 md:mx-auto mt-20 p-6 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]`}
+      >
         <div className="h-40 w-40 p-1 md:h-68 md:w-68 lg:h-88 lg:w-88 relative border-2 border-gray-300 rounded-full bg-zinc-400">
           <div className="rounded-full h-full w-full overflow-hidden border-2 border-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <img
@@ -161,6 +185,106 @@ function Profile() {
                 className="w-8 h-6 object-contain"
               />
               <h2>Time Played: {formatTime(user.time_played)}s</h2>
+            </div>
+            <div>
+              <div className="relative ml-1">
+                <div
+                  className="flex gap-2 text-md items-center p-2 bg-zinc-200 w-36 h-6 cursor-pointer rounded-full hover:scale-105 transition-transform duration-300 ease-in-out"
+                  onClick={() => setIsColorsOpen(!isColorsOpen)}
+                >
+                  <img
+                    src={`${isColorsOpen ? "./arrup.png" : "./arrdown.png"}`}
+                    alt="arrow"
+                    className="w-6 h-6"
+                  />
+                  <p>Card theme</p>
+                </div>
+                <ul
+                  className={`absolute top-6 grid grid-cols-3 gap-1 text-zinc-300 text-xs bg-zinc-950/10 p-2 rounded-lg mt-2 ${isColorsOpen ? "" : "hidden"}`}
+                >
+                  <li
+                    className={LIGHT_PINC}
+                    onClick={() => {
+                      setCardBG(LIGHT_PINC);
+                      localStorage.setItem("cardBG", LIGHT_PINC);
+                    }}
+                  >
+                    Light Pink
+                  </li>
+                  <li
+                    className={PURPLE}
+                    onClick={() => {
+                      setCardBG(PURPLE);
+                      localStorage.setItem("cardBG", PURPLE);
+                    }}
+                  >
+                    Purple
+                  </li>
+                  <li
+                    className={LIGHT_BLUE}
+                    onClick={() => {
+                      setCardBG(LIGHT_BLUE);
+                      localStorage.setItem("cardBG", LIGHT_BLUE);
+                    }}
+                  >
+                    Light Blue
+                  </li>
+                  <li
+                    className={RED}
+                    onClick={() => {
+                      setCardBG(RED);
+                      localStorage.setItem("cardBG", RED);
+                    }}
+                  >
+                    Red
+                  </li>
+                  <li
+                    className={GRAY}
+                    onClick={() => {
+                      setCardBG(GRAY);
+                      localStorage.setItem("cardBG", GRAY);
+                    }}
+                  >
+                    Gray
+                  </li>
+                  <li
+                    className={LIGHT_GRAY}
+                    onClick={() => {
+                      setCardBG(LIGHT_GRAY);
+                      localStorage.setItem("cardBG", LIGHT_GRAY);
+                    }}
+                  >
+                    Light Gray
+                  </li>
+                  <li
+                    className={GRASS_GREEN}
+                    onClick={() => {
+                      setCardBG(GRASS_GREEN);
+                      localStorage.setItem("cardBG", GRASS_GREEN);
+                    }}
+                  >
+                    Grass Green
+                  </li>
+                  <li
+                    className={ORANGE}
+                    onClick={() => {
+                      setCardBG(ORANGE);
+                      localStorage.setItem("cardBG", ORANGE);
+                    }}
+                  >
+                    Orange
+                  </li>
+                  <li
+                    className={DEFAULT_COL}
+                    onClick={() => {
+                      setCardBG(DEFAULT_COL);
+                      localStorage.setItem("cardBG", DEFAULT_COL);
+                    }}
+                  >
+                    Default
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

@@ -37,7 +37,7 @@
   }
 
   .nav {
-    @apply py-0.5 rounded-lg border border-transparent text-lg;
+    @apply py-0.5 px-2 rounded-lg border border-transparent text-lg;
   }
   .nav-hover {
     @apply hover:bg-gradient-to-r hover:from-sky-100 hover:to-sky-200 transform transition-transform duration-300 ease-out  hover:border-black hover:rounded-2xl;
