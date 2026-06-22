@@ -14,7 +14,7 @@ from django.core.mail import send_mail
     acks_late=True,
     ignore_result=True,
 )
-def send_welcome_email():
+def send_welcome_email(self):
     # send_mail(
     #     subject="Welcome to Quizzy",
     #     message="Thank you for registering!",
