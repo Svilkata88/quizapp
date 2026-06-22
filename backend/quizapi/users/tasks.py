@@ -15,12 +15,12 @@ from django.core.mail import send_mail
     ignore_result=True,
 )
 def send_welcome_email():
-    send_mail(
-        subject="Welcome to Quizzy",
-        message="Thank you for registering!",
-        from_email="noreply@quizzy.com",
-        recipient_list=[email],
-        fail_silently=False,
-    )
+    # send_mail(
+    #     subject="Welcome to Quizzy",
+    #     message="Thank you for registering!",
+    #     from_email="noreply@quizzy.com",
+    #     recipient_list=[email],
+    #     fail_silently=False,
+    # )
     print('Mail send successfully')
     return 'OK'
