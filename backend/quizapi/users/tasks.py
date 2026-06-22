@@ -1,6 +1,8 @@
 from celery import shared_task
 from django.core.mail import send_mail
+import logging
 
+logger = logging.getLogger(__name__)
 
 @shared_task(
     bind=True,
@@ -22,5 +24,6 @@ def send_welcome_email(self):
     #     recipient_list=[email],
     #     fail_silently=False,
     # )
+    logger.warning("Mail send successfully")
     print('Mail send successfully')
     return 'OK'
