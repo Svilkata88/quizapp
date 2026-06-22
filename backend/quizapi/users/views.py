@@ -16,6 +16,7 @@ from .utils import create_quiz_token
 from django.shortcuts import get_object_or_404
 from quizapi.settings import DEBUG
 from django.views.decorators.cache import cache_page
+from .tasks import send_welcome_email
 
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
@@ -65,6 +66,7 @@ def register_user(request):
 
 @api_view(["POST"])
 def login_user(request):
+    send_welcome_email.delay()
     if request.method == 'POST':
         data = JSONParser().parse(request)
         username = data.get('username')
