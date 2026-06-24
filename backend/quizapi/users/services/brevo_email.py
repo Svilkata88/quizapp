@@ -8,7 +8,7 @@ from django.utils.html import strip_tags
 class BrevoEmailService:
     def __init__(self):
         config = sib_api_v3_sdk.Configuration()
-        config.api_key["api-key"] = settings.BREVO_API_KEY
+        config.api_key["api-key"] = settings.EMAIL_API_KEY
 
         self.client = sib_api_v3_sdk.TransactionalEmailsApi(
             sib_api_v3_sdk.ApiClient(config)
