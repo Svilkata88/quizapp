@@ -66,48 +66,47 @@ def register_user(request):
 
 @api_view(["POST"])
 def login_user(request):
-    send_welcome_email.delay()
-    if request.method == 'POST':
-        data = JSONParser().parse(request)
-        username = data.get('username')
-        password = data.get('password')
-        try:
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                refresh = create_quiz_token(user)
-                userQuestions = Question.objects.filter(author=user).count()
+    data = request.data
+    username = data.get('username')
+    password = data.get('password')
+    try:
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            refresh = create_quiz_token(user)
+            userQuestions = Question.objects.filter(author=user).count()
+            send_welcome_email.delay(user.email, user.username)
 
-                response = Response({
-                    'access': refresh['access'],
-                    'seed': refresh['seed'],
-                    'user': {
-                        'id': user.id,
-                        'username': user.username,
-                        'xp': user.xp,
-                        'points': user.points,
-                        'addedQuestions': userQuestions,
-                         'image': user.image.url if user.image else None,
-                         'time_played': user.time_played.total_seconds(),
-                         "staff": user.is_staff,
-                    }
-                })
+            response = Response({
+                'access': refresh['access'],
+                'seed': refresh['seed'],
+                'user': {
+                    'id': user.id,
+                    'username': user.username,
+                    'xp': user.xp,
+                    'points': user.points,
+                    'addedQuestions': userQuestions,
+                        'image': user.image.url if user.image else None,
+                        'time_played': user.time_played.total_seconds() if user.time_played else 0,
+                        "staff": user.is_staff,
+                }
+            })
 
-                response.set_cookie(
-                    key="refresh",
-                    value=refresh['refresh'],
-                    httponly=True,
-                    secure=True,     
-                    samesite="None",
-                    path="/",  
-                    max_age=60 * 60 * 24 * 7     # 7 days
-                )
-                # print("COOKIES:", request.COOKIES)
-                return response
-        
-            else:
-                return Response({"error": "Invalid credentials"}, status=400)
-        except User.DoesNotExist:
-            return Response({"error": "User does not exist"}, status=404)
+            response.set_cookie(
+                key="refresh",
+                value=refresh['refresh'],
+                httponly=True,
+                secure=True,     
+                samesite="None",
+                path="/",  
+                max_age=60 * 60 * 24 * 7     # 7 days
+            )
+            # print("COOKIES:", request.COOKIES)
+            return response
+    
+        else:
+            return Response({"error": "Invalid credentials"}, status=400)
+    except User.DoesNotExist:
+        return Response({"error": "User does not exist"}, status=404)
 
 @api_view(["POST"])
 def logout_user(request):
