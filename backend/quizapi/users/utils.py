@@ -1,5 +1,6 @@
 import random
-from django.conf.settings import redis_client
+import redis
+from django.conf import settings
 from rest_framework_simplejwt.tokens import RefreshToken
 
 def create_quiz_token(user):
@@ -19,7 +20,11 @@ def refresh_seed():
     return seed
 
 def set_redis_token(token, user_id):
-
+    redis_client = redis.from_url(
+    settings.env("REDIS_URL"),
+    decode_responses=True
+)
+    
     redis_client.setex(
         f"email_verify:{token}",
         5 * 60,  # 5 min
