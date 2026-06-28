@@ -40,7 +40,7 @@ function SetNewPassword() {
     }
 
     setLoading(true);
-    apiResetPassword(`${BASE_URL}/api/users/reset-password`, {
+    apiResetPassword(`${BASE_URL}/api/users/verify-password/${token}`, {
       password,
     })
       .then((data) => {

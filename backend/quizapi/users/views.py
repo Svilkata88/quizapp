@@ -160,8 +160,8 @@ def verify_password(request, token):
     
     user.set_password(password)
     user.save()
-    
-    send_password_reset_confirmation_email(user.email, user.username)
+
+    send_password_reset_confirmation_email.delay(user.email, user.username)
 
     refresh = create_quiz_token(user)
     userQuestions = Question.objects.filter(author=user).count()
