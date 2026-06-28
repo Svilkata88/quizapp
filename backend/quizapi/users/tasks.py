@@ -21,15 +21,8 @@ logger = logging.getLogger(__name__)
     ignore_result=True,
 )
 def send_welcome_email(self, recipient_email, username):
-    logger.info("send_welcome_email task started for %s", recipient_email)
     service = BrevoEmailService()
-    try:
-        result = service.send_welcome_email(recipient_email, username)
-        logger.info("send_welcome_email result for %s: %s", recipient_email, result)
-        return result
-    except Exception as e:
-        logger.exception("send_welcome_email failed for %s", recipient_email)
-        raise
+    return service.send_welcome_email(recipient_email, username)
 
 @shared_task(
     bind=True,
@@ -44,12 +37,21 @@ def send_welcome_email(self, recipient_email, username):
     ignore_result=True,
 )
 def send_password_reset_email(self, recipient_email, link):
-    logger.info("send_password_reset_email task started for %s", recipient_email)
     service = BrevoEmailService()
-    try:
-        result = service.send_password_reset_email(recipient_email, link)
-        logger.info("send_password_reset_email result for %s: %s", recipient_email, result)
-        return result
-    except Exception as e:
-        logger.exception("send_password_reset_email failed for %s", recipient_email)
-        raise
+    return service.send_password_reset_email(recipient_email, link)
+
+@shared_task(
+    bind=True,
+    max_retries=5,
+    default_retry_delay=5,
+    autoretry_for=(Exception,),
+    retry_backoff=True,
+    retry_jitter=True,
+    time_limit=30,
+    soft_time_limit=25,
+    acks_late=True,
+    ignore_result=True,
+)
+def send_password_reset_confirmation_email(self, recipient_email):
+    service = BrevoEmailService()
+    return service.send_password_reset_confirmation_email(recipient_email)

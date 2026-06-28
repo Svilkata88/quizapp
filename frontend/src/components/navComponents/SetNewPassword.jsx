@@ -1,6 +1,6 @@
 import Spinner from "../others/Spinner.jsx";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { apiResetPassword } from "../../../utils.js";
 import { Link } from "react-router-dom";
 import FormButton from "../buttons/FormButton.jsx";
@@ -8,25 +8,40 @@ import ErrorMessage from "../formsComponents/errorMessage.jsx";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-function EmailPasswordReset() {
+function SetNewPassword() {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [pass, setPass] = useState("");
+  const [confPass, setConfPass] = useState("");
   const navigate = useNavigate();
+  const { token } = useParams();
 
-  const handleSendEmail = (formData) => {
-    const email = formData.get("email");
-    const emailRegex =
-      /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+$/;
+  const isPassValid = pass && confPass;
 
-    const isEmailValid = emailRegex.test(email) && email;
-    if (!isEmailValid) {
-      setErrors({ Error: "Email is not valid!" });
+  useEffect(() => {
+    if (Object.keys(errors).length === 0) return;
+
+    const timer = setTimeout(() => {
+      setErrors({});
+      setPass("");
+      setConfPass("");
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [errors]);
+
+  const handlePasswordReset = (formData) => {
+    const password = formData.get("password");
+    const passwordConfirm = formData.get("password-confirm");
+
+    if (password !== passwordConfirm) {
+      setErrors({ Error: "Passwords do not match!" });
       return;
     }
 
     setLoading(true);
     apiResetPassword(`${BASE_URL}/api/users/reset-password`, {
-      email,
+      password,
     })
       .then((data) => {
         navigate("/auth/login");
@@ -47,19 +62,27 @@ function EmailPasswordReset() {
     <Spinner />
   ) : (
     <div className="flex flex-col justify-center items-center p3">
-      <h1 className="text-2xl mb-4">Resset you password</h1>
+      <h1 className="text-2xl mb-4">Set new password</h1>
       <form
-        action={handleSendEmail}
+        action={handlePasswordReset}
         className="flex flex-col gap-3 w-full md:w-1/2 lg:w-1/4 bg-stone-200 form-container"
       >
         <input
-          type="text"
-          name="email"
-          placeholder="Enter your email"
+          type="password"
+          name="password"
+          placeholder="Enter your new password"
+          onChange={(e) => setPass(e.target.value)}
+          className="bg-stone-100 p-1 pl-2 rounded-md focus:outline-black focus:outline-2"
+        />
+        <input
+          type="password"
+          name="password-confirm"
+          placeholder="Confirm your new password"
+          onChange={(e) => setConfPass(e.target.value)}
           className="bg-stone-100 p-1 pl-2 rounded-md focus:outline-black focus:outline-2"
         />
 
-        <FormButton text="Send" />
+        <FormButton text="Confirm" disabled={!isPassValid} />
         <div className="flex flex-col gap-2 mt-2">
           {errors &&
             Object.entries(errors).map((error, index) => (
@@ -71,4 +94,4 @@ function EmailPasswordReset() {
   );
 }
 
-export default EmailPasswordReset;
+export default SetNewPassword;

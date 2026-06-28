@@ -13,11 +13,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
-from .utils import create_quiz_token, set_redis_token
+from .utils import create_quiz_token, set_redis_token, verify_redis_token
 from django.shortcuts import get_object_or_404
 from quizapi.settings import DEBUG
 from django.views.decorators.cache import cache_page
-from .tasks import send_welcome_email, send_password_reset_email
+from .tasks import send_welcome_email, send_password_reset_email, send_password_reset_confirmation_email
 
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
@@ -101,7 +101,6 @@ def login_user(request):
                 path="/",  
                 max_age=60 * 60 * 24 * 7     # 7 days
             )
-            # print("COOKIES:", request.COOKIES)
             return response
     
         else:
@@ -133,16 +132,65 @@ def reset_password(request):
 
     try:
         token = token_urlsafe(32)
-        link = f"https://play-quizzy.com/auth/password-reset/{token}"
+        link = f"https://play-quizzy.com/auth/set-new-password/{token}"
 
         set_redis_token(token, user.id)
         send_password_reset_email.delay(user.email, link)
-        
+
         return Response({"message": "Password reset email sent"})
     except Exception as e:
         if DEBUG:
             print("Password reset error:", str(e))
         return Response({"error": "Failed to reset the password!"}, status=400)
+
+@api_view(["POST"])
+def verify_password(request, token):
+    password = request.data.get('password')
+    if not password:
+        return Response({"error": "no password provided for reset"}, status=400)
+
+    verified_user_id = verify_redis_token(token)
+    if not verified_user_id :
+        return Response({"error": "Invalid or expired token"}, status=400)
+
+    try:
+        user = User.objects.get(id=verified_user_id)
+    except User.DoesNotExist:
+        return Response({"error": "User not found"}, status=404)
+    
+    user.set_password(password)
+    user.save()
+    
+    send_password_reset_confirmation_email(user.email, user.username)
+
+    refresh = create_quiz_token(user)
+    userQuestions = Question.objects.filter(author=user).count()
+
+    response = Response({
+        'access': refresh['access'],
+        'seed': refresh['seed'],
+        'user': {
+            'id': user.id,
+            'username': user.username,
+            'xp': user.xp,
+            'points': user.points,
+            'addedQuestions': userQuestions,
+                'image': user.image.url if user.image else None,
+                'time_played': user.time_played.total_seconds() if user.time_played else 0,
+                "staff": user.is_staff,
+        }
+    })
+
+    response.set_cookie(
+        key="refresh",
+        value=refresh['refresh'],
+        httponly=True,
+        secure=True,     
+        samesite="None",
+        path="/",  
+        max_age=60 * 60 * 24 * 7     # 7 days
+    )
+    return response
 
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])

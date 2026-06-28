@@ -1,11 +1,11 @@
 import random
 import redis
 import environ
+from rest_framework_simplejwt.tokens import RefreshToken
 
 env = environ.Env(DEBUG=(bool, False)
 )
 
-from rest_framework_simplejwt.tokens import RefreshToken
 
 def create_quiz_token(user):
     seed = refresh_seed()
@@ -36,3 +36,15 @@ def set_redis_token(token, user_id):
     )
 
     return token
+
+def verify_redis_token(token):
+    redis_client = redis.from_url(
+        env("REDIS_URL"),
+        decode_responses=True
+    )
+    
+    user_id = redis_client.get(f"email_verify:{token}")
+    if user_id is not None:
+        redis_client.delete(f"email_verify:{token}")
+
+    return user_id

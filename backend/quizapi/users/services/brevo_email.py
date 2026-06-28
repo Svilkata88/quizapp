@@ -57,3 +57,26 @@ class BrevoEmailService:
         except ApiException as e:
             print("Brevo error:", e)
             return False
+        
+
+    def send_password_reset_confirmation_email(self, email, username):
+        html = render_to_string("emails/reset_password_confirmation_email.html", {
+            "username": username,
+        })
+        
+        text = strip_tags(html)
+
+        email_data = sib_api_v3_sdk.SendSmtpEmail(
+            to=[{"email": email}],
+            sender={"email": "noreply@play-quizzy.com", "name": "Quizzy"},
+            subject="Quizzy - password changed successfully!",
+            html_content=html,
+            text_content=text,
+        )
+
+        try:
+            self.client.send_transac_email(email_data)
+            return True
+        except ApiException as e:
+            print("Brevo error:", e)
+            return False
