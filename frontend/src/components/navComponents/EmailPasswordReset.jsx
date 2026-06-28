@@ -14,11 +14,11 @@ function EmailPasswordReset() {
   const navigate = useNavigate();
 
   const handleSendEmail = (formData) => {
-    const username = formData.get("email");
+    const email = formData.get("email");
     const emailRegex =
       /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+$/;
 
-    const isEmailValid = emailRegex.test(username) && username;
+    const isEmailValid = emailRegex.test(email) && email;
     if (!isEmailValid) {
       setErrors({ Error: "Email is not valid!" });
       return;

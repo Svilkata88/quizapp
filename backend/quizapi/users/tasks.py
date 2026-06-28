@@ -21,8 +21,15 @@ logger = logging.getLogger(__name__)
     ignore_result=True,
 )
 def send_welcome_email(self, recipient_email, username):
+    logger.info("send_welcome_email task started for %s", recipient_email)
     service = BrevoEmailService()
-    return service.send_welcome_email(recipient_email, username)
+    try:
+        result = service.send_welcome_email(recipient_email, username)
+        logger.info("send_welcome_email result for %s: %s", recipient_email, result)
+        return result
+    except Exception as e:
+        logger.exception("send_welcome_email failed for %s", recipient_email)
+        raise
 
 @shared_task(
     bind=True,
@@ -37,5 +44,12 @@ def send_welcome_email(self, recipient_email, username):
     ignore_result=True,
 )
 def send_password_reset_email(self, recipient_email, link):
+    logger.info("send_password_reset_email task started for %s", recipient_email)
     service = BrevoEmailService()
-    return service.send_password_reset_email(recipient_email, link)
+    try:
+        result = service.send_password_reset_email(recipient_email, link)
+        logger.info("send_password_reset_email result for %s: %s", recipient_email, result)
+        return result
+    except Exception as e:
+        logger.exception("send_password_reset_email failed for %s", recipient_email)
+        raise

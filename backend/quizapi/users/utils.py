@@ -1,6 +1,10 @@
 import random
 import redis
-from django.conf import settings
+import environ
+
+env = environ.Env(DEBUG=(bool, False)
+)
+
 from rest_framework_simplejwt.tokens import RefreshToken
 
 def create_quiz_token(user):
@@ -21,7 +25,7 @@ def refresh_seed():
 
 def set_redis_token(token, user_id):
     redis_client = redis.from_url(
-    settings.env("REDIS_URL"),
+    env("REDIS_URL"),
     decode_responses=True
 )
     
