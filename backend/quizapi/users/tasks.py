@@ -52,6 +52,6 @@ def send_password_reset_email(self, recipient_email, link):
     acks_late=True,
     ignore_result=True,
 )
-def send_password_reset_confirmation_email(self, recipient_email):
+def send_password_reset_confirmation_email(self, recipient_email, username):
     service = BrevoEmailService()
-    return service.send_password_reset_confirmation_email(recipient_email)
+    return service.send_password_reset_confirmation_email(recipient_email, username)
