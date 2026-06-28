@@ -8,6 +8,7 @@ import QuestionDetail from "./components/mainComponents/QuestonsComponents/Quest
 import Register from "./components/navComponents/Register.jsx";
 import Login from "./components/navComponents/Login.jsx";
 import Logout from "./components/navComponents/Logout.jsx";
+import EmailPasswordReset from "./components/navComponents/EmailPasswordReset.jsx";
 import ProtectAdminRoute from "./layouts/ProtectAdminRoute.jsx";
 import AdminRedirectRoute from "./layouts/AdminRedirectRoute.jsx";
 
@@ -36,6 +37,7 @@ export function App() {
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="logout" element={<Logout />} />
+          <Route path="password-reset" element={<EmailPasswordReset />} />
         </Route>
         <Route element={<AdminRedirectRoute />}>
           <Route path="questions">

@@ -85,14 +85,14 @@ function Profile() {
   return (
     <div className="main-children-wrapper">
       <section
-        className={`${cardBG} flex flex-col md:flex-row items-center gap-10 lg:gap-20 border border-gray-300 rounded-2xl lg:h-[40vh] lg:w-[800px] mx-4 md:mx-auto mt-20 p-6 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]`}
+        className={`${cardBG} flex flex-col md:flex-row items-center gap-5 lg:gap-20 border border-gray-300 !rounded-3xl lg:h-[40vh] lg:w-[800px] mx-4 md:mx-auto mt-20 p-6 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]`}
       >
-        <div className="h-40 w-40 p-1 md:h-68 md:w-68 lg:h-88 lg:w-88 relative border-2 border-gray-300 rounded-full bg-zinc-400">
-          <div className="rounded-full h-full w-full overflow-hidden border-2 border-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div className="h-40 w-40 md:h-68 md:w-68 lg:h-88 lg:w-88 relative box-border border-2 border-gray-400 rounded-full bg-zinc-400">
+          <div className="absolute inset-0 rounded-full overflow-hidden border-2 border-white">
             <img
               src={imageUrl}
               alt="profile-pic"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover rounded-full"
             />
           </div>
 
@@ -107,7 +107,7 @@ function Profile() {
           <button
             type="button"
             onClick={handleClick}
-            className="w-15 h-15 absolute bottom-0 right-0 md:bottom-5 md:right-6 lg:bottom-5 lg:right-10 hover:scale-110 transition-transform duration-300 bg-white p-2 rounded-full border-2 border-gray-300 flex items-center justify-center"
+            className="w-15 h-15 absolute bottom-0 right-0 md:bottom-5 md:right-6 lg:bottom-4 lg:right-9 hover:scale-110 transition-transform duration-300 bg-white p-2 rounded-full border-2 border-gray-300 flex items-center justify-center"
           >
             <img src="/imageUpload.png" alt="imageUpload" />
           </button>
@@ -157,7 +157,7 @@ function Profile() {
             </button>
           </div>
 
-          <div className="flex flex-col gap-2 md:gap-5">
+          <div className="flex flex-col gap-2 md:gap-4">
             <div className="flex gap-2 items-center h-8">
               <img src="/xp.png" alt="xp" className="w-8 h-8 object-contain" />
               <h2>Xp: {user.xp}</h2>

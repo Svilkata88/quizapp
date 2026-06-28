@@ -165,6 +165,14 @@ function apiLoginUser(url, credentials) {
   return data;
 }
 
+function apiResetPassword(url, emailObj) {
+  const data = apiFetch(`${url}`, {
+    method: "POST",
+    body: emailObj,
+  }).then((response) => response);
+  return data;
+}
+
 function apiEditUser(url, newData) {
   const data = apiFetch(`${url}`, {
     method: "PUT",
@@ -241,6 +249,7 @@ export {
   apiFetchAllUsers,
   apiFetchOneUser,
   apiLoginUser,
+  apiResetPassword,
   apiRegisterUser,
   createQuestionIssue,
   apiLogoutUser,

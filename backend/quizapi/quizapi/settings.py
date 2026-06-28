@@ -2,6 +2,7 @@
 from datetime import timedelta
 from pathlib import Path
 import os
+import redis
 import environ
 
 
@@ -151,6 +152,11 @@ STORAGES = {
 }
 
 WHITENOISE_MAX_AGE = 31536000
+
+redis_client = redis.from_url(
+    env("REDIS_URL"),
+    decode_responses=True
+)
 
 CELERY_BROKER_URL = env("REDIS_URL")
 CELERY_RESULT_BACKEND = env("REDIS_URL")

@@ -3,7 +3,8 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from .models import User
-from datetime import timedelta    
+from datetime import timedelta   
+from secrets import token_urlsafe 
 from questions.models import Question
 from .serializers import UserSerializer
 from django.contrib.auth import authenticate
@@ -12,11 +13,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
-from .utils import create_quiz_token
+from .utils import create_quiz_token, set_redis_token
 from django.shortcuts import get_object_or_404
 from quizapi.settings import DEBUG
 from django.views.decorators.cache import cache_page
-from .tasks import send_welcome_email
+from .tasks import send_welcome_email, send_password_reset_email
 
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
@@ -35,6 +36,7 @@ def register_user(request):
             user = serializer.save()
             refresh = create_quiz_token(user)
             userQuestions = Question.objects.filter(author=user).count()
+            send_welcome_email.delay(user.email, user.username)
 
             response = Response({
                 'access': refresh['access'],
@@ -74,7 +76,6 @@ def login_user(request):
         if user is not None:
             refresh = create_quiz_token(user)
             userQuestions = Question.objects.filter(author=user).count()
-            send_welcome_email.delay(user.email, user.username)
 
             response = Response({
                 'access': refresh['access'],
@@ -118,6 +119,30 @@ def logout_user(request):
     )
     
     return response
+
+@api_view(["POST"])
+def reset_password(request):
+    email = request.data.get('email')
+
+    if not email:
+        return Response({"error": "Email is empty!"}, status=400)
+
+    user = User.objects.filter(email=email).first()
+    if not user:
+        return Response({"error": "User with such email not found"}, status=404)
+
+    try:
+        token = token_urlsafe(32)
+        link = f"https://play-quizzy.com/auth/password-reset/{token}"
+
+        set_redis_token(token, user.id)
+        send_password_reset_email.delay(user.email, link)
+        
+        return Response({"message": "Password reset email sent"})
+    except Exception as e:
+        if DEBUG:
+            print("Password reset error:", str(e))
+        return Response({"error": "Failed to reset the password!"}, status=400)
 
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
