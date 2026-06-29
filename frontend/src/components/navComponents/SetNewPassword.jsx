@@ -61,7 +61,7 @@ function SetNewPassword() {
   return loading ? (
     <Spinner />
   ) : (
-    <div className="flex flex-col justify-center items-center p3">
+    <div className="flex flex-col justify-center items-center p-3">
       <h1 className="text-2xl mb-4">Set new password</h1>
       <form
         action={handlePasswordReset}

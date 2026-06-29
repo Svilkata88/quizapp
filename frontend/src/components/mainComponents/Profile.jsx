@@ -6,23 +6,22 @@ import { formatTime } from "../../../utils";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const DEFAULT_COL =
-  "bg-gradient-to-b from-zinc-300 to-zinc-500 rounded-md p-1 border border-gray-400 cursor-pointer";
+  "bg-gradient-to-b from-zinc-500 via-zinc-100 to-zinc-600 rounded-md p-1 border border-gray-400 cursor-pointer";
 const LIGHT_PINC =
-  "bg-gradient-to-r from-pink-800 to-pink-500 rounded-md p-1 border border-gray-400 cursor-pointer";
+  "bg-gradient-to-r from-pink-700 via-pink-500 to-pink-400 rounded-md p-1 border border-gray-400 cursor-pointer";
 const PURPLE =
-  "bg-gradient-to-r from-purple-800 to-purple-500 rounded-md p-1 border border-gray-400 cursor-pointer";
+  "bg-gradient-to-r from-purple-800 to-purple-400 rounded-md p-1 border border-gray-400 cursor-pointer";
 const LIGHT_BLUE =
-  "bg-gradient-to-r from-blue-800 to-blue-500 rounded-md p-1 border border-gray-400 cursor-pointer";
+  "bg-gradient-to-r from-blue-700 to-blue-300 rounded-md p-1 border border-gray-400 cursor-pointer";
 const RED =
-  "bg-gradient-to-r from-red-800 to-red-500 rounded-md p-1 border border-gray-400 cursor-pointer";
+  "bg-gradient-to-r from-red-700 to-red-400 rounded-md p-1 border border-gray-400 cursor-pointer";
 const GRAY =
-  "bg-gradient-to-r from-gray-800 to-gray-500 rounded-md p-1 border border-gray-400 cursor-pointer";
+  "bg-gradient-to-r from-gray-700 to-gray-200 rounded-md p-1 border border-gray-400 cursor-pointer";
 const LIGHT_GRAY =
-  "bg-gradient-to-r from-gray-500 to-gray-300 rounded-md p-1 border border-gray-400 cursor-pointer";
-const GRASS_GREEN =
-  "bg-gradient-to-r from-green-600 to-green-300 rounded-md p-1 border border-gray-400 cursor-pointer";
+  "bg-gradient-to-r from-gray-500 to-gray-100 rounded-md p-1 border border-gray-400 cursor-pointer";
+const GRASS_GREEN = "bg-gradient-to-r from-[#2dd4bf] to-[#1f2937]";
 const ORANGE =
-  "bg-gradient-to-r from-amber-800 to-amber-500 rounded-md p-1 border border-gray-400 cursor-pointer";
+  "bg-gradient-to-r from-amber-700 to-amber-400 rounded-md p-1 border border-gray-400 cursor-pointer";
 
 function Profile() {
   const { user, setUser } = useUserContext();
