@@ -229,7 +229,7 @@ def edit_user_profile(request, id):
 def delete_user_profile(request, id):
     if request.method == 'DELETE':
         user = get_object_or_404(User, id=id)
-        if request.user.id != user.id or not request.user.is_staff: 
+        if request.user.id != user.id and not request.user.is_staff:
             return Response({"error": "Unauthorized"}, status=403)
 
         user.delete()

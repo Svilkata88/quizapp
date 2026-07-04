@@ -11,7 +11,8 @@ function AdminUserDetails() {
   const [loading, setLoading] = useState(false);
   const [redacting, setRedacting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const USER_DETAILS_URL = `${BASE_URL}/api/users/profile/delete/${id}`;
+  const USER_DETAILS_URL = `${BASE_URL}/api/users/profile/${id}`;
+  const USER_DELETE_URL = `${BASE_URL}/api/users/profile/delete/${id}`;
 
   useEffect(() => {
     setLoading(true);
@@ -25,19 +26,20 @@ function AdminUserDetails() {
   }, []);
 
   const handleDeleteUser = () => {
-    apiDeleteUser(USER_DETAILS_URL)
+    apiDeleteUser(USER_DELETE_URL)
       .then((res) => {
         navigate("/admin/users");
       })
       .catch((e) => console.log(e));
   };
-
+  console.log(user);
   return loading ? (
     <Spinner />
   ) : (
     <section
       className={`relative flex flex-col gap-1 bg-gradient-to-b from-zinc-300 to-zinc-400 mt-10 mx-auto p-4 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:w-[1000px] max-h-150`}
     >
+      {/* User Image and Username */}
       <section className="flex gap-2 items-center justify-between px-3">
         <div className="rounded-full w-15 h-15 overflow-hidden">
           <img
@@ -48,7 +50,9 @@ function AdminUserDetails() {
         </div>
         <h2>{user?.username}</h2>
       </section>
+      {/* User Details */}
       <section className="">
+        {/* Icons and user details */}
         <div
           className={`${redacting ? "hidden" : ""} flex flex-col gap-2 px-4 py-2`}
         >
@@ -193,12 +197,21 @@ function AdminUserDetails() {
         <div className="bg-green-300 hover:bg-green-400 cursor-pointer px-3 py-1 rounded-lg">
           Back
         </div>
-        <div className="bg-red-300 hover:bg-red-400 cursor-pointer px-3 py-1 rounded-lg">
+
+        {/* Delete button */}
+        <button
+          className="bg-red-300 hover:bg-red-400 cursor-pointer px-3 py-1 rounded-lg"
+          onClick={handleDeleteUser}
+        >
           Delete
-        </div>
+        </button>
+
+        {/* Close Modal */}
         <button
           className="border border-gray-200 px-1 bg-gray-600 rounded-2xl cursor-pointer hover:scale-110 transition-transform duration-300 absolute right-2 top-1"
-          onClick={() => setIsModalOpen(false)}
+          onClick={() => {
+            setIsModalOpen(false);
+          }}
         >
           <img src="/close.png" alt="edit" className="w-3 h-4" />
         </button>

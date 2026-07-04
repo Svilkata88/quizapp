@@ -18,9 +18,11 @@ function Nav() {
   return (
     <nav className="w-1/3 flex items-start md:items-center justify-center">
       {user && user.staff ? (
-        <NavLink to="/admin" className="nav nav-hover text-center mb-auto">
-          Admin Dashboard
-        </NavLink>
+        <div className="flex flex-col gap-1 md:flex-row justify-center items-center">
+          <NavLink to="/admin" className="nav nav-hover text-center mb-auto">
+            Admin Dashboard
+          </NavLink>
+        </div>
       ) : (
         <div className="flex flex-col gap-1 md:flex-row justify-center items-center">
           <div className="mb-auto w-16 h-16 md:hidden " onClick={toggleMenu}>
