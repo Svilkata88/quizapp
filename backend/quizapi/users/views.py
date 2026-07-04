@@ -223,6 +223,18 @@ def edit_user_profile(request, id):
             return Response(data)
         return Response(serializer.errors, status=400)
 
+@api_view(["DELETE"])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def delete_user_profile(request, id):
+    if request.method == 'DELETE':
+        user = get_object_or_404(User, id=id)
+        if request.user.id != user.id or not request.user.is_staff: 
+            return Response({"error": "Unauthorized"}, status=403)
+
+        user.delete()
+        return Response({"message": "User deleted successfully"})
+
 @api_view(["POST"])
 def custom_refresh_token_view(request):
     refresh_token = request.COOKIES.get("refresh")

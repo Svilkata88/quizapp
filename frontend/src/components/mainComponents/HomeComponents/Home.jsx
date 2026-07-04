@@ -25,8 +25,8 @@ function Home() {
   }, []);
 
   return (
-    <div className="main-children-wrapper w-full gap-10 md:justify-between">
-      <div className="h-[250px] mb-5 md:mb-0 lg:pl-auto">
+    <div className="main-children-wrapper w-full gap-1 md:gap-10 md:justify-between">
+      <div className="h-[250px] md:mb-0 lg:pl-auto">
         <h1 className="text-center text-2xl font-bold text-gray-900 md:text-black">
           Welcome to the Quiz App
         </h1>

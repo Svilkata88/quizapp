@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import register_user, login_user, get_user_profile, logout_user, top_five, edit_user_profile, get_all_users, reset_password, verify_password
+from .views import register_user, login_user, get_user_profile, logout_user, top_five, edit_user_profile, get_all_users, reset_password, verify_password, delete_user_profile
+
 urlpatterns = [
     path('register', register_user, name='register_user'),
     path('login', login_user, name='login_user'),
@@ -8,6 +9,7 @@ urlpatterns = [
     path('verify-password/<str:token>', verify_password, name='verify-password'),
     path('top-five/', top_five, name='top_five_users'),
     path('profile/edit/<int:id>', edit_user_profile, name='edit_user_profile'),
+    path('profile/delete/<int:id>', delete_user_profile, name='delete_user_profile'),
     path('profile/<int:id>', get_user_profile, name='user_profile'),
 
     path('admin/all-users/', get_all_users, name='admin-all-users')

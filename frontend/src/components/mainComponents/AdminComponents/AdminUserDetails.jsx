@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { apiFetchOneUser } from "../../../../utils";
+import { apiFetchOneUser, apiDeleteUser } from "../../../../utils";
 import Spinner from "../../others/Spinner";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -11,7 +11,7 @@ function AdminUserDetails() {
   const [loading, setLoading] = useState(false);
   const [redacting, setRedacting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const USER_DETAILS_URL = `${BASE_URL}/api/users/profile/${id}`;
+  const USER_DETAILS_URL = `${BASE_URL}/api/users/profile/delete/${id}`;
 
   useEffect(() => {
     setLoading(true);
@@ -23,6 +23,14 @@ function AdminUserDetails() {
       .catch((e) => console.log(e))
       .finally(setTimeout(() => setLoading(false), 300));
   }, []);
+
+  const handleDeleteUser = () => {
+    apiDeleteUser(USER_DETAILS_URL)
+      .then((res) => {
+        navigate("/admin/users");
+      })
+      .catch((e) => console.log(e));
+  };
 
   return loading ? (
     <Spinner />

@@ -5,7 +5,7 @@ function Footer() {
     <footer className="flex flex-col gap-3 md:gap-0 md:flex-row justify-between items-center md:h-[50px] font-style: italic tracking-wider font-serif text-sm m-auto bg-gradient-to-t from-zinc-100 to-zinc-150 w-full text-center">
       <section className="w-1/3"></section>
       <section className="w-1/3">Game by: Svilen Ivanov</section>
-      <ul className="flex gap-2 items-center justify-end w-1/3 mx-4">
+      <ul className="flex gap-2 items-center justify-center md:justify-end w-1/3 mx-4">
         <li>
           <a
             href="https://www.facebook.com/svilen.ivanov.794"

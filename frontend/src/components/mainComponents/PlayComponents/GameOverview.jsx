@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { useGameOverviewContext } from "../../../hooks/useGameOverview.jsx";
 import { formatTime } from "../../../../utils.js";
+import Spinner from "../../others/Spinner.jsx";
 
 function GameOverview() {
   const navigate = useNavigate();
@@ -14,6 +16,10 @@ function GameOverview() {
     difficultyOverview,
     setDifficultyOverview,
   } = useGameOverviewContext();
+
+  if (timeOverview === 0 && pointsOverview === 0) {
+    return <Spinner />;
+  }
 
   return (
     <div className="absolute inset-0 h-screen flex items-center justify-center p-4">

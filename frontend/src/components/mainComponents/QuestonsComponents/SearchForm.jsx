@@ -11,7 +11,7 @@ function SearchForm({ type, title, elementRef }) {
   const [author, setAuthor] = useState(undefined);
   const [question, setQuestion] = useState(undefined);
   const { user } = useUserContext();
-  const isAllowedToEddit = user.id === author?.id;
+  // const isAllowedToEddit = type === "edit" ? user.id === author?.id : true;
 
   useEffect(() => {
     setSearchValue("");
@@ -46,7 +46,7 @@ function SearchForm({ type, title, elementRef }) {
 
     fetchOneQuestions(`${BASE_URL}/api/questions`, id)
       .then((response) => {
-        if (response.author.id !== user.id) {
+        if (type === "edit" && response.author.id !== user.id) {
           showText(
             inputRef,
             "You are not allowed to edit this question!",

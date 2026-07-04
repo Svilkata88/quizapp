@@ -58,7 +58,7 @@ function QestionsList({ elementRef, type }) {
       {/* ДА се имплементира search с натискане на enter  */}
       {/* Title and search section */}
       <section className="flex items-center gap-1 justify-between mb-4">
-        <h2 className="text-base md:text-xl font-bold">
+        <h2 className="text-xs md:text-xl font-bold max-w-[30%] md:max-w-none">
           {questions?.length === 0
             ? "Still no added questions!"
             : `${user?.username}'s Questions`}

@@ -68,11 +68,13 @@ function Register() {
     if (!data) return true;
 
     if (type === "email") {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailRegex =
+        /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+$/;
       return emailRegex.test(data.trim());
     }
     if (type === "username") {
-      return data.length >= 3;
+      const usernameRegex = /^[\w.@+-]+$/;
+      return usernameRegex.test(data.trim()) && data.length >= 3;
     }
     if (type === "password") {
       return data.length >= 8;
@@ -123,7 +125,8 @@ function Register() {
               : "hidden"
           }
         >
-          Username must be at least 3 characters long
+          Username must be at least 3 characters long and can only contain
+          letters, numbers, and the characters @/./+/-/_
         </p>
         <input
           type="password"

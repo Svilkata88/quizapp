@@ -181,6 +181,13 @@ function apiEditUser(url, newData) {
   return data;
 }
 
+function apiDeleteUser(url) {
+  const data = apiFetch(`${url}`, {
+    method: "DELETE",
+  }).then((response) => response);
+  return data;
+}
+
 function apiRegisterUser(url, credentials) {
   const data = apiFetch(`${url}`, {
     method: "POST",
@@ -256,5 +263,6 @@ export {
   createRating,
   fetchTopFiveUsers,
   apiEditUser,
+  apiDeleteUser,
   formatTime,
 };
