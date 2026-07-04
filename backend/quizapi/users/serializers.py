@@ -6,10 +6,11 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False) 
     password2 = serializers.CharField(write_only=True, required=False)
     addedQuestions = serializers.IntegerField(read_only=True)
+    staff = serializers.BooleanField(source='is_staff', read_only=True)
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'password2', 'points', 'xp', 'image', 'addedQuestions', 'time_played']
+        fields = ['id', 'username', 'email', 'password', 'password2', 'points', 'xp', 'image', 'addedQuestions', 'time_played', 'staff']
 
     def validate(self, data):
         pw1 = data.get('password')

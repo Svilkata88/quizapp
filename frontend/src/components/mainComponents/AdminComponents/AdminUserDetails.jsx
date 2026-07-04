@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { apiFetchOneUser, apiDeleteUser } from "../../../../utils";
 import Spinner from "../../others/Spinner";
 
@@ -8,11 +8,20 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 function AdminUserDetails() {
   const { id } = useParams();
   const [user, setUser] = useState(null);
+  const [userEmail, setUserEmail] = useState(user?.email ?? "");
+  const [username, setUsername] = useState(user?.username ?? "");
+  const [userXp, setUserXp] = useState(user?.xp ?? "");
+  const [userPoints, setUserPoints] = useState(user?.points ?? "");
+  const [userTimePlayed, setUserTimePlayed] = useState(user?.time_played ?? "");
+  const [userAddedQuestions, setUserAddedQuestions] = useState(
+    user?.addedQuestions ?? "",
+  );
   const [loading, setLoading] = useState(false);
   const [redacting, setRedacting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const USER_DETAILS_URL = `${BASE_URL}/api/users/profile/${id}`;
   const USER_DELETE_URL = `${BASE_URL}/api/users/profile/delete/${id}`;
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -25,14 +34,28 @@ function AdminUserDetails() {
       .finally(setTimeout(() => setLoading(false), 300));
   }, []);
 
+  useEffect(() => {
+    if (!user) return;
+
+    setUserEmail(user.email ?? "");
+    setUsername(user.username ?? "");
+    setUserXp(user.xp ?? "");
+    setUserPoints(user.points ?? "");
+    setUserTimePlayed(user.time_played ?? "");
+    setUserAddedQuestions(user.addedQuestions ?? "");
+  }, [user]);
+
   const handleDeleteUser = () => {
+    setLoading(true);
+
     apiDeleteUser(USER_DELETE_URL)
       .then((res) => {
         navigate("/admin/users");
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.log(e))
+      .finally(setTimeout(() => setLoading(false), 300));
   };
-  console.log(user);
+
   return loading ? (
     <Spinner />
   ) : (
@@ -101,6 +124,8 @@ function AdminUserDetails() {
             </p>
           </div>
         </div>
+
+        {/* Edit user form */}
         <form
           className={`${redacting ? "" : "hidden"} relative flex flex-col gap-2 px-4 py-2`}
         >
@@ -114,7 +139,8 @@ function AdminUserDetails() {
               type="email"
               className="w-full flex items-center justify-between rounded-lg shadow-xs bg-zinc-200 px-2"
               placeholder="Email"
-              value={user?.email}
+              value={userEmail}
+              onChange={(e) => setUserEmail(e.target.value)}
             />
           </div>
           <div className="flex gap-2 items-center">
@@ -123,7 +149,8 @@ function AdminUserDetails() {
               type="text"
               className="w-full flex items-center justify-between rounded-lg shadow-xs bg-zinc-200 px-2"
               placeholder="Xp"
-              value={user?.xp}
+              value={userXp}
+              onChange={(e) => setUserXp(e.target.value)}
             />
           </div>
           <div className="flex gap-2 items-center">
@@ -136,7 +163,8 @@ function AdminUserDetails() {
               type="text"
               className="w-full flex items-center justify-between rounded-lg shadow-xs bg-zinc-200 px-2"
               placeholder="Points"
-              value={user?.points}
+              value={userPoints}
+              onChange={(e) => setUserPoints(e.target.value)}
             />
           </div>
           <div className="flex gap-2 items-center">
@@ -149,7 +177,8 @@ function AdminUserDetails() {
               type="text"
               className="w-full flex items-center justify-between rounded-lg shadow-xs bg-zinc-200 px-2"
               placeholder="Time played"
-              value={user?.time_played}
+              value={userTimePlayed}
+              onChange={(e) => setUserTimePlayed(e.target.value)}
             />
           </div>
           <div className="flex gap-2 items-center">
@@ -162,19 +191,30 @@ function AdminUserDetails() {
               type="text"
               className="w-full flex items-center justify-between rounded-lg shadow-xs bg-zinc-200 px-2"
               placeholder="Added questions"
-              value={user?.addedQuestions}
+              value={userAddedQuestions}
+              onChange={(e) => setUserAddedQuestions(e.target.value)}
             />
           </div>
-          <button
-            className="border border-gray-200 px-1 bg-gray-600 rounded-2xl cursor-pointer hover:scale-110 transition-transform duration-300 absolute right-2 top-2"
-            onClick={() => setIsModalOpen(false)}
-          >
-            <img src="/close.png" alt="edit" className="w-4 h-5" />
-          </button>
+          <section className="flex gap-2 justify-center items-center mt-2">
+            <button
+              className="border border-gray-200 px-3 bg-gray-600 rounded-2xl cursor-pointer hover:scale-110 transition-transform duration-300"
+              onClick={() => setIsModalOpen(false)}
+            >
+              <img src="/close.png" alt="edit" className="w-10 h-8" />
+            </button>
+            <button
+              className="border border-gray-200 px-3 bg-gray-600 rounded-2xl cursor-pointer hover:scale-110 transition-transform duration-300"
+              onClick={() => setIsModalOpen(false)}
+            >
+              <img src="/ok.png" alt="ok" className="w-10 h-8" />
+            </button>
+          </section>
         </form>
       </section>
       {/* User Cards buttons */}
-      <section className="flex gap-2 items-center justify-center">
+      <section
+        className={`flex gap-2 justify-center items-center mt-2 ${redacting ? "hidden" : ""}`}
+      >
         <button
           className="border border-gray-200 px-3 bg-gray-600 rounded-2xl cursor-pointer hover:scale-110 transition-transform duration-300"
           onClick={() => setIsModalOpen(true)}
@@ -192,11 +232,15 @@ function AdminUserDetails() {
       </section>
       {/* Modal */}
       <div
-        className={`flex gap-3 justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  bg-zinc-500/95 w-50 h-25 rounded-xl p-2 border border-gray-200 shadow-[var(--blue-shadow)]+${!isModalOpen ? " hidden" : ""}`}
+        className={`flex gap-3 justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  bg-zinc-500/85 w-50 h-28 rounded-xl p-2 border border-gray-200 shadow-[var(--blue-shadow)]+${!isModalOpen ? " hidden" : ""}`}
       >
-        <div className="bg-green-300 hover:bg-green-400 cursor-pointer px-3 py-1 rounded-lg">
+        {/* Back button */}
+        <button
+          className="bg-green-300 hover:bg-green-400 cursor-pointer px-3 py-1 rounded-lg"
+          onClick={() => setIsModalOpen(false)}
+        >
           Back
-        </div>
+        </button>
 
         {/* Delete button */}
         <button
@@ -208,12 +252,12 @@ function AdminUserDetails() {
 
         {/* Close Modal */}
         <button
-          className="border border-gray-200 px-1 bg-gray-600 rounded-2xl cursor-pointer hover:scale-110 transition-transform duration-300 absolute right-2 top-1"
+          className="border border-gray-200 px-2 bg-gray-600 rounded-2xl cursor-pointer hover:scale-110 transition-transform duration-300 absolute right-2 top-2"
           onClick={() => {
             setIsModalOpen(false);
           }}
         >
-          <img src="/close.png" alt="edit" className="w-3 h-4" />
+          <img src="/close.png" alt="edit" className="w-5 h-5" />
         </button>
       </div>
     </section>
@@ -221,5 +265,3 @@ function AdminUserDetails() {
 }
 
 export default AdminUserDetails;
-
-// api/users/profile/:id

@@ -7,14 +7,14 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function AdminUsers() {
   const [loading, setLoading] = useState(false);
-  const [users, serUsers] = useState();
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     setLoading(true);
 
     apiFetchAllUsers(`${BASE_URL}/api/users/admin/all-users/`)
       .then((res) => {
-        serUsers(res);
+        setUsers(res);
       })
       .catch((err) => {
         console.error("Error fetching all users:", err);
@@ -39,16 +39,26 @@ function AdminUsers() {
           >
             <Link
               to={`/admin/users/${user?.id}`}
-              className="flex gap-2 w-full min-w-0 transition-all hover:text-sky-700 hover:font-semibold"
+              className="grid grid-cols-3 items-center w-full min-w-0 gap-3 transition-all hover:text-sky-700 hover:font-semibold"
             >
-              <div className="rounded-full w-6 h-6 overflow-hidden">
-                <img
-                  src={user.image}
-                  alt="user image"
-                  className="w-full h-full object-cover"
-                />
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="rounded-full w-6 h-6 overflow-hidden flex-shrink-0">
+                  <img
+                    src={user.image}
+                    alt="user image"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <span className="truncate">{user?.username}</span>
               </div>
-              <span className="truncate min-w-0">{user?.username}</span>
+
+              <p className="text-sm text-gray-500 text-right">
+                {user?.staff ? "staff" : "user"}
+              </p>
+              <div className="flex gap-1 text-sm text-gray-500 text-right ml-auto">
+                <span>Xp: </span> <p>{user?.xp}</p>
+              </div>
             </Link>
           </li>
         ))}
