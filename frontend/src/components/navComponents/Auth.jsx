@@ -11,7 +11,7 @@ function Auth() {
   return (
     <div className="flex gap-2 justify-end mr-4 md:items-center text-lg w-1/3 md:ml-auto h-26">
       {isAuthenticated ? (
-        <div className="flex flex-col md:flex-row gap-1 md:border border-gray-300 md:rounded-full items-center md:bg-stone-900/10">
+        <div className="flex flex-col md:flex-row gap-1 md:border border-gray-300 md:rounded-full items-end md:items-center md:bg-stone-900/10">
           <div
             className="rounded-full w-16 h-16 md:h-10 md:w-10 md:p-1 overflow-hidden flex items-center justify-center border border-gray-300 md:border-none cursor-pointer"
             onClick={() => setIsMenuOpen(!isMenuOpen)}

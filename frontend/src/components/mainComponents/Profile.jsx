@@ -84,7 +84,7 @@ function Profile() {
   return (
     <div className="main-children-wrapper">
       <section
-        className={`${cardBG} flex flex-col md:flex-row items-center gap-5 lg:gap-20 border border-gray-300 !rounded-3xl lg:h-[40vh] lg:w-[800px] mx-4 md:mx-auto mt-20 p-6 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]`}
+        className={`${cardBG} flex flex-col md:flex-row items-center gap-5 lg:gap-20 border border-gray-300 !rounded-3xl xl:h-[400px] lg:w-[800px] mx-4 md:mx-auto p-6 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]`}
       >
         <div className="h-40 w-40 md:h-68 md:w-68 lg:h-88 lg:w-88 relative box-border border-2 border-gray-400 rounded-full bg-zinc-400">
           <div className="absolute inset-0 rounded-full overflow-hidden border-2 border-white">

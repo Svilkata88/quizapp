@@ -37,7 +37,7 @@ function AdminIssues() {
             key={issue?.id}
             className="w-full flex gap-3 items-start justify-between px-3 py-1 rounded-md shadow-sm"
           >
-            <p className="flex items-center justify-center w-6 h-6 bg-gray-600 rounded-full p-2 text-zinc-300 text-xs font-semibold">
+            <p className="flex items-center justify-center w-6 h-6 bg-gray-600 rounded-full p-2 mt-1 text-zinc-300 text-xs font-semibold">
               {index + 1}
             </p>
             <div className="flex flex-col gap-1 w-full">
