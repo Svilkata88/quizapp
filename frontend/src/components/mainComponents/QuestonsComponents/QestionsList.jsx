@@ -31,7 +31,7 @@ function QestionsList({ elementRef, type }) {
       });
   }, []);
 
-  const hanndleSearch = () => {
+  const handleSearch = () => {
     const value = inputRef.current.value;
     if (allQuestions.length === 0) return;
 
@@ -80,7 +80,7 @@ function QestionsList({ elementRef, type }) {
           </div>
           <div
             className="w-8 h-8 hover:scale-110 transition-transform cursor-pointer"
-            onClick={hanndleSearch}
+            onClick={handleSearch}
           >
             <img src="search.png" alt="search" />
           </div>

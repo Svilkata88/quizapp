@@ -216,6 +216,10 @@ function hideText(divRef) {
   divRef.current.lastChild.remove();
 }
 
+function apiFetchAllIssues(url) {
+  return apiFetch(url).then((response) => response);
+}
+
 function createQuestionIssue(url, questionId, issue) {
   return apiFetch(url, {
     method: "POST",
@@ -259,6 +263,7 @@ export {
   apiResetPassword,
   apiRegisterUser,
   createQuestionIssue,
+  apiFetchAllIssues,
   apiLogoutUser,
   createRating,
   fetchTopFiveUsers,

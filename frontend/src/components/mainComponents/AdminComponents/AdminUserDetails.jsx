@@ -217,6 +217,16 @@ function AdminUserDetails() {
       >
         <button
           className="border border-gray-200 px-3 bg-gray-600 rounded-2xl cursor-pointer hover:scale-110 transition-transform duration-300"
+          onClick={() => navigate("/admin/users")}
+        >
+          <img
+            src="/arrowLeftGreen.png"
+            alt="arrow left"
+            className="w-10 h-8"
+          />
+        </button>
+        <button
+          className="border border-gray-200 px-3 bg-gray-600 rounded-2xl cursor-pointer hover:scale-110 transition-transform duration-300"
           onClick={() => setIsModalOpen(true)}
         >
           <img src="/close.png" alt="edit" className="w-10 h-8" />
@@ -232,25 +242,32 @@ function AdminUserDetails() {
       </section>
       {/* Modal */}
       <div
-        className={`flex gap-3 justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  bg-zinc-500/85 w-50 h-28 rounded-xl p-2 border border-gray-200 shadow-[var(--blue-shadow)]+${!isModalOpen ? " hidden" : ""}`}
+        className={`flex flex-col gap-3 justify-end items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  bg-zinc-500/85 w-50 h-35 rounded-xl p-2 border border-gray-200 shadow-[var(--blue-shadow)]+${!isModalOpen ? " hidden" : ""}`}
       >
-        {/* Back button */}
-        <button
-          className="bg-green-300 hover:bg-green-400 cursor-pointer px-3 py-1 rounded-lg"
-          onClick={() => setIsModalOpen(false)}
-        >
-          Back
-        </button>
+        {/* Buttons section */}
+        <div className="flex gap-2 justify-center items-center">
+          {/* Back button */}
+          <button
+            className="bg-green-300 hover:bg-green-400 cursor-pointer px-3 py-1 rounded-lg"
+            onClick={() => setIsModalOpen(false)}
+          >
+            Back
+          </button>
 
-        {/* Delete button */}
-        <button
-          className="bg-red-300 hover:bg-red-400 cursor-pointer px-3 py-1 rounded-lg"
-          onClick={handleDeleteUser}
-        >
-          Delete
-        </button>
+          {/* Delete button */}
+          <button
+            className="bg-red-300 hover:bg-red-400 cursor-pointer px-3 py-1 rounded-lg"
+            onClick={handleDeleteUser}
+          >
+            Delete
+          </button>
+        </div>
 
-        {/* Close Modal */}
+        <h3 className="text-sm text-center font-bold text-zinc-100">
+          {`You sure you want to delete user ${user?.username}?`}
+        </h3>
+
+        {/* Close Modal Btn */}
         <button
           className="border border-gray-200 px-2 bg-gray-600 rounded-2xl cursor-pointer hover:scale-110 transition-transform duration-300 absolute right-2 top-2"
           onClick={() => {

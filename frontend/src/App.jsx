@@ -23,6 +23,7 @@ import CreateQuestionsForm from "./components/formsComponents/CreateQuestionsFor
 import ChoseDifficulty from "./components/mainComponents/PlayComponents/ChoseDifficulty.jsx";
 import GameOverview from "./components/mainComponents/PlayComponents/GameOverview.jsx";
 import AdminDashboard from "./components/navComponents/AdminDashboard.jsx";
+import AdminIssues from "./components/mainComponents/AdminComponents/AdminIssues.jsx";
 
 export function App() {
   return (
@@ -58,8 +59,10 @@ export function App() {
               <Route index element={<AdminQuestions />} />
               <Route path=":id" element={<AdminQuestionDetails />} />
             </Route>
-            <Route path="issues" />
-            <Route path=":id" element={<AdminUserDetails />} />
+            <Route path="issues">
+              <Route index element={<AdminIssues />} />
+            </Route>
+            {/* <Route path=":id" element={<AdminUserDetails />} /> */}
           </Route>
           <Route />
         </Route>

@@ -6,7 +6,7 @@ function AdminDashboard() {
   return (
     <div className="p-4">
       {/* Dashboard buttons  */}
-      <section className="flex flex-1 gap-3 justify-center mt-5 md:mt-2 p-2 mx-auto bg-gradient-to-b from-zinc-100 to-zinc-400 lg:w-[800px] bg-white rounded-lg shadow-[0px_7px_13px_4px_rgba(40,55,61,1)]">
+      <section className="flex flex-1 gap-3 justify-center md:mt-5 md:mt-2 p-2 mx-auto bg-gradient-to-b from-zinc-100 to-zinc-400 lg:w-[800px] bg-white rounded-lg shadow-[0px_7px_13px_4px_rgba(40,55,61,1)]">
         {/* Users Button */}
         <button
           className="hover:scale-110 transition-transform cursor-pointer"

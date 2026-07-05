@@ -41,7 +41,7 @@ function AdminUsers() {
               to={`/admin/users/${user?.id}`}
               className="grid grid-cols-3 items-center w-full min-w-0 gap-3 transition-all hover:text-sky-700 hover:font-semibold"
             >
-              <div className="flex items-center gap-2 min-w-0">
+              <div className="flex items-center gap-2">
                 <div className="rounded-full w-6 h-6 overflow-hidden flex-shrink-0">
                   <img
                     src={user.image}
@@ -50,14 +50,19 @@ function AdminUsers() {
                   />
                 </div>
 
-                <span className="truncate">{user?.username}</span>
+                <span className="truncate min-w-25">{user?.username}</span>
               </div>
 
-              <p className="text-sm text-gray-500 text-right">
+              <p
+                className={`text-sm text-right ${user?.staff ? "text-lime-300" : "text-gray-600"} text-semibold`}
+              >
                 {user?.staff ? "staff" : "user"}
               </p>
               <div className="flex gap-1 text-sm text-gray-500 text-right ml-auto">
-                <span>Xp: </span> <p>{user?.xp}</p>
+                <div>
+                  <img src="/xp.png" alt="xp" className="w-5 h-5" />
+                </div>
+                <p>{user?.xp}</p>
               </div>
             </Link>
           </li>

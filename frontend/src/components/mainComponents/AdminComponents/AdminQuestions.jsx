@@ -14,7 +14,7 @@ function AdminQuestions() {
   const questions =
     filteredQuestions.length > 0 ? filteredQuestions : allQuestions;
 
-  const hanndleSearch = () => {
+  const handleSearch = () => {
     const value = inputRef.current.value;
     if (allQuestions.length === 0) return;
 
@@ -43,41 +43,76 @@ function AdminQuestions() {
     <Spinner />
   ) : (
     <section
-      className={`relative ${questions ? "" : " hidden"} flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 mx-auto p-4 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:w-[1000px] max-h-150`}
+      className={`relative ${questions ? "" : " hidden"} flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-5 md:mt-10 mx-auto p-4 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:w-[1000px] max-h-150`}
     >
-      <div className="flex gap-2 justify-between px-2">
-        <h2>All questions</h2>
-        <div className="flex items-center gap-1 md:gap-2">
-          <div className="flex relative bg-zinc-100 text-zinc-700 border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-black-500 rounded-xl px-2 md:px-3 py-1 w-44 lg:w-64 transition-colors duration-200 focus:ring-offset-0 focus:ring-offset-transparent">
-            <input
-              type="text"
-              ref={inputRef}
-              placeholder="Search questions..."
-              className="placeholder:text-zinc-500 text-sm md:text-base focus:outline-none w-32 lg:w-52 bg-transparent"
-            />
+      <div className="flex flex-col gap-2 justify-between items-start px-2 w-full">
+        <div className="flex justify-between items-center gap-3 w-full">
+          <h2 className="text-base flex-1">All questions</h2>
+          <div className="flex items-center gap-1 md:gap-2">
+            <div className="flex relative bg-zinc-100 text-zinc-700 border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-black-500 rounded-xl px-2 md:px-3 py-1 w-44 lg:w-64 transition-colors duration-200 focus:ring-offset-0 focus:ring-offset-transparent">
+              <input
+                type="text"
+                ref={inputRef}
+                placeholder="Search questions..."
+                className="placeholder:text-zinc-500 text-sm md:text-base focus:outline-none w-32 lg:w-52 bg-transparent"
+              />
+              <div
+                className="w-6 h-6 hover:scale-110 transition-transform cursor-pointer absolute right-1 top-1/2 transform -translate-y-1/2"
+                onClick={() => {
+                  setFilteredQuestions([]);
+                  inputRef.current.value = "";
+                }}
+              >
+                <img src="/close.png" alt="close" />
+              </div>
+            </div>
             <div
-              className="w-6 h-6 hover:scale-110 transition-transform cursor-pointer absolute right-1 top-1/2 transform -translate-y-1/2"
-              onClick={() => {
-                setFilteredQuestions([]);
-                inputRef.current.value = "";
-              }}
+              className="w-8 h-8 hover:scale-110 transition-transform cursor-pointer"
+              onClick={() => handleSearch()}
             >
-              <img src="/close.png" alt="close" />
+              <img src="/search.png" alt="search" />
             </div>
           </div>
-          <div
-            className="w-8 h-8 hover:scale-110 transition-transform cursor-pointer"
-            onClick={() => hanndleSearch()}
-          >
-            <img src="/search.png" alt="search" />
-          </div>
         </div>
+        <section className="flex gap-1 items-center text-sm text-gray-500">
+          <h5 className="font-medium text-gray-500">Status:</h5>
+          <button
+            className={`px-2 h-4 text-xs text-black text-center rounded-full flex-shrink-0 bg-zinc-100 border border-gray-500 cursor-pointer hover:scale-110 transition-transform`}
+            onClick={() => setFilteredQuestions([])}
+          >
+            All
+          </button>
+          <button
+            className={`p-1 h-4 w-4 rounded-full flex-shrink-0 bg-green-500 border border-gray-500 cursor-pointer hover:scale-110 transition-transform`}
+            onClick={() =>
+              setFilteredQuestions(
+                allQuestions.filter((q) => q.status === "confirmed"),
+              )
+            }
+          ></button>
+          <button
+            className={`p-1 h-4 w-4 rounded-full flex-shrink-0 bg-amber-500 border border-gray-500 cursor-pointer hover:scale-110 transition-transform`}
+            onClick={() =>
+              setFilteredQuestions(
+                allQuestions.filter((q) => q.status === "pending"),
+              )
+            }
+          ></button>
+          <button
+            className={`p-1 h-4 w-4 rounded-full flex-shrink-0 bg-red-500 border border-gray-500 cursor-pointer hover:scale-110 transition-transform`}
+            onClick={() =>
+              setFilteredQuestions(
+                allQuestions.filter((q) => q.status === "rejected"),
+              )
+            }
+          ></button>
+        </section>
       </div>
       <ul className="max-h-[60vh] overflow-y-auto space-y-1 pb-10">
         {questions?.map((question) => (
           <li
             key={question.id}
-            className="w-full flex gap-2 items-center justify-between px-3 py-2 rounded-md shadow-sm"
+            className="flex flex-1 gap-2 items-center justify-between px-3 py-2 rounded-md shadow-sm"
           >
             <div
               className={`p-1 rounded-full flex-shrink-0 ${
@@ -96,11 +131,12 @@ function AdminQuestions() {
                 {question.text}
               </span>
             </Link>
-            {/* Question's Rating */}
-            <div className="flex gap-2 min-w-25 justify-between text-xs">
-              <span className="text-gray-500">author: </span>
+            {/* Question's Author */}
+            <div className="flex gap-2 min-w-15 md:min-w-25 justify-start text-xs truncate mr-2">
+              <span className="text-gray-500 hidden md:block">author: </span>
               {question?.author.username}
             </div>
+            {/* Question's Rating */}
             <div className="relative flex flex-shrink-0 w-6 h-6 lg:w-8 md:h-8">
               <img
                 src="/fullStarRating.png"

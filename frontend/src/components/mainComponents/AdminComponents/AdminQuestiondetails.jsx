@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { fetchOneQuestions } from "../../../../utils";
 import { apiEditQuestion } from "../../../../utils";
 import FormButton from "../../buttons/FormButton";
@@ -8,6 +8,7 @@ import Spinner from "../../others/Spinner";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function AdminQuestionDetails() {
+  const [loading, setLoading] = useState(false);
   const [question, setQuestion] = useState(null);
   const [qText, setQtext] = useState(null);
   const [answers, setAnswers] = useState([]);
@@ -16,6 +17,7 @@ function AdminQuestionDetails() {
   const [author, setAuthor] = useState(null);
   const [status, setStatus] = useState("");
   const { id } = useParams();
+  const navigate = useNavigate();
   const QUESTION_URL = `/api/questions/admin/all-questions`;
 
   useEffect(() => {
@@ -61,38 +63,18 @@ function AdminQuestionDetails() {
     );
 
   const handleSubmit = (formData) => {
-    // console.log(Array.from(formData.entries()));
-    // console.log(question);
+    setLoading(true);
 
     apiEditQuestion(`${BASE_URL}/api/questions/edit/${id}/`, formData)
       .then((res) => {
         console.log(`Question: "${question.text}" updated successfully!`);
-
-        // showText(
-        //   questionEditContainer,
-        //   `Question: "${question.text}" updated successfully!`,
-        //   "text-green-500 font-bold bg-gray-300 p-2 rounded-md border border-green-500",
-        // );
-        // setTimeout(() => {
-        //   hideText(questionEditContainer);
-
-        //   setQtext("");
-        //   setCorrectAnswer("");
-        //   setOptionOne("");
-        //   setOptionTwo("");
-        //   setOptionThree("");
-        //   setInfoText("");
-        // }, 3500);
+        navigate("/admin/questions");
       })
       .catch((err) => {
-        // const formattedErrors = {};
-
-        // Object.entries(err).forEach(([key, value]) => {
-        //   formattedErrors[key] = Array.isArray(value) ? value[0] : value;
-        // });
-
-        // setErrors(formattedErrors);
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
