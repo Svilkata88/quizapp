@@ -160,6 +160,22 @@ def create_question_issue(request):
 
     return JsonResponse({"id": issue.id}, status=201)
 
+@api_view(["GET"])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def get_all_issues(request):
+    issues = QuestionIssues.objects.select_related("question").all()
+    serialized_issues = [
+        {
+            "id": issue.id,
+            "question_id": issue.question.id,
+            "question_text": issue.question.text,
+            "description": issue.description,
+            "decision": issue.decision,
+        }
+        for issue in issues
+    ]
+    return JsonResponse(serialized_issues, safe=False, status=200)
 
 @api_view(["POST"])
 @authentication_classes([JWTAuthentication])

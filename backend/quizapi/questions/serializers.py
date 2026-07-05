@@ -31,4 +31,4 @@ class QuestionIssueSerializer(serializers.ModelField):
 
     class Meta:
         model = QuestionIssues
-        fields = ['id', 'Status', 'description', 'decision']
+        fields = ['id', 'Status', 'description', 'decision', 'question']

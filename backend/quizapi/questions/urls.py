@@ -1,5 +1,18 @@
 from django.urls import path
-from .views import get_own_questions_list, question_list, reset_game, get_question, create_question, create_question_issue, create_rating, update_questions, edit_question, all_questions
+
+from .views import (
+    all_questions,
+    create_question,
+    create_question_issue,
+    create_rating,
+    edit_question,
+    get_all_issues,
+    get_own_questions_list,
+    get_question,
+    question_list,
+    reset_game,
+    update_questions,
+)
 
 
 urlpatterns = [
@@ -14,5 +27,6 @@ urlpatterns = [
     path('<int:id>/', get_question, name='get_question'),
 
     path('admin/all-questions/', all_questions, name="all_questions"),
-    path('admin/all-questions/<int:id>/', get_question, name="admin_get_question")
+    path('admin/all-questions/<int:id>/', get_question, name="admin_get_question"),
+    path('admin/all-issues/', get_all_issues, name='all_issues'),
 ]
