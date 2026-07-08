@@ -26,9 +26,10 @@ function Home() {
 
   return (
     <div className="main-children-wrapper w-full gap-1 md:gap-10 md:justify-between">
-      <div className="h-[250px] md:mb-0 lg:pl-auto">
+      {/* Welcome to Quizzy! */}
+      <div className="h-[200px] md:h-[250px] md:mb-0 lg:pl-auto">
         <h1 className="text-center text-2xl font-bold text-gray-900 md:text-black">
-          Welcome to the Quiz App
+          Welcome to the Quizzy!
         </h1>
         <div
           ref={divRef}
@@ -51,11 +52,12 @@ function Home() {
         </div>
       </div>
 
+      {/* Top 5 players */}
       <div className="mb-10 md:mb-0 md:mx-0">
         <h3 className="text-2xl font-bold text-center text-sky-700 md:text-black mb-5">
           Top 5 players
         </h3>
-        <ul className="flex flex-col items-center mt-4 gap-2 relative">
+        <ul className="flex flex-col items-center mt-4 gap-2 relative scrollable">
           {topFive.length === 0
             ? Array.from({ length: 5 }).map((_, i) => (
                 <UserSkeletonCard key={i} />

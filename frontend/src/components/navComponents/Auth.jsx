@@ -26,14 +26,14 @@ function Auth() {
             {user ? user.username : "Anonymus User"}
           </span>
           <NavLink
-            className={`nav nav-hover text-xs md:mr-3 md:text-base font-bold md:font-normal hover:rounded-2xl ${isMenuOpen ? "block" : "hidden"} md:block`}
+            className={`nav-mobile nav nav-hover md:mr-3 font-bold md:font-normal ${isMenuOpen ? "block" : "hidden"} md:block`}
             to="/auth/logout"
           >
             Logout
           </NavLink>
         </div>
       ) : (
-        <div className="fhidden md:block lex gap-2 items-center">
+        <div className="hidden md:flex gap-2 items-center">
           <NavLink className="nav nav-hover" to="/auth/login">
             Login
           </NavLink>

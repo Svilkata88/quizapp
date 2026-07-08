@@ -36,11 +36,15 @@
     @apply overflow-y-auto;
   }
 
+  .nav-mobile {
+    @apply bg-[#70BFFF] text-gray-800 rounded-xl px-2 border-2 border-gray-500 text-lg md:bg-transparent md:text-black md:rounded-none md:px-0;
+  }
+
   .nav {
-    @apply py-0.5 px-2 rounded-lg border border-transparent text-lg;
+    @apply md:py-0.5 md:px-2 md:rounded-xl md:border md:border-transparent md:text-lg md:text-black;
   }
   .nav-hover {
-    @apply hover:bg-gradient-to-r hover:from-sky-100 hover:to-sky-200 transform transition-transform duration-300 ease-out  hover:border-black hover:rounded-2xl;
+    @apply md:transform md:transition-transform md:duration-300 md:ease-out md:hover:bg-gradient-to-r md:hover:from-sky-100 md:hover:to-sky-200 md:hover:border-black md:hover:rounded-2xl;
   }
 
   .main-children-wrapper {

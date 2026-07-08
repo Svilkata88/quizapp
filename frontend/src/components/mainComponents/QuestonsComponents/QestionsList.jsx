@@ -52,12 +52,12 @@ function QestionsList({ elementRef, type }) {
     <Spinner />
   ) : (
     <div
-      className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-4 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:max-w-[1000px] max-h-130 md:max-h-120 lg:max-h-160"
+      className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-4 pt-0 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:max-w-[1000px] max-h-[45vh] md:max-h-80 lg:max-h-80"
       ref={elementRef}
     >
       {/* ДА се имплементира search с натискане на enter  */}
       {/* Title and search section */}
-      <section className="flex items-center gap-1 justify-between mb-4">
+      <section className="flex items-center gap-1 justify-between md:mb-4 p-2 rounded-md sticky top-0 z-10 bg-gradient-to-b from-zinc-100 to-zinc-200 pt-2">
         <h2 className="text-xs md:text-xl font-bold max-w-[30%] md:max-w-none">
           {questions?.length === 0
             ? "Still no added questions!"
@@ -99,7 +99,9 @@ function QestionsList({ elementRef, type }) {
                 to={`/questions/${question.id}`}
                 className="flex w-full min-w-0 transition-all hover:text-sky-700 hover:font-semibold"
               >
-                <span className="truncate min-w-0">{question.text}</span>
+                <span className="truncate min-w-0 text-sm md:text-base">
+                  {question.text}
+                </span>
               </Link>
               <div className="w-8 h-8 relative">
                 <img src="fullStarRating.png" alt="full star rating" />

@@ -7,7 +7,7 @@ function Main() {
   const { bg } = useBGContext();
   return (
     <div
-      className="flex flex-col min-h-screen max-h-screen bg-cover bg-no-repeat bg-center font-roboto bg-fixed"
+      className="flex flex-col bg-cover bg-no-repeat bg-center font-roboto bg-fixed h-screen overflow-y-auto"
       style={{ backgroundImage: bg }}
     >
       <Navigation />

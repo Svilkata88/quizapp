@@ -24,7 +24,7 @@ function QuestionDetail() {
   return !author || !question ? (
     <Spinner />
   ) : (
-    <div className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-3 md:p-5 rounded-lg shadow-[var(--blue-shadow)] lg:w-[800px] mx-4 lg:mx-auto min-h-150">
+    <div className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 p-3 md:p-5 rounded-lg shadow-[var(--blue-shadow)] mx-4 lg:w-[800px] max-h-[70vh] md:max-h-[60vh] lg:max-h-[70vh] lg:mx-auto min-h-120 scrollable">
       <div className="flex gap-2 items-center justify-center border-b border-gray-300 pb-5">
         <div className="w-14 float-left">
           <img src="/question.png" alt="question" className="w-full min-w-8" />
@@ -34,7 +34,7 @@ function QuestionDetail() {
         </h1>
       </div>
       <p className="text-center text-gray-600">Author: {author?.username}</p>
-      <section className="flex gap-10 items-center justify-center pb-5 mt-10">
+      <section className="flex gap-10 items-center justify-center pb-5 mt-5">
         <div className="w-10 h-10 lg:w-16 lg:h-16 flex flex-col items-center justify-center">
           <p className="text-center text-xs text-gray-600">id</p>
           <img src="/id.png" alt="id" />

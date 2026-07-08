@@ -18,8 +18,11 @@ function Nav() {
   return (
     <nav className="w-1/3 flex items-start md:items-center justify-center">
       {user && user.staff ? (
-        <div className="flex flex-col gap-1 md:flex-row justify-center items-center">
-          <NavLink to="/admin" className="nav nav-hover text-center mb-auto">
+        <div className="flex flex-col gap-1 md:flex-row justify-center items-center bg-white md:bg-transparent p-[3px] md:p-0 rounded-2xl md:rounded-none">
+          <NavLink
+            to="/admin"
+            className="nav-mobile nav nav-hover text-center mb-auto"
+          >
             Admin Dashboard
           </NavLink>
         </div>
@@ -31,24 +34,32 @@ function Nav() {
           <div
             className={`${
               isOpen ? "flex" : "hidden"
-            } md:flex md:flex-row items-center justify-between gap-3 text-xl mt-5 md:mt-0`}
+            } md:flex md:flex-row items-center justify-between gap-2 md:gap-3 text-xl mt-5 md:mt-0`}
           >
-            <NavLink to="/" className="nav nav-hover">
-              Home
-            </NavLink>
+            <div className="bg-white md:bg-transparent p-[3px] md:p-0 rounded-2xl md:rounded-none">
+              <NavLink to="/" className="nav-mobile nav nav-hover">
+                Home
+              </NavLink>
+            </div>
 
-            <NavLink to="/info" className="nav nav-hover">
-              Info
-            </NavLink>
+            <div className="bg-white md:bg-transparent p-[3px] md:p-0 rounded-2xl md:rounded-none">
+              <NavLink to="/info" className="nav-mobile nav nav-hover">
+                Info
+              </NavLink>
+            </div>
 
-            <NavLink to="/profile" className="nav nav-hover">
-              Profile
-            </NavLink>
+            <div className="bg-white md:bg-transparent p-[3px] md:p-0 rounded-2xl md:rounded-none">
+              <NavLink to="/profile" className="nav-mobile nav nav-hover">
+                Profile
+              </NavLink>
+            </div>
 
             {user && (
-              <NavLink to="/questions" className="nav nav-hover">
-                Questions
-              </NavLink>
+              <div className="bg-white md:bg-transparent p-[3px] md:p-0 rounded-2xl md:rounded-none">
+                <NavLink to="/questions" className="nav-mobile nav nav-hover">
+                  Questions
+                </NavLink>
+              </div>
             )}
           </div>
         </div>
