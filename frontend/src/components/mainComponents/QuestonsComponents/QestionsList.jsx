@@ -52,7 +52,7 @@ function QestionsList({ elementRef, type }) {
     <Spinner />
   ) : (
     <div
-      className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-4 pt-0 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:max-w-[1000px] max-h-[45vh] md:max-h-80 lg:max-h-80"
+      className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-10 p-4 pt-0 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:max-w-[1000px] max-h-[50vh] md:max-h-120 2xl:max-h-140"
       ref={elementRef}
     >
       {/* ДА се имплементира search с натискане на enter  */}

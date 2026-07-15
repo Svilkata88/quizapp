@@ -24,7 +24,7 @@ function QuestionDetail() {
   return !author || !question ? (
     <Spinner />
   ) : (
-    <div className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 p-3 md:p-5 rounded-lg shadow-[var(--blue-shadow)] mx-4 lg:w-[800px] max-h-[70vh] md:max-h-[60vh] lg:max-h-[70vh] lg:mx-auto min-h-120 scrollable">
+    <div className="flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 p-3 md:p-5 mt-3 rounded-lg shadow-[var(--blue-shadow)] mx-4 lg:w-[800px] max-h-[70vh] md:max-h-[60vh] lg:max-h-[70vh] lg:mx-auto min-h-120 scrollable">
       <div className="flex gap-2 items-center justify-center border-b border-gray-300 pb-5">
         <div className="w-14 float-left">
           <img src="/question.png" alt="question" className="w-full min-w-8" />
@@ -63,7 +63,7 @@ function QuestionDetail() {
           {question?.info ? question.info : "No additional info."}
         </p>
       </div>
-      <div className="flex flex-col items-center mx-20">
+      <div className="flex flex-col items-center mx-10">
         <h2 className="mb-2">Answers:</h2>
         <ul>
           {question?.answers?.map((answer, index) => (
