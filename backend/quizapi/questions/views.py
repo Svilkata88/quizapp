@@ -1,7 +1,7 @@
 import random
 from urllib import request
 from django.http import JsonResponse 
-from .models import Question, Answer, QuestionIssues, Rating
+from .models import Question, Answer, QuestionIssues, Rating, Category
 from users.models import User
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from .serializers import QuestionSerializer
@@ -164,9 +164,8 @@ def create_question_issue(request):
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def category_list(request):
-    categories = Question.objects.values_list('category__name', flat=True).distinct()
-    print("Fetched categories:", list(categories))  # Debugging line
-    return JsonResponse(list(categories), safe=False, status=200)
+    categories = Category.objects.all()
+    return JsonResponse(list(categories.values('name')), safe=False, status=200)
 
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
