@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 
+
 class Question(models.Model):
     class Status(models.TextChoices):
         PENDING = "pending", "Pending"
@@ -71,6 +72,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Answer(models.Model):
     question = models.ForeignKey(

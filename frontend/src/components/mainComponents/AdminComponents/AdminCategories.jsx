@@ -7,24 +7,26 @@ function AdminCategories() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const fetchCategories = () => {
-    fetch(`${BASE_URL}/api/questions/admin/categories/`)
-      .then((response) => response.json())
-      .then((data) => setCategories(data))
+    fetchCategories(`${BASE_URL}/api/questions/admin/categories/`)
+      .then((data) => {
+        setCategories(data);
+        console.log(data);
+      })
       .catch((error) => console.error("Error fetching categories:", error));
-  };
+  }, []);
 
   return (
     <div>
-      <h2>Admin Categories</h2>
+      <h2 className="text-white font-bold mb-4">Admin Categories</h2>
       <ul>
         {categories.length > 0 ? (
-          categories.map((category) => <li key={category}>{category}</li>)
+          categories.map((category) => (
+            <li key={category} className="text-white">
+              {category}
+            </li>
+          ))
         ) : (
-          <li>No categories found.</li>
+          <li className="text-white">No categories found.</li>
         )}
       </ul>
     </div>

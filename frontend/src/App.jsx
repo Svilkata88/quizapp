@@ -24,6 +24,7 @@ import ChoseDifficulty from "./components/mainComponents/PlayComponents/ChoseDif
 import GameOverview from "./components/mainComponents/PlayComponents/GameOverview.jsx";
 import AdminDashboard from "./components/navComponents/AdminDashboard.jsx";
 import AdminIssues from "./components/mainComponents/AdminComponents/AdminIssues.jsx";
+import AdminCategories from "./components/mainComponents/AdminComponents/AdminCategories.jsx";
 
 export function App() {
   return (
