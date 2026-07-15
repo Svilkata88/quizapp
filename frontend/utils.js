@@ -149,6 +149,10 @@ function updateQuestions(url, body) {
   return data;
 }
 
+function fetchCategories(url) {
+  return apiFetch(url).then((response) => response);
+}
+
 function apiFetchAllUsers(url) {
   return apiFetch(url).then((response) => response);
 }
@@ -257,6 +261,7 @@ export {
   updateQuestions,
   showText,
   hideText,
+  fetchCategories,
   apiFetchAllUsers,
   apiFetchOneUser,
   apiLoginUser,

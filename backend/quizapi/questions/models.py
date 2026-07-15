@@ -14,7 +14,16 @@ class Question(models.Model):
         db_index=True
     )
 
+    category = models.ForeignKey(
+        "Category",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="questions"
+    )
+
     text = models.CharField(max_length=255, unique=True)
+    
     correct_answer = models.ForeignKey( 
         "Answer",
         on_delete=models.CASCADE,
@@ -56,6 +65,12 @@ class Rating(models.Model):
     question = models.ForeignKey(to=Question, on_delete=models.CASCADE, related_name='ratings')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
 
 class Answer(models.Model):
     question = models.ForeignKey(

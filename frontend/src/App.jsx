@@ -58,6 +58,7 @@ export function App() {
             <Route path="questions">
               <Route index element={<AdminQuestions />} />
               <Route path=":id" element={<AdminQuestionDetails />} />
+              <Route path="categories" element={<AdminCategories />} />
             </Route>
             <Route path="issues">
               <Route index element={<AdminIssues />} />

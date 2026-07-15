@@ -160,6 +160,11 @@ def create_question_issue(request):
 
     return JsonResponse({"id": issue.id}, status=201)
 
+
+def category_list(request):
+    categories = Question.objects.values_list('category__name', flat=True).distinct()
+    return JsonResponse(list(categories), safe=False, status=200)
+
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])

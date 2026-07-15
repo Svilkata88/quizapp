@@ -12,6 +12,7 @@ from .views import (
     question_list,
     reset_game,
     update_questions,
+    category_list,
 )
 
 
@@ -28,5 +29,6 @@ urlpatterns = [
 
     path('admin/all-questions/', all_questions, name="all_questions"),
     path('admin/all-questions/<int:id>/', get_question, name="admin_get_question"),
+    path('admin/categories/', category_list, name="categories"),
     path('admin/all-issues/', get_all_issues, name='all_issues'),
 ]

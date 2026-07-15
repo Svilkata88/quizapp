@@ -134,8 +134,25 @@ function AdminQuestionDetails() {
           </div>
         </div>
       </div>
+      {/* Category Section */}
+      <section className="flex gap-3 justify-center items-start mt-5">
+        <div className="flex flex-col gap-2 justify-center items-center">
+          <label htmlFor="categoryInput" className="text-gray-500 text-base">
+            Category:
+          </label>
+          <input
+            name="category"
+            className="text-black bg-zinc-100 rounded-lg w-35 p-1 text-center"
+            id="categoryInput"
+            value={question?.category ?? "No Category"}
+            onChange={(e) =>
+              setQuestion({ ...question, category: e.target.value })
+            }
+          />
+        </div>
+      </section>
       {/* Icons Section */}
-      <section className="flex gap-5 items-center justify-around mx:2 md:mx-16 pb-5 mt-8">
+      <section className="flex gap-3 items-center justify-around mx:2 md:mx-16 pb-5 mt-8">
         <div className="w-10 h-10 lg:w-16 lg:h-16 flex flex-col items-center justify-center">
           <p className="text-center text-xs text-gray-600">id</p>
           <img src="/id.png" alt="id" />
@@ -153,7 +170,7 @@ function AdminQuestionDetails() {
         </div>
       </section>
       {/* Info Section */}
-      <div className="my-2 mx-2 mt-4 md:mx-16">
+      <section className="my-2 mx-2 mt-4 md:mx-16">
         <div className="relative border-b border-gray-300 pb-5">
           {/* Icon */}
           <div className="absolute -left-4 -top-7 w-12 flex items-start">
@@ -168,7 +185,7 @@ function AdminQuestionDetails() {
             onChange={(e) => setInfoText(e.target.value)}
           />
         </div>
-      </div>
+      </section>
       {/* Answers Section */}
       <div className="flex flex-col items-center mx-auto md:mx-16 md:mt-2 lg:mt-10">
         <h2 className="mb-2">Answers:</h2>
