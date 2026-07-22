@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 function Answer({
   text,
   correct,
+  stopTimer,
   disabled,
   setDisabled,
   setPoints,
@@ -49,6 +50,7 @@ function Answer({
     setAnsweredCorrectly((prev) =>
       correct && !prev.includes(qID) ? [...prev, qID] : prev,
     );
+    !correct && stopTimer(); // Stop the timer if the answer is incorrect
 
     setTimeout(() => {
       setPoints((prev) => (correct ? prev + 1 : prev));

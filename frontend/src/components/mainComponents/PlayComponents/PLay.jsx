@@ -31,7 +31,7 @@ function Questions() {
   } = useGameOverviewContext();
   const { logout } = useUserContext();
   const { difficulty } = useDifficultyContext();
-  const { time, start, reset } = useTimer();
+  const { time, start, stop, reset } = useTimer();
 
   const location = useLocation();
   const query = new URLSearchParams(location.search);
@@ -52,6 +52,8 @@ function Questions() {
 
   const handleReset = () => {
     let newPoints;
+
+    stop();
 
     if (points <= 5) newPoints = user.points + points;
     else if (5 < points <= 10) newPoints = user.points + points + 2;
@@ -220,6 +222,7 @@ function Questions() {
         <Answer
           text={question?.answers[0]?.text}
           correct={question?.correct_answer.text === question?.answers[0]?.text}
+          stopTimer={stop}
           disabled={disabled}
           setDisabled={setDisabled}
           setPoints={setPoints}
@@ -232,6 +235,7 @@ function Questions() {
         <Answer
           text={question?.answers[1]?.text}
           correct={question?.correct_answer.text === question?.answers[1]?.text}
+          stopTimer={stop}
           disabled={disabled}
           setDisabled={setDisabled}
           setPoints={setPoints}
@@ -244,6 +248,7 @@ function Questions() {
         <Answer
           text={question?.answers[2]?.text}
           correct={question?.correct_answer.text === question?.answers[2]?.text}
+          stopTimer={stop}
           disabled={disabled}
           setDisabled={setDisabled}
           setPoints={setPoints}
@@ -256,6 +261,7 @@ function Questions() {
         <Answer
           text={question?.answers[3]?.text}
           correct={question?.correct_answer.text === question?.answers[3]?.text}
+          stopTimer={stop}
           disabled={disabled}
           setDisabled={setDisabled}
           setPoints={setPoints}

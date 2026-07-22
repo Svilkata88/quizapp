@@ -74,7 +74,7 @@ function AdminQuestions() {
             </div>
           </div>
         </div>
-        <section className="flex gap-1 items-center text-sm text-gray-500">
+        <section className="flex w-full gap-1 items-center text-sm text-gray-500">
           <h5 className="font-medium text-gray-500">Status:</h5>
           <button
             className={`px-2 h-4 text-xs text-black text-center rounded-full flex-shrink-0 bg-zinc-100 border border-gray-500 cursor-pointer hover:scale-110 transition-transform`}
@@ -106,6 +106,15 @@ function AdminQuestions() {
               )
             }
           ></button>
+          <Link
+            to="/admin/questions/categories"
+            className="flex gap-1 ml-auto px-2 h-4 text-xs text-black text-center rounded-full flex-shrink-0 bg-zinc-100 border border-gray-500 cursor-pointer hover:scale-110 transition-transform"
+          >
+            Categories
+            <div className="h-4 ml-1">
+              <img src="/arrowRightGreen.png" alt="" className="h-full" />
+            </div>
+          </Link>
         </section>
       </div>
       <ul className="max-h-[60vh] overflow-y-auto space-y-1 pb-10">

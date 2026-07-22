@@ -36,10 +36,8 @@ function Login() {
         });
 
         setErrors(formattedErrors);
-
-        navigate("/auth/login");
-      })
-      .finally(() => setLoading(false));
+        setLoading(false);
+      });
   };
 
   return loading ? (
