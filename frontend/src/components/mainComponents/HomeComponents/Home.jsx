@@ -57,7 +57,7 @@ function Home() {
         <h3 className="text-2xl font-bold text-center text-sky-700 md:text-black mb-5">
           Top 5 players
         </h3>
-        <ul className="flex flex-col items-center mt-4 gap-2 relative scrollable">
+        <ul className="flex flex-col items-center mt-4 gap-2 relative">
           {topFive.length === 0
             ? Array.from({ length: 5 }).map((_, i) => (
                 <UserSkeletonCard key={i} />

@@ -37,26 +37,42 @@ function Nav() {
             } md:flex md:flex-row items-center justify-between gap-2 md:gap-3 text-xl mt-5 md:mt-0`}
           >
             <div className="bg-white md:bg-transparent p-[3px] md:p-0 rounded-2xl md:rounded-none">
-              <NavLink to="/" className="nav-mobile nav nav-hover">
+              <NavLink
+                to="/"
+                className="nav-mobile nav nav-hover"
+                onClick={() => setIsOpen(false)}
+              >
                 Home
               </NavLink>
             </div>
 
             <div className="bg-white md:bg-transparent p-[3px] md:p-0 rounded-2xl md:rounded-none">
-              <NavLink to="/info" className="nav-mobile nav nav-hover">
+              <NavLink
+                to="/info"
+                className="nav-mobile nav nav-hover"
+                onClick={() => setIsOpen(false)}
+              >
                 Info
               </NavLink>
             </div>
 
             <div className="bg-white md:bg-transparent p-[3px] md:p-0 rounded-2xl md:rounded-none">
-              <NavLink to="/profile" className="nav-mobile nav nav-hover">
+              <NavLink
+                to="/profile"
+                className="nav-mobile nav nav-hover"
+                onClick={() => setIsOpen(false)}
+              >
                 Profile
               </NavLink>
             </div>
 
             {user && (
               <div className="bg-white md:bg-transparent p-[3px] md:p-0 rounded-2xl md:rounded-none">
-                <NavLink to="/questions" className="nav-mobile nav nav-hover">
+                <NavLink
+                  to="/questions"
+                  className="nav-mobile nav nav-hover"
+                  onClick={() => setIsOpen(false)}
+                >
                   Questions
                 </NavLink>
               </div>

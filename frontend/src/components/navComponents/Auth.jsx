@@ -33,11 +33,14 @@ function Auth() {
           </NavLink>
         </div>
       ) : (
-        <div className="hidden md:flex gap-2 items-center">
-          <NavLink className="nav nav-hover" to="/auth/login">
+        <div className="flex gap-2 pt-4 md:pt-0">
+          <NavLink className="nav-mobile nav nav-hover h-fit" to="/auth/login">
             Login
           </NavLink>
-          <NavLink className="nav nav-hover" to="/auth/register">
+          <NavLink
+            className="nav-mobile nav nav-hover h-fit"
+            to="/auth/register"
+          >
             Register
           </NavLink>
         </div>

@@ -56,6 +56,16 @@ function AdminUserDetails() {
       .finally(setTimeout(() => setLoading(false), 300));
   };
 
+  // to be implemented
+  const handleEditUser = (formData) => {
+    setLoading(true);
+
+    const email = formData.get("email");
+    console.log(email);
+
+    setLoading(false);
+  };
+
   return loading ? (
     <Spinner />
   ) : (
@@ -73,6 +83,7 @@ function AdminUserDetails() {
         </div>
         <h2>{user?.username}</h2>
       </section>
+
       {/* User Details */}
       <section className="">
         {/* Icons and user details */}
@@ -127,8 +138,10 @@ function AdminUserDetails() {
 
         {/* Edit user form */}
         <form
+          action={handleEditUser}
           className={`${redacting ? "" : "hidden"} relative flex flex-col gap-2 px-4 py-2`}
         >
+          {/* email */}
           <div className="flex gap-2 items-center">
             <img
               src="/mail.png"
@@ -137,22 +150,26 @@ function AdminUserDetails() {
             />
             <input
               type="email"
+              name="email"
               className="w-full flex items-center justify-between rounded-lg shadow-xs bg-zinc-200 px-2"
               placeholder="Email"
               value={userEmail}
               onChange={(e) => setUserEmail(e.target.value)}
             />
           </div>
+          {/* xp */}
           <div className="flex gap-2 items-center">
             <img src="/xp.png" alt="xp" className="w-8 h-8 object-contain" />
             <input
               type="text"
+              name="xp"
               className="w-full flex items-center justify-between rounded-lg shadow-xs bg-zinc-200 px-2"
               placeholder="Xp"
               value={userXp}
               onChange={(e) => setUserXp(e.target.value)}
             />
           </div>
+          {/* points */}
           <div className="flex gap-2 items-center">
             <img
               src="/points.png"
@@ -161,12 +178,14 @@ function AdminUserDetails() {
             />
             <input
               type="text"
+              name="points"
               className="w-full flex items-center justify-between rounded-lg shadow-xs bg-zinc-200 px-2"
               placeholder="Points"
               value={userPoints}
               onChange={(e) => setUserPoints(e.target.value)}
             />
           </div>
+          {/* timePlayed */}
           <div className="flex gap-2 items-center">
             <img
               src="/timer.png"
@@ -175,12 +194,14 @@ function AdminUserDetails() {
             />
             <input
               type="text"
+              name="timePlayed"
               className="w-full flex items-center justify-between rounded-lg shadow-xs bg-zinc-200 px-2"
               placeholder="Time played"
               value={userTimePlayed}
               onChange={(e) => setUserTimePlayed(e.target.value)}
             />
           </div>
+          {/* addedQuestions */}
           <div className="flex gap-2 items-center">
             <img
               src="/question.png"
@@ -189,6 +210,7 @@ function AdminUserDetails() {
             />
             <input
               type="text"
+              name="addedQuestions"
               className="w-full flex items-center justify-between rounded-lg shadow-xs bg-zinc-200 px-2"
               placeholder="Added questions"
               value={userAddedQuestions}

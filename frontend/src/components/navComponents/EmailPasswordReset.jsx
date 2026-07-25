@@ -14,7 +14,7 @@ function EmailPasswordReset() {
   const navigate = useNavigate();
 
   const handleSendEmail = (formData) => {
-    const email = formData.get("email");
+    const email = formData.get("email")?.trim();
     const emailRegex =
       /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+$/;
 

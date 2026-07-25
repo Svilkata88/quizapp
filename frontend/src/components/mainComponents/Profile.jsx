@@ -1,8 +1,9 @@
 import { useUserContext } from "../../hooks/userContext";
+import { useBGContext } from "../../hooks/useBG";
 import { useRef, useState } from "react";
 import { apiEditUser } from "../../../utils";
-import Cookies from "js-cookie";
 import { formatTime } from "../../../utils";
+import Cookies from "js-cookie";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const DEFAULT_COL =
@@ -25,7 +26,9 @@ const ORANGE =
 
 function Profile() {
   const { user, setUser } = useUserContext();
+  const { bg: gameBG, setBg: setGameBG, BgChoices } = useBGContext();
   const [isColorsOpen, setIsColorsOpen] = useState(false);
+  const [isBgOpen, setIsBgOpen] = useState(false);
   const [cardBG, setCardBG] = useState(
     localStorage.getItem("cardBG") || DEFAULT_COL,
   );
@@ -187,7 +190,8 @@ function Profile() {
             </div>
             <div>
               <div className="relative ml-1">
-                <div
+                <button
+                  type="button"
                   className="flex gap-2 text-md items-center p-2 bg-zinc-200 w-36 h-6 cursor-pointer rounded-full hover:scale-105 transition-transform duration-300 ease-in-out"
                   onClick={() => setIsColorsOpen(!isColorsOpen)}
                 >
@@ -197,9 +201,9 @@ function Profile() {
                     className="w-6 h-6"
                   />
                   <p>Card theme</p>
-                </div>
+                </button>
                 <ul
-                  className={`absolute top-6 grid grid-cols-3 gap-1 text-zinc-300 text-xs bg-zinc-950/10 p-2 rounded-lg mt-2 ${isColorsOpen ? "" : "hidden"}`}
+                  className={`absolute top-17 grid grid-cols-3 gap-1 text-zinc-300 text-xs bg-zinc-950/50 p-2 rounded-lg mt-2 ${isColorsOpen ? "" : "hidden"}`}
                 >
                   <li
                     className={LIGHT_PINC}
@@ -282,6 +286,46 @@ function Profile() {
                   >
                     Default
                   </li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div className="relative ml-1">
+                <button
+                  type="button"
+                  className="flex gap-2 text-md items-center p-2 bg-zinc-200 w-36 h-6 cursor-pointer rounded-full hover:scale-105 transition-transform duration-300 ease-in-out"
+                  onClick={() => setIsBgOpen(!isBgOpen)}
+                >
+                  <img
+                    src={`${isBgOpen ? "./arrup.png" : "./arrdown.png"}`}
+                    alt="arrow"
+                    className="w-6 h-6"
+                  />
+                  <p>Bg theme</p>
+                </button>
+                <ul
+                  className={`absolute top-8 grid grid-cols-3 gap-1 text-zinc-300 text-xs bg-zinc-950/50 p-2 rounded-lg mt-2 ${isBgOpen ? "" : "hidden"}`}
+                >
+                  <li
+                    className="w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('/homebg.jpg')] bg-cover bg-center"
+                    onClick={() => {
+                      setGameBG(`url('${BgChoices.DOGBG}')`);
+                      localStorage.setItem(
+                        "gameBG",
+                        `url('${BgChoices.DOGBG}')`,
+                      );
+                    }}
+                  ></li>
+                  <li
+                    className={`w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('https://res.cloudinary.com/dnnab4vv0/image/upload/v1784735162/Pngtree_3d_cat_as_video_game_15593467_vogekl.png')] bg-cover bg-center`}
+                    onClick={() => {
+                      setGameBG(`url('${BgChoices.CATBG}')`);
+                      localStorage.setItem(
+                        "gameBG",
+                        `url('${BgChoices.CATBG}')`,
+                      );
+                    }}
+                  ></li>
                 </ul>
               </div>
             </div>
