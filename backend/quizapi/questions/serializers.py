@@ -19,7 +19,10 @@ class QuestionSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True)
     answers = AnswerSerializer(many=True, read_only=True)
     correct_answer = AnswerSerializer(read_only=True)
-    category = CategorySerializer(read_only=True)
+    category = serializers.PrimaryKeyRelatedField(
+        queryset=Category.objects.all(),
+        allow_null=True
+    )
 
     class Meta:
         model = Question

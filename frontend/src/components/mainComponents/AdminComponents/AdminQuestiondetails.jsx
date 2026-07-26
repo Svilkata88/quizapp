@@ -72,7 +72,8 @@ function AdminQuestionDetails() {
   const handleSubmit = (formData) => {
     setLoading(true);
     // ДА СЕ ОПРАВИ ЪПДЕЙТА НА КАТЕГОРИТО, КОГАТО СЕ ЪПДЕЙТВЯА ВЪПРОСА
-    console.log(formData.get("category"));
+    console.log([...formData.entries()]);
+    // console.log(categories.find((c) => c.id === Number(categoryId)));
     apiEditQuestion(`${BASE_URL}/api/questions/edit/${id}/`, formData)
       .then((res) => {
         console.log(`Question: "${question.text}" updated successfully!`);
@@ -150,21 +151,22 @@ function AdminQuestionDetails() {
           </label>
           <select
             name="category"
-            value={question?.category?.name ?? ""}
+            value={question?.category?.id ?? ""}
             className="text-black bg-zinc-100 rounded-lg px-2 py-1 cursor-pointer w-30"
             onChange={(e) => {
-              const selectedName = e.target.value;
+              const selectedId = e.target.value;
+
               setQuestion({
                 ...question,
                 category:
-                  selectedName === ""
+                  selectedId === ""
                     ? null
-                    : categories.find((c) => c.name === selectedName),
+                    : categories.find((c) => c.id === Number(selectedId)),
               });
             }}
           >
             {categories?.map((category) => (
-              <option key={category.name} value={category.name}>
+              <option key={category.name} value={category.id}>
                 {category.name}
               </option>
             ))}
