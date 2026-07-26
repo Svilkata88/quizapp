@@ -173,7 +173,7 @@ def category_list(request):
 def create_category(request):
     new_category = request.data.get("categoryName")
     normalized_new_category = new_category.capitalize()
-    Category.objects.create(normalized_new_category)
+    Category.objects.create(name=normalized_new_category)
 
     return Response(status=status.HTTP_201_CREATED)
 
