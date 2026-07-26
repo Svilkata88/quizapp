@@ -33,7 +33,9 @@ function QuestionDetail() {
           {question?.text}
         </h1>
       </div>
-      <p className="text-center text-gray-600">Author: {author?.username}</p>
+      <p className="text-center text-gray-600 mb-3">
+        Author: {author?.username}
+      </p>
       <section className="flex gap-10 items-center justify-center pb-5 mt-5">
         <div className="w-10 h-10 lg:w-16 lg:h-16 flex flex-col items-center justify-center">
           <p className="text-center text-xs text-gray-600">id</p>
@@ -51,8 +53,8 @@ function QuestionDetail() {
           <p className="text-lg lg:text-2xl">{question?.difficulty}</p>
         </div>
       </section>
-      <div className="my-5 mx-3 lg:mx-20">
-        <div className="flex flex-col items-center justify-center float-left mb-2 mr-2">
+      <div className="flex gap-2 items-center my-5 mx-3 lg:mx-20">
+        <div className="flex flex-col items-center justify-center float-left mb-2 mr-2 self-start">
           <img
             src="/info.png"
             alt="info"

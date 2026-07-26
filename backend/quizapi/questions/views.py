@@ -165,7 +165,7 @@ def create_question_issue(request):
 @permission_classes([IsAuthenticated])
 def category_list(request):
     categories = Category.objects.all()
-    return JsonResponse(list(categories.values('name')), safe=False, status=200)
+    return JsonResponse(list(categories.values('id','name')), safe=False, status=200)
 
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])

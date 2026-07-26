@@ -160,6 +160,7 @@ function Profile() {
           </div>
 
           <div className="flex flex-col gap-2 md:gap-4">
+            {/* Player statistics section */}
             <div className="flex gap-2 items-center h-8">
               <img src="/xp.png" alt="xp" className="w-8 h-8 object-contain" />
               <h2>Xp: {user.xp}</h2>
@@ -188,6 +189,8 @@ function Profile() {
               />
               <h2>Time Played: {formatTime(user.time_played)}s</h2>
             </div>
+
+            {/* Card colors section */}
             <div>
               <div className="relative ml-1">
                 <button
@@ -210,6 +213,7 @@ function Profile() {
                     onClick={() => {
                       setCardBG(LIGHT_PINC);
                       localStorage.setItem("cardBG", LIGHT_PINC);
+                      setIsColorsOpen(!isColorsOpen);
                     }}
                   >
                     Light Pink
@@ -219,6 +223,7 @@ function Profile() {
                     onClick={() => {
                       setCardBG(PURPLE);
                       localStorage.setItem("cardBG", PURPLE);
+                      setIsColorsOpen(!isColorsOpen);
                     }}
                   >
                     Purple
@@ -228,6 +233,7 @@ function Profile() {
                     onClick={() => {
                       setCardBG(LIGHT_BLUE);
                       localStorage.setItem("cardBG", LIGHT_BLUE);
+                      setIsColorsOpen(!isColorsOpen);
                     }}
                   >
                     Light Blue
@@ -237,6 +243,7 @@ function Profile() {
                     onClick={() => {
                       setCardBG(RED);
                       localStorage.setItem("cardBG", RED);
+                      setIsColorsOpen(!isColorsOpen);
                     }}
                   >
                     Red
@@ -246,6 +253,7 @@ function Profile() {
                     onClick={() => {
                       setCardBG(GRAY);
                       localStorage.setItem("cardBG", GRAY);
+                      setIsColorsOpen(!isColorsOpen);
                     }}
                   >
                     Gray
@@ -255,6 +263,7 @@ function Profile() {
                     onClick={() => {
                       setCardBG(LIGHT_GRAY);
                       localStorage.setItem("cardBG", LIGHT_GRAY);
+                      setIsColorsOpen(!isColorsOpen);
                     }}
                   >
                     Light Gray
@@ -264,6 +273,7 @@ function Profile() {
                     onClick={() => {
                       setCardBG(GRASS_GREEN);
                       localStorage.setItem("cardBG", GRASS_GREEN);
+                      setIsColorsOpen(!isColorsOpen);
                     }}
                   >
                     Grass Green
@@ -273,6 +283,7 @@ function Profile() {
                     onClick={() => {
                       setCardBG(ORANGE);
                       localStorage.setItem("cardBG", ORANGE);
+                      setIsColorsOpen(!isColorsOpen);
                     }}
                   >
                     Orange
@@ -282,6 +293,7 @@ function Profile() {
                     onClick={() => {
                       setCardBG(DEFAULT_COL);
                       localStorage.setItem("cardBG", DEFAULT_COL);
+                      setIsColorsOpen(!isColorsOpen);
                     }}
                   >
                     Default
@@ -289,6 +301,8 @@ function Profile() {
                 </ul>
               </div>
             </div>
+
+            {/* Background Image sectiion */}
             <div>
               <div className="relative ml-1">
                 <button
@@ -314,6 +328,7 @@ function Profile() {
                         "gameBG",
                         `url('${BgChoices.DOGBG}')`,
                       );
+                      setIsBgOpen(!isBgOpen);
                     }}
                   ></li>
                   <li
@@ -324,6 +339,7 @@ function Profile() {
                         "gameBG",
                         `url('${BgChoices.CATBG}')`,
                       );
+                      setIsBgOpen(!isBgOpen);
                     }}
                   ></li>
                 </ul>

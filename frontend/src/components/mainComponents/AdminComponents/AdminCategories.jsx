@@ -28,7 +28,7 @@ function AdminCategories() {
         {categories.length > 0 ? (
           categories.map((category) => (
             <li key={category.name} className="text-base">
-              {category.name}
+              {category.id}: {category.name}
             </li>
           ))
         ) : (

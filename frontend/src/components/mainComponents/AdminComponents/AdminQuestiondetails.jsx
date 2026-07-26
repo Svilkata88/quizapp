@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { fetchOneQuestions } from "../../../../utils";
+import { fetchOneQuestions, fetchCategories } from "../../../../utils";
 import { apiEditQuestion } from "../../../../utils";
 import FormButton from "../../buttons/FormButton";
 import Spinner from "../../others/Spinner";
@@ -10,6 +10,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 function AdminQuestionDetails() {
   const [loading, setLoading] = useState(false);
   const [question, setQuestion] = useState(null);
+  const [categories, setCategories] = useState(null);
   const [qText, setQtext] = useState(null);
   const [answers, setAnswers] = useState([]);
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -34,6 +35,12 @@ function AdminQuestionDetails() {
       .catch((err) => {
         console.error("Error fetching question:", err);
       });
+
+    fetchCategories(`${BASE_URL}/api/questions/admin/categories/`)
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((error) => console.error("Error fetching categories:", error));
   }, [id]);
 
   function validate(data, type) {
@@ -64,7 +71,8 @@ function AdminQuestionDetails() {
 
   const handleSubmit = (formData) => {
     setLoading(true);
-
+    // ДА СЕ ОПРАВИ ЪПДЕЙТА НА КАТЕГОРИТО, КОГАТО СЕ ЪПДЕЙТВЯА ВЪПРОСА
+    console.log(formData.get("category"));
     apiEditQuestion(`${BASE_URL}/api/questions/edit/${id}/`, formData)
       .then((res) => {
         console.log(`Question: "${question.text}" updated successfully!`);
@@ -140,15 +148,30 @@ function AdminQuestionDetails() {
           <label htmlFor="categoryInput" className="text-gray-500 text-base">
             Category:
           </label>
-          <input
+          <select
             name="category"
-            className="text-black bg-zinc-100 rounded-lg w-35 p-1 text-center"
-            id="categoryInput"
-            value={question?.category ?? "No Category"}
-            onChange={(e) =>
-              setQuestion({ ...question, category: e.target.value })
-            }
-          />
+            value={question?.category?.name ?? ""}
+            className="text-black bg-zinc-100 rounded-lg px-2 py-1 cursor-pointer w-30"
+            onChange={(e) => {
+              const selectedName = e.target.value;
+              setQuestion({
+                ...question,
+                category:
+                  selectedName === ""
+                    ? null
+                    : categories.find((c) => c.name === selectedName),
+              });
+            }}
+          >
+            {categories?.map((category) => (
+              <option key={category.name} value={category.name}>
+                {category.name}
+              </option>
+            ))}
+            <option key={"none"} value="">
+              No category
+            </option>
+          </select>
         </div>
       </section>
       {/* Icons Section */}
