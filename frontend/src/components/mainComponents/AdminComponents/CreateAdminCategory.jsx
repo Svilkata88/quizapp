@@ -7,10 +7,6 @@ function CreateAdminCategory() {
   const navigate = useNavigate();
 
   const handleCreateCategory = (formData) => {
-    const categoryName = formData.get("categoryName");
-    const normalizedCategoryName =
-      categoryName[0].toUpperCase() + categoryName.slice(1);
-
     apiCreateCategory(
       `${BASE_URL}/api/questions/admin/categories/create/`,
       formData,

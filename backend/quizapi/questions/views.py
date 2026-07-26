@@ -171,7 +171,7 @@ def category_list(request):
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def create_category(request):
-    new_category = request.data.categoryName
+    new_category = request.data.get("categoryName")
     normalized_new_category = new_category.capitalize()
     Category.objects.create(normalized_new_category)
 
