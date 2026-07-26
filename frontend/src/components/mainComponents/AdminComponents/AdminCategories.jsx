@@ -26,7 +26,7 @@ function AdminCategories() {
     >
       <section className="flex justify-between items-center">
         <h2 className="text-base font-bold">Questions Categories</h2>
-        <Link className="w-8" to="./create">
+        <Link className="w-8 pointer hover:scale-110" to="./create">
           <img src="/addbtn.png" alt="add button" />
         </Link>
       </section>

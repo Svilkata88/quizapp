@@ -75,7 +75,7 @@ def get_own_questions_list(request):
 @permission_classes([IsAuthenticated])
 def get_question(request, id):
     question = get_object_or_404(
-        Question.objects.select_related("author"),
+        Question.objects.select_related("author", "category"),
         id=id,
     )
 

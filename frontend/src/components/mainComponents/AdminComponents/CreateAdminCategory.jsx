@@ -1,8 +1,8 @@
 import { apiCreateCategory } from "./../../../../utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Spinner from "../../others/Spinner";
 import ErrorMessage from "../../formsComponents/ErrorMessage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -10,6 +10,10 @@ function CreateAdminCategory() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setTimeout(() => setError(null), 2500);
+  }, [error]);
 
   const handleCreateCategory = (formData) => {
     setLoading(true);
@@ -28,7 +32,7 @@ function CreateAdminCategory() {
 
   return (
     <section
-      className={`flex flex-col gap-1 items-center bg-gradient-to-b from-zinc-100 to-zinc-400 mt-5 md:mt-10 mx-auto p-4 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:w-[1000px] max-h-150`}
+      className={`relative flex flex-col gap-1 items-center bg-gradient-to-b from-zinc-100 to-zinc-400 mt-5 md:mt-10 mx-auto p-4 rounded-lg shadow-[var(--blue-shadow)] w-full xl:w-[1000px] max-h-150`}
     >
       <div className="flex flex-col gap-1 w-full md:w-1/2 lg:w-1/3 p-5 rounded-lg item-center">
         <h2 className="text-center text-2xl">Create new Category</h2>
@@ -54,6 +58,13 @@ function CreateAdminCategory() {
               <ErrorMessage key={index} error={error} />
             ))}
         </div>
+
+        <Link
+          className="w-8 absolute left-5 top-5 pointer hover:scale-110 rounded-full border border-gray-500 p-2 bg-gray-700/70"
+          to="/admin/questions/categories"
+        >
+          <img src="/arrowLeftGreen.png" alt="" />
+        </Link>
       </form>
     </section>
   );

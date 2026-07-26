@@ -20,7 +20,7 @@ function QuestionDetail() {
         console.error("Error fetching question:", err);
       });
   }, [id]);
-
+  console.log(question);
   return !author || !question ? (
     <Spinner />
   ) : (
