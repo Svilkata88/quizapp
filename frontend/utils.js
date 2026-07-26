@@ -153,6 +153,13 @@ function fetchCategories(url) {
   return apiFetch(url).then((response) => response);
 }
 
+function apiCreateCategory(url, body) {
+  return aapiFetch(`${url}`, {
+    method: "POST",
+    body: body,
+  }).then((response) => response);
+}
+
 function apiFetchAllUsers(url) {
   return apiFetch(url).then((response) => response);
 }
@@ -262,6 +269,7 @@ export {
   showText,
   hideText,
   fetchCategories,
+  apiCreateCategory,
   apiFetchAllUsers,
   apiFetchOneUser,
   apiLoginUser,

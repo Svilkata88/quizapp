@@ -151,7 +151,7 @@ function AdminQuestionDetails() {
           </label>
           <select
             name="category"
-            value={question?.category?.id ?? ""}
+            value={question?.category ?? ""}
             className="text-black bg-zinc-100 rounded-lg px-2 py-1 cursor-pointer w-30"
             onChange={(e) => {
               const selectedId = e.target.value;

@@ -25,6 +25,7 @@ import GameOverview from "./components/mainComponents/PlayComponents/GameOvervie
 import AdminDashboard from "./components/navComponents/AdminDashboard.jsx";
 import AdminIssues from "./components/mainComponents/AdminComponents/AdminIssues.jsx";
 import AdminCategories from "./components/mainComponents/AdminComponents/AdminCategories.jsx";
+import CreateAdminCategory from "./components/mainComponents/AdminComponents/CreateAdminCategory.jsx";
 
 export function App() {
   return (
@@ -60,6 +61,10 @@ export function App() {
               <Route index element={<AdminQuestions />} />
               <Route path=":id" element={<AdminQuestionDetails />} />
               <Route path="categories" element={<AdminCategories />} />
+              <Route
+                path="categories/create"
+                element={<CreateAdminCategory />}
+              />
             </Route>
             <Route path="issues">
               <Route index element={<AdminIssues />} />

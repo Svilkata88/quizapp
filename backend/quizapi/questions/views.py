@@ -1,5 +1,5 @@
 import random
-from urllib import request
+from rest_framework import status
 from django.http import JsonResponse 
 from .models import Question, Answer, QuestionIssues, Rating, Category
 from users.models import User
@@ -166,6 +166,16 @@ def create_question_issue(request):
 def category_list(request):
     categories = Category.objects.all()
     return JsonResponse(list(categories.values('id','name')), safe=False, status=200)
+
+@api_view(["GET"])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def create_category(request):
+    new_category = request.data.categoryName
+    normalized_new_category = new_category.capitalize()
+    Category.objects.create(normalized_new_category)
+
+    return Response(status=status.HTTP_201_CREATED)
 
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])

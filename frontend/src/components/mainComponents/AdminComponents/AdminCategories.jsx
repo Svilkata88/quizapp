@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { fetchCategories } from "../../../../utils.js";
 import Spinner from "../../others/Spinner";
 
@@ -23,12 +24,17 @@ function AdminCategories() {
     <section
       className={`flex flex-col gap-1 bg-gradient-to-b from-zinc-100 to-zinc-400 mt-5 md:mt-10 mx-auto p-4 rounded-lg shadow-[var(--blue-shadow)] scrollable w-full xl:w-[1000px] max-h-150`}
     >
-      <h2 className="text-base font-bold mb-4">Questions Categories</h2>
+      <section className="flex justify-between items-center">
+        <h2 className="text-base font-bold">Questions Categories</h2>
+        <Link className="w-8" to="./create">
+          <img src="/addbtn.png" alt="add button" />
+        </Link>
+      </section>
       <ul>
         {categories.length > 0 ? (
           categories.map((category) => (
             <li key={category.name} className="text-base">
-              {category.id}: {category.name}
+              {category.id}. {category.name}
             </li>
           ))
         ) : (
