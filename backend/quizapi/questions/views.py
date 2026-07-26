@@ -172,10 +172,31 @@ def category_list(request):
 @permission_classes([IsAuthenticated])
 def create_category(request):
     new_category = request.data.get("categoryName")
-    normalized_new_category = new_category.capitalize()
-    Category.objects.create(name=normalized_new_category)
 
-    return Response(status=status.HTTP_201_CREATED)
+    if not new_category:
+        return Response(
+            {"error": "Category name is required"},
+            status=400
+        )
+
+    normalized_new_category = new_category.strip().capitalize()
+
+    if Category.objects.filter(name=normalized_new_category).exists():
+        return Response(
+            {"error": "Category already exists"},
+            status=400
+        )
+
+    category = Category.objects.create(
+        name=normalized_new_category
+    )
+
+    return Response(
+        {
+            "id": category.id,
+            "name": category.name
+        },
+        status=status.HTTP_201_CREATED    )
 
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
