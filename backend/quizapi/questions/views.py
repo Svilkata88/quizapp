@@ -14,7 +14,7 @@ from users.utils import refresh_seed
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import QuestionSerializer, UpdateQuestionsSerializer
+from .serializers import QuestionSerializer, UpdateQuestionsSerializer, CategorySerializer
 from django.db import transaction
 from django.db.models import Case, When, Value, CharField, F
 
@@ -81,10 +81,12 @@ def get_question(request, id):
 
     serialized_question = QuestionSerializer(question)
     serialized_author = UserSerializer(question.author)
+    serialized_category = CategorySerializer(question.category)
 
     return JsonResponse({
         "question": serialized_question.data,
         "author": serialized_author.data,
+        "category": serialized_category.data,
     })
 
 

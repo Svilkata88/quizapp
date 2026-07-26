@@ -7,6 +7,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function QuestionDetail() {
   const [question, setQuestion] = useState(null);
+  const [category, setCategory] = useState(null);
   const [author, setAuthor] = useState(null);
   const { id } = useParams();
 
