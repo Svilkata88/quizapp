@@ -62,12 +62,12 @@ function QuestionDetail() {
           <p className="text-lg lg:text-2xl">{question?.difficulty}</p>
         </div>
       </section>
-      <div className="flex gap-2 items-center my-5 mx-3 lg:mx-20">
-        <div className="flex flex-col items-center justify-center float-left mb-2 mr-2 self-start">
+      <div className="my-5 mx-3 lg:mx-20">
+        <div className="float-left mb-2 mr-2 self-start min-w-6">
           <img
             src="/info.png"
             alt="info"
-            className={question?.info ? "w-15" : "w-6"}
+            className={question?.info ? "w-10" : "w-6"}
           />
         </div>
         <p className="xl:text-lg text-justify">
