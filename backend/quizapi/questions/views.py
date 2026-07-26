@@ -175,7 +175,7 @@ def create_category(request):
 
     if not new_category:
         return Response(
-            {"error": "Category name is required"},
+            {"Еrror": "Category name is required"},
             status=400
         )
 
@@ -183,7 +183,7 @@ def create_category(request):
 
     if Category.objects.filter(name=normalized_new_category).exists():
         return Response(
-            {"error": "Category already exists"},
+            {"Еrror": "Category already exists"},
             status=400
         )
 

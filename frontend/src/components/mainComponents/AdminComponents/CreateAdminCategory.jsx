@@ -1,16 +1,29 @@
 import { apiCreateCategory } from "./../../../../utils";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../others/Spinner";
+import ErrorMessage from "../../formsComponents/ErrorMessage";
+import { useState } from "react";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function CreateAdminCategory() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleCreateCategory = (formData) => {
+    setLoading(true);
+
     apiCreateCategory(
       `${BASE_URL}/api/questions/admin/categories/create/`,
       formData,
-    ).then((res) => navigate("/admin/questions/categories"));
+    )
+      .then(() => {
+        navigate("/admin/questions/categories");
+      })
+      .catch((e) => {
+        setError(e);
+      });
   };
 
   return (
@@ -34,6 +47,13 @@ function CreateAdminCategory() {
         <button className="p-1 bg-green-300 hover:bg-green-400 rounded-md">
           Create
         </button>
+
+        <div className="flex flex-col gap-2 mt-2">
+          {error &&
+            Object.entries(error).map((error, index) => (
+              <ErrorMessage key={index} error={error} />
+            ))}
+        </div>
       </form>
     </section>
   );
