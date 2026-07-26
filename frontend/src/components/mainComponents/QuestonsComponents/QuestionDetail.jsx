@@ -16,12 +16,13 @@ function QuestionDetail() {
       .then((res) => {
         setQuestion(res.question);
         setAuthor(res.author);
+        setCategory(res.category);
       })
       .catch((err) => {
         console.error("Error fetching question:", err);
       });
   }, [id]);
-  console.log(question);
+
   return !author || !question ? (
     <Spinner />
   ) : (
@@ -34,9 +35,16 @@ function QuestionDetail() {
           {question?.text}
         </h1>
       </div>
-      <p className="text-center text-gray-600 mb-3">
-        Author: {author?.username}
-      </p>
+      <div className="flex gap-2 justify-center">
+        <p className="text-center text-gray-600 mb-3">
+          Author: <span className="font-bold">{author?.username}</span>
+        </p>
+        |
+        <p className="text-center text-gray-600 mb-3">
+          Category:{" "}
+          <span className="font-bold">{category?.name || "No category"}</span>
+        </p>
+      </div>
       <section className="flex gap-10 items-center justify-center pb-5 mt-5">
         <div className="w-10 h-10 lg:w-16 lg:h-16 flex flex-col items-center justify-center">
           <p className="text-center text-xs text-gray-600">id</p>
