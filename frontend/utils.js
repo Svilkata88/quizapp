@@ -154,7 +154,7 @@ function fetchCategories(url) {
 }
 
 function apiCreateCategory(url, body) {
-  return aapiFetch(`${url}`, {
+  return apiFetch(`${url}`, {
     method: "POST",
     body: body,
   }).then((response) => response);

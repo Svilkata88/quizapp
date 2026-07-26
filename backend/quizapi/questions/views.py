@@ -167,7 +167,7 @@ def category_list(request):
     categories = Category.objects.all()
     return JsonResponse(list(categories.values('id','name')), safe=False, status=200)
 
-@api_view(["GET"])
+@api_view(["POST"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def create_category(request):
