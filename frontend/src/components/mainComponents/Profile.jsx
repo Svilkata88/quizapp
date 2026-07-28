@@ -24,6 +24,8 @@ const GRASS_GREEN = "bg-gradient-to-r from-[#2dd4bf] to-[#1f2937]";
 const ORANGE =
   "bg-gradient-to-r from-amber-700 to-amber-400 rounded-md p-1 border border-gray-400 cursor-pointer";
 
+const aspectRatio = window.innerWidth / window.innerHeight; // aspectRatio < 1 - Portrait / aspectRatio > 1 - Landscape
+
 function Profile() {
   const { user, setUser } = useUserContext();
   const { bg: gameBG, setBg: setGameBG, BgChoices } = useBGContext();
@@ -338,6 +340,40 @@ function Profile() {
                       localStorage.setItem(
                         "gameBG",
                         `url('${BgChoices.CATBG}')`,
+                      );
+                      setIsBgOpen(!isBgOpen);
+                    }}
+                  ></li>
+                  <li
+                    className={`w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('https://res.cloudinary.com/dnnab4vv0/image/upload/v1785250628/2-d_nxlakw.jpg')] bg-cover bg-center`}
+                    onClick={() => {
+                      setGameBG(
+                        aspectRatio > 1
+                          ? `url('${BgChoices.LAVAPLANETD}')`
+                          : `url('${BgChoices.LAVAPLANETM}')`,
+                      );
+                      localStorage.setItem(
+                        "gameBG",
+                        aspectRatio > 1
+                          ? `url('${BgChoices.LAVAPLANETD}')`
+                          : `url('${BgChoices.LAVAPLANETM}')`,
+                      );
+                      setIsBgOpen(!isBgOpen);
+                    }}
+                  ></li>
+                  <li
+                    className={`w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('https://res.cloudinary.com/dnnab4vv0/image/upload/v1785250628/1-d_g0ergt.jpg')] bg-cover bg-center`}
+                    onClick={() => {
+                      setGameBG(
+                        aspectRatio > 1
+                          ? `url('${BgChoices.CAVEWORLDD}')`
+                          : `url('${BgChoices.CAVEWORLDM}')`,
+                      );
+                      localStorage.setItem(
+                        "gameBG",
+                        aspectRatio > 1
+                          ? `url('${BgChoices.CAVEWORLDD}')`
+                          : `url('${BgChoices.CAVEWORLDM}')`,
                       );
                       setIsBgOpen(!isBgOpen);
                     }}

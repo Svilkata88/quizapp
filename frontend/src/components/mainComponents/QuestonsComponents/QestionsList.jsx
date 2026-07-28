@@ -98,7 +98,7 @@ function QestionsList({ elementRef, type }) {
 
       {/* Questions list section */}
       <section className="relative">
-        <ul className="max-h-[60vh] overflow-y-auto space-y-1 pb-10">
+        <ul className="space-y-1 pb-10">
           {questions?.map((question) => (
             <li
               key={question.id}

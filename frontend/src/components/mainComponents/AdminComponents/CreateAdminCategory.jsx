@@ -30,6 +30,8 @@ function CreateAdminCategory() {
       });
   };
 
+  if (loading) return <Spinner />;
+
   return (
     <section
       className={`relative flex flex-col gap-1 items-center bg-gradient-to-b from-zinc-100 to-zinc-400 mt-5 md:mt-10 mx-auto p-4 rounded-lg shadow-[var(--blue-shadow)] w-full xl:w-[1000px] max-h-150`}

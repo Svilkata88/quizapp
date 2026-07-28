@@ -56,10 +56,14 @@
   }
 
   .chose-difficulty-container {
-    @apply relative flex flex-col gap-5 justify-center items-center w-full md:w-1/2 lg:w-1/4 h-[200px] mx-auto bg-gray-100 rounded-lg shadow-[var(--blue-shadow)] bg-gradient-to-b from-zinc-300 to-zinc-500;
+    @apply relative flex flex-col gap-2 justify-center items-center mx-auto w-2/3 md:w-1/2 lg:w-1/4 rounded-4xl bg-transparent bg-gradient-to-b from-zinc-400/70 to-zinc-600/70 py-3 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)];
   }
 
   .chose-difficulty-container select {
-    @apply text-center text-lg bg-green-200 cursor-pointer;
+    @apply text-center text-lg bg-lime-200 cursor-pointer;
+  }
+
+  .game-overview-container {
+    @apply relative flex flex-col gap-2 justify-center items-center mx-auto w-full md:w-1/2 lg:w-1/4 rounded-4xl bg-transparent bg-gradient-to-b from-zinc-400/70 to-zinc-600/70 py-3 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)];
   }
 }

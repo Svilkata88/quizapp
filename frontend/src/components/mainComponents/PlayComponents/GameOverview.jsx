@@ -22,9 +22,9 @@ function GameOverview() {
   }
 
   return (
-    <div className="absolute inset-0 h-screen flex items-center justify-center p-4">
+    <div className="absolute inset-0 h-screen flex items-center justify-center p-10">
       <div className="absolute inset-0 bg-black backdrop-blur-md opacity-30 "></div>
-      <div className="chose-difficulty-container !h-70">
+      <div className="game-overview-container !h-70">
         <section className="text-center">
           <h2>Game Overview</h2>
         </section>

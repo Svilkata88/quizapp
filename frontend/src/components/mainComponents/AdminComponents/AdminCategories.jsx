@@ -32,9 +32,9 @@ function AdminCategories() {
       </section>
       <ul>
         {categories.length > 0 ? (
-          categories.map((category) => (
+          categories.map((category, index) => (
             <li key={category.name} className="text-base">
-              {category.id}. {category.name}
+              {index + 1}. {category.name}
             </li>
           ))
         ) : (

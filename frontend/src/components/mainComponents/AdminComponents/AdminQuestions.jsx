@@ -108,9 +108,9 @@ function AdminQuestions() {
           ></button>
           <Link
             to="/admin/questions/categories"
-            className="flex gap-1 ml-auto px-2 h-4 text-xs text-black text-center rounded-full flex-shrink-0 bg-zinc-100 border border-gray-500 cursor-pointer hover:scale-110 transition-transform"
+            className="flex gap-1 ml-auto px-1 h-4 text-xs text-black text-center rounded-full flex-shrink-0 bg-zinc-100 border border-gray-500 cursor-pointer hover:scale-110 transition-transform"
           >
-            Categories
+            <p>Categories</p>
             <div className="h-4 ml-1">
               <img src="/arrowRightGreen.png" alt="" className="h-full" />
             </div>
