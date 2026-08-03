@@ -21,7 +21,8 @@ class QuestionSerializer(serializers.ModelSerializer):
     correct_answer = AnswerSerializer(read_only=True)
     category = serializers.PrimaryKeyRelatedField(
         queryset=Category.objects.all(),
-        allow_null=True
+        allow_null=True,
+        required=False,
     )
 
     class Meta:
