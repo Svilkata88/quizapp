@@ -28,7 +28,13 @@ const aspectRatio = window.innerWidth / window.innerHeight; // aspectRatio < 1 -
 
 function Profile() {
   const { user, setUser } = useUserContext();
-  const { bg: gameBG, setBg: setGameBG, BgChoices } = useBGContext();
+  const {
+    bg: gameBG,
+    setBg: setGameBG,
+    mode,
+    setMode,
+    BgChoices,
+  } = useBGContext();
   const [isColorsOpen, setIsColorsOpen] = useState(false);
   const [isBgOpen, setIsBgOpen] = useState(false);
   const [cardBG, setCardBG] = useState(
@@ -85,6 +91,14 @@ function Profile() {
         console.error("Profile update failed:", err);
       });
   }
+
+  const applyNewBg = (newBgUrl, newThemeMode) => {
+    setGameBG(newBgUrl);
+    setMode(newThemeMode);
+    localStorage.setItem("gameBG", newBgUrl);
+    localStorage.setItem("themeMode", newThemeMode);
+    setIsBgOpen(!isBgOpen);
+  };
 
   return (
     <div className="main-children-wrapper">
@@ -325,57 +339,35 @@ function Profile() {
                   <li
                     className="w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('/homebg.jpg')] bg-cover bg-center"
                     onClick={() => {
-                      setGameBG(`url('${BgChoices.DOGBG}')`);
-                      localStorage.setItem(
-                        "gameBG",
-                        `url('${BgChoices.DOGBG}')`,
-                      );
-                      setIsBgOpen(!isBgOpen);
+                      applyNewBg(`url('${BgChoices.DOGBG}')`, `light`);
                     }}
                   ></li>
                   <li
                     className={`w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('https://res.cloudinary.com/dnnab4vv0/image/upload/v1784735162/Pngtree_3d_cat_as_video_game_15593467_vogekl.png')] bg-cover bg-center`}
                     onClick={() => {
-                      setGameBG(`url('${BgChoices.CATBG}')`);
-                      localStorage.setItem(
-                        "gameBG",
-                        `url('${BgChoices.CATBG}')`,
-                      );
-                      setIsBgOpen(!isBgOpen);
+                      applyNewBg(`url('${BgChoices.CATBG}')`, `dark`);
                     }}
                   ></li>
                   <li
                     className={`w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('https://res.cloudinary.com/dnnab4vv0/image/upload/v1785250628/2-d_nxlakw.jpg')] bg-cover bg-center`}
                     onClick={() => {
-                      setGameBG(
+                      applyNewBg(
                         aspectRatio > 1
                           ? `url('${BgChoices.LAVAPLANETD}')`
                           : `url('${BgChoices.LAVAPLANETM}')`,
+                        `dark`,
                       );
-                      localStorage.setItem(
-                        "gameBG",
-                        aspectRatio > 1
-                          ? `url('${BgChoices.LAVAPLANETD}')`
-                          : `url('${BgChoices.LAVAPLANETM}')`,
-                      );
-                      setIsBgOpen(!isBgOpen);
                     }}
                   ></li>
                   <li
                     className={`w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('https://res.cloudinary.com/dnnab4vv0/image/upload/v1785250628/1-d_g0ergt.jpg')] bg-cover bg-center`}
                     onClick={() => {
-                      setGameBG(
+                      applyNewBg(
                         aspectRatio > 1
                           ? `url('${BgChoices.CAVEWORLDD}')`
                           : `url('${BgChoices.CAVEWORLDM}')`,
+                        `dark`,
                       );
-                      localStorage.setItem(
-                        "gameBG",
-                        aspectRatio > 1
-                          ? `url('${BgChoices.CAVEWORLDD}')`
-                          : `url('${BgChoices.CAVEWORLDM}')`,
-                      );
-                      setIsBgOpen(!isBgOpen);
                     }}
                   ></li>
                 </ul>

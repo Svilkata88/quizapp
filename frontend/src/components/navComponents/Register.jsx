@@ -88,7 +88,7 @@ function Register() {
     <Spinner />
   ) : (
     <div className="flex flex-col justify-center items-center p-4">
-      <h1 className="text-2xl mb-4">Register</h1>
+      <h1 className="text-2xl mb-4 dark:text-stone-300">Register</h1>
       <form
         action={handleRegister}
         className="flex flex-col gap-2 w-full md:w-1/2 lg:w-1/3 bg-stone-200 form-container"

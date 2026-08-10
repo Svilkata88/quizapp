@@ -130,7 +130,6 @@ def create_question(request):
         status=status.HTTP_201_CREATED
     )
 
-
 @api_view(["PUT"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])

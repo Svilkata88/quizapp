@@ -26,7 +26,7 @@ function GameOverview() {
       <div className="absolute inset-0 bg-black backdrop-blur-md opacity-30 "></div>
       <div className="game-overview-container !h-70">
         <section className="text-center">
-          <h2>Game Overview</h2>
+          <h2 className="dark:text-stone-300">Game Overview</h2>
         </section>
         <section className="flex flex-col gap-2">
           <div className="flex gap-2 items-center">

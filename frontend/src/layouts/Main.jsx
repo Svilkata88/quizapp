@@ -4,10 +4,10 @@ import Navigation from "./Navigation";
 import Footer from "./Footer";
 
 function Main() {
-  const { bg } = useBGContext();
+  const { bg, mode } = useBGContext();
   return (
     <div
-      className="flex flex-col bg-cover bg-no-repeat bg-center font-roboto bg-fixed h-screen overflow-y-auto"
+      className={`flex flex-col bg-cover bg-no-repeat bg-center font-roboto bg-fixed h-screen overflow-y-auto ${mode === "light" ? "" : "dark"}`}
       style={{ backgroundImage: bg }}
     >
       <Navigation />

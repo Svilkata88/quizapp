@@ -28,7 +28,7 @@ function Home() {
     <div className="main-children-wrapper w-full gap-1 md:gap-10 md:justify-between">
       {/* Welcome to Quizzy! */}
       <div className="h-[200px] md:h-[250px] md:mb-0 lg:pl-auto">
-        <h1 className="text-center text-2xl font-bold text-gray-900 md:text-black">
+        <h1 className="text-center text-2xl font-bold text-gray-900 md:text-black dark:text-stone-300 mt-1 md:mt-0">
           Welcome to the Quizzy!
         </h1>
         <div
@@ -42,7 +42,7 @@ function Home() {
               showText(
                 divRef,
                 "Lets Play... 🥸",
-                "text-center text-lg mt-10 font-bold animate-slide-in ",
+                "text-center text-lg mt-10 font-bold animate-slide-in dark:text-stone-300",
               );
             }}
             onMouseLeave={() => hideText(divRef)}
@@ -54,7 +54,7 @@ function Home() {
 
       {/* Top 5 players */}
       <div className="mb-10 md:mb-0 md:mx-0">
-        <h3 className="text-2xl font-bold text-center text-sky-700 md:text-black mb-5">
+        <h3 className="text-2xl font-bold text-center text-sky-700 md:text-black dark:text-stone-300 mb-5">
           Top 5 players
         </h3>
         <ul className="flex flex-col items-center mt-4 gap-2 relative">

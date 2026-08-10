@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap");
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
   box-sizing: border-box;
   --main-blue: linear-gradient(to right, #e0f2fe, #bae6fd);
@@ -41,7 +43,7 @@
   }
 
   .nav {
-    @apply md:py-0.5 md:px-2 md:rounded-xl md:border md:border-transparent md:text-lg md:text-black;
+    @apply md:py-0.5 md:px-2 md:rounded-xl md:border md:border-transparent md:text-lg md:text-black md:dark:text-stone-200 md:dark:hover:text-black;
   }
   .nav-hover {
     @apply md:transform md:transition-transform md:duration-300 md:ease-out md:hover:bg-gradient-to-r md:hover:from-sky-100 md:hover:to-sky-200 md:hover:border-black md:hover:rounded-2xl;
@@ -66,4 +68,39 @@
   .game-overview-container {
     @apply relative flex flex-col gap-2 justify-center items-center mx-auto w-full md:w-1/2 lg:w-1/4 rounded-4xl bg-transparent bg-gradient-to-b from-zinc-400/70 to-zinc-600/70 py-3 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)];
   }
+}
+
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
 }

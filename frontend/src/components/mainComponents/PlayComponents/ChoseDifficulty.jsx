@@ -9,7 +9,7 @@ function ChoseDifficulty() {
       <div className="absolute inset-0 bg-black backdrop-blur-md opacity-30"></div>
       <div className="chose-difficulty-container">
         <section className="text-center">
-          <p>Choose Difficulty:</p>
+          <p className="dark:text-stone-300">Choose Difficulty:</p>
           <select
             className="appearance-none mt-2 px-3 py-2 rounded-4xl min-w-28"
             value={difficulty}

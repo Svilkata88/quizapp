@@ -23,10 +23,15 @@ export const BgProvider = ({ children }) => {
   const [bg, setBg] = useState(
     localStorage.getItem("gameBG") || "url('/homebg.jpg')",
   );
+  const [mode, setMode] = useState(
+    localStorage.getItem("themeMode") || "light",
+  );
 
   const value = {
     bg,
     setBg,
+    mode,
+    setMode,
     BgChoices,
   };
 

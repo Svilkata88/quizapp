@@ -22,7 +22,7 @@ function Auth() {
               className="h-full w-full object-cover rounded-full"
             />
           </div>
-          <span className="hidden md:block px-2 rounded-md">
+          <span className="hidden md:block px-2 rounded-md dark:text-lime-400 dark:font-semibold">
             {user ? user.username : "Anonymus User"}
           </span>
           <NavLink

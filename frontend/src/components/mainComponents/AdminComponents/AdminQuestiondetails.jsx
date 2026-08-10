@@ -151,18 +151,15 @@ function AdminQuestionDetails() {
           </label>
           <select
             name="category"
-            value={question?.category ?? ""}
+            value={question?.category ?? ""} // it is only id - category field in question serializer is PrimaryKeyRelatedField
             className="text-black bg-zinc-100 rounded-lg px-2 py-1 cursor-pointer w-30"
             onChange={(e) => {
               const selectedId = e.target.value;
 
-              setQuestion({
-                ...question,
-                category:
-                  selectedId === ""
-                    ? null
-                    : categories.find((c) => c.id === Number(selectedId)),
-              });
+              setQuestion((currentQuestion) => ({
+                ...currentQuestion,
+                category: selectedId === "" ? null : Number(selectedId),
+              }));
             }}
           >
             {categories?.map((category) => (
