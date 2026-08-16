@@ -1,9 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import { showText, hideText, fetchTopFiveUsers } from "../../../../utils";
-import { useEffect, useState, useRef } from "react";
-import UserCard from "./UserCard";
-import UserSkeletonCard from "./UserSkeletonCard";
 import { useUserContext } from "../../../hooks/userContext";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import UserSkeletonCard from "./UserSkeletonCard";
+import DailyQuiz from "./DailyQuiz";
+import UserCard from "./UserCard";
+
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function Home() {
@@ -26,29 +28,37 @@ function Home() {
 
   return (
     <div className="main-children-wrapper w-full gap-1 md:gap-10 md:justify-between">
-      {/* Welcome to Quizzy! */}
-      <div className="h-[200px] md:h-[250px] md:mb-0 lg:pl-auto">
-        <h1 className="text-center text-2xl font-bold text-gray-900 md:text-black dark:text-stone-300 mt-1 md:mt-0">
-          Welcome to the Quizzy!
-        </h1>
-        <div
-          ref={divRef}
-          className="bg-gradient-to-b from-zinc-100/30 to-zinc-400/0 min-h-50 lg:w-[300px] rounded-xl mt-5 mx-auto"
-        >
-          <button
-            className="block cursor-pointer hover:scale-110 transition-transform mx-auto pt-10"
-            onClick={() => navigate("/chose-difficulty")}
-            onMouseEnter={() => {
-              showText(
-                divRef,
-                "Lets Play... 🥸",
-                "text-center text-lg mt-10 font-bold animate-slide-in dark:text-stone-300",
-              );
-            }}
-            onMouseLeave={() => hideText(divRef)}
+      {/* Play section! */}
+      <div className="mb-18 md:mb-0">
+        {/* Welcome to Quizzy / Play section */}
+        <div className="h-[200px] md:h-[250px] md:mb-0 lg:pl-auto mb-10 md:mb-0">
+          <h1 className="text-center text-2xl font-bold text-gray-900 md:text-black dark:text-stone-300 mt-1 md:mt-0">
+            Welcome to the Quizzy!
+          </h1>
+          <div
+            ref={divRef}
+            className="bg-gradient-to-b from-zinc-100/30 to-zinc-400/0 min-h-50 lg:w-[300px] rounded-xl mt-5 mx-auto"
           >
-            <img src="start.png" alt="start" />
-          </button>
+            <button
+              className="block cursor-pointer hover:scale-110 transition-transform mx-auto pt-10"
+              onClick={() => navigate("/chose-difficulty")}
+              onMouseEnter={() => {
+                showText(
+                  divRef,
+                  "Lets Play... 🥸",
+                  "text-center text-lg mt-10 font-bold animate-slide-in dark:text-stone-300",
+                );
+              }}
+              onMouseLeave={() => hideText(divRef)}
+            >
+              <img src="start.png" alt="start" />
+            </button>
+          </div>
+        </div>
+
+        {/* Daily quizz secttion */}
+        <div className="h-[200px] md:h-[250px] md:mb-0 lg:pl-auto">
+          <DailyQuiz />
         </div>
       </div>
 

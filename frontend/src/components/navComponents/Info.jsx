@@ -24,11 +24,13 @@ function Info() {
           </h2>
           <br />
           <div className="text-sm md:text-base">
-            <span className=" ml-2">Quizzy</span> is a quiz game app that allows
-            you to test your knowledge on various topics, compete with friends,
-            and track your progress. With a wide range of questions and
-            categories, Quizzy offers something for everyone, whether you're a
-            trivia enthusiast or just looking for a fun way to pass the time.
+            <span className=" ml-2">Quizzy</span> is a game that allows you to
+            test your knowledge on various topics, compete with friends, and
+            track your progress. It turns your time in a fun and engaging
+            experience of testing your knowledge and learning new things. With a
+            wide range of questions and categories, Quizzy offers something for
+            everyone, whether you're just curious or just looking for a fun way
+            to pass your time.
           </div>
           <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
             <img src="arrdown.png" alt="arrow down" />
@@ -36,7 +38,7 @@ function Info() {
         </div>
         <div className="relative overflow-hidden bg-gray-100 w-full lg:w-2/3 xl:w-1/2 h-14 p-3 border-black border rounded-2xl rounded-tl-none mt-3 md:mt-5 w-1/2">
           <h2 className="text-sm md:text-base font-semibold">
-            How to Navigate
+            How to navigate
           </h2>
           <br />
           <ul className="text-sm md:text-base">
@@ -70,13 +72,10 @@ function Info() {
           </h2>
           <br />
           <div className="text-sm md:text-base">
-            <span className=" ml-2">Quizzy</span> turns your time in a fun and
-            engaging experience of testing your knowledge and learning new
-            things. You can challenge your friends to a quiz battle ( in
-            development ), create your own questions and share them with the
-            community ( in development ) and track your progress and ranking on
-            the leaderboard. Whether you're a trivia enthusiast or just looking
-            for a fun way to pass the time, Quizzy has something for everyone.
+            <span className=" ml-2">In Quizzy</span> уou can challenge your
+            friends to a quiz battle ( in development ), create your own
+            questions and share them with the community ( in development ) and
+            track your progress and ranking on the leaderboard.
           </div>
           <div className="absolute top-3 right-5 w-6 h-6" onClick={toggleInfo}>
             <img src="arrdown.png" alt="arrow down" />

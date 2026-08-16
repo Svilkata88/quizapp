@@ -11,7 +11,7 @@ function ChoseDifficulty() {
         <section className="text-center">
           <p className="dark:text-stone-300">Choose Difficulty:</p>
           <select
-            className="appearance-none mt-2 px-3 py-2 rounded-4xl min-w-28"
+            className="appearance-none hover:bg-green-400 mt-5 px-3 py-2 rounded-4xl min-w-28"
             value={difficulty}
             onChange={(e) => setDifficulty(e.target.value)}
           >
@@ -32,7 +32,7 @@ function ChoseDifficulty() {
           <img
             src="close.png"
             alt="close"
-            className="absolute top-3 right-5 cursor-pointer hover:scale-110 transition-transform h-6 w-6"
+            className="absolute top-3 right-5 cursor-pointer hover:scale-120 hover:bg-gray-400 rounded-full transition-transform h-6 w-6"
             onClick={() => navigate("/")}
           />
         </button>
