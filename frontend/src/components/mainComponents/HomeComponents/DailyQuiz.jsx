@@ -3,7 +3,7 @@ import React from "react";
 function DailyQuiz() {
   return (
     <section className="text-gray-900 md:text-black dark:text-stone-300 bg-gradient-to-b from-zinc-200/30 to-zinc-400/0 min-h-70 lg:w-[300px] rounded-xl mt-5 mx-auto">
-      <h1 className="text-center text-2xl font-bold mt-1 md:mt-0 p-5">
+      <h1 className="text-center text-2xl font-bold mt-1 md:mt-0 pt-5">
         Daily quizz!
       </h1>
       <div className="mt-2 ml-2 text-center">

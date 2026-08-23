@@ -30,17 +30,17 @@ function Home() {
     <div className="main-children-wrapper w-full gap-1 md:gap-10 md:justify-between">
       {/* Play section! */}
       <div className="mb-18 md:mb-0">
-        {/* Welcome to Quizzy / Play section */}
+        {/* Start Quizzy game / Play section */}
         <div className="h-[200px] md:h-[250px] md:mb-0 lg:pl-auto mb-10 md:mb-0">
-          <h1 className="text-center text-2xl font-bold text-gray-900 md:text-black dark:text-stone-300 mt-1 md:mt-0">
-            Welcome to the Quizzy!
-          </h1>
           <div
             ref={divRef}
             className="bg-gradient-to-b from-zinc-100/30 to-zinc-400/0 min-h-50 lg:w-[300px] rounded-xl mt-5 mx-auto"
           >
+            <h1 className="text-center text-2xl font-bold text-gray-900 md:text-black dark:text-stone-300 mt-1 md:mt-0 pt-5">
+              Start a game!
+            </h1>
             <button
-              className="block cursor-pointer hover:scale-110 transition-transform mx-auto pt-10"
+              className="block cursor-pointer hover:scale-110 transition-transform mx-auto pt-5"
               onClick={() => navigate("/chose-difficulty")}
               onMouseEnter={() => {
                 showText(
