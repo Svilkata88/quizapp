@@ -177,7 +177,7 @@ EMAIL_API_KEY= env("EMAIL_API_KEY")
 CELERY_BEAT_SCHEDULE = {
     "reset-daily-quiz": {
         "task": "daily_quiz.tasks.restart_daily_topic_task",
-        # "schedule": crontab(hour=0, minute=0),
-        "schedule": crontab(minute="*/2"),
+        "schedule": crontab(hour=0, minute=0),
+        # "schedule": crontab(minute="*/2"),
     },
 }
