@@ -116,6 +116,14 @@ function fetchDailyQuestions(url) {
   return apiFetch(normalizedUrl).then((response) => response);
 }
 
+function updateDailyQuiz(url, points_earned) {
+  const normalizedUrl = url.endsWith("/") ? url : `${url}/`;
+  return apiFetch(normalizedUrl, {
+    method: "POST",
+    body: points_earned,
+  }).then((response) => response);
+}
+
 function fetchAllQuestions(url) {
   return apiFetch(url).then((response) => response);
 }
@@ -266,6 +274,7 @@ function formatTime(seconds) {
 export {
   fetchQuestions,
   fetchDailyQuestions,
+  updateDailyQuiz,
   fetchAllQuestions,
   fetchOwnQuestions,
   fetchOneQuestions,

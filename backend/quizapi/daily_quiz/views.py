@@ -1,5 +1,4 @@
 from urllib import request
-
 import redis
 import random
 import environ
@@ -36,7 +35,6 @@ def restart_daily_topic():
         defaults={"category": daily_category},
     )
 
-
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
@@ -68,7 +66,31 @@ def get_daily_quiz_questions(request):
 
     return Response(serialized_questions.data, status=status.HTTP_200_OK)
     
+@api_view(["POST"])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def update_daily_quiz_after_game(request):
+    points_earned = request.data.get("points_earned")
 
+    daily_quiz = UserDailyQuiz.objects.filter(
+        user=request.user,
+        for_date=date.today()
+    ).first()
 
-    #Play the daily quiz for the given user and daily topic.
-    #...
+    if not daily_quiz:
+        return Response(
+            {"error": "No daily quiz found for today."},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    daily_quiz.points_earned = int(points_earned)
+    daily_quiz.is_played = True
+    daily_quiz.end_time = date.today()
+    daily_quiz.save()
+
+    print(
+        f"Updated daily quiz for user {request.user.username} "
+        f"with points: {points_earned}"
+    )
+
+    return Response({"message": "Daily quiz updated successfully."})

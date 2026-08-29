@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import {
   fetchDailyQuestions,
-  updateQuestions,
+  updateDailyQuiz,
   apiEditUser,
   hideText,
   showText,
@@ -57,7 +57,7 @@ function PlayDailyQuiz() {
     }
     fetchDailyQuestions(`${BASE_URL}/api/daily_quiz/get_daily_questions`)
       .then((res) => {
-        setQuestions(res.results);
+        setQuestions(res);
         setLoading(false);
         start();
       })
@@ -72,11 +72,29 @@ function PlayDailyQuiz() {
           navigate("/auth/login");
         }
       });
-  }, []);
+  }, [questions?.length]);
+
+  const handleReset = () => {
+    updateDailyQuiz(`${BASE_URL}/api/daily_quiz/update_daily_quiz/`, {
+      points_earned: points,
+    })
+      .then((res) => {
+        setPointsOverview(points);
+        setTimeOverview(time);
+        setCorrectlyAnsweredCountOverview(answeredCorrectly.length);
+        setDifficultyOverview("Daily Quiz");
+        reset();
+        navigate("/game_overview");
+      })
+      .catch((e) => {
+        console.error("Error updating daily quiz:", e);
+        // Handle the error appropriately, e.g., show a notification to the user
+      });
+  };
 
   return loading ? (
     <Spinner />
-  ) : questions.length > 0 ? (
+  ) : questions?.length > 0 ? (
     <div className="flex flex-col flex-1 bg-transparent p-2 md:p-10">
       {/* Question Section */}
       <section className="flex flex-col gap-2 items-center">
@@ -146,7 +164,7 @@ function PlayDailyQuiz() {
           setPoints={setPoints}
           qIndex={qIndex}
           setQIndex={setQIndex}
-          setPage={setPage}
+          setPage={1}
           setAnsweredCorrectly={setAnsweredCorrectly}
           qID={question?.id}
         />
@@ -159,7 +177,7 @@ function PlayDailyQuiz() {
           setPoints={setPoints}
           qIndex={qIndex}
           setQIndex={setQIndex}
-          setPage={setPage}
+          setPage={1}
           setAnsweredCorrectly={setAnsweredCorrectly}
           qID={question?.id}
         />
@@ -172,7 +190,7 @@ function PlayDailyQuiz() {
           setPoints={setPoints}
           qIndex={qIndex}
           setQIndex={setQIndex}
-          setPage={setPage}
+          setPage={1}
           setAnsweredCorrectly={setAnsweredCorrectly}
           qID={question?.id}
         />
@@ -185,7 +203,7 @@ function PlayDailyQuiz() {
           setPoints={setPoints}
           qIndex={qIndex}
           setQIndex={setQIndex}
-          setPage={setPage}
+          setPage={1}
           setAnsweredCorrectly={setAnsweredCorrectly}
           qID={question?.id}
         />
