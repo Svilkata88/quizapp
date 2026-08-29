@@ -3,8 +3,7 @@ import redis
 import environ
 from rest_framework_simplejwt.tokens import RefreshToken
 
-env = environ.Env(DEBUG=(bool, False)
-)
+env = environ.Env(DEBUG=(bool, False))
 
 
 def create_quiz_token(user):
@@ -27,7 +26,7 @@ def set_redis_token(token, user_id):
     redis_client = redis.from_url(
     env("REDIS_URL"),
     decode_responses=True
-)
+    )
     
     redis_client.setex(
         f"email_verify:{token}",

@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('users.urls')),
     path('api/questions/', include('questions.urls')),
+    path('api/daily_quiz/', include('daily_quiz.urls')),
 
     path("api/token/refresh/", custom_refresh_token_view, name="token_refresh"),
 ]

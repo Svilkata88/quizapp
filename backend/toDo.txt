@@ -9,5 +9,20 @@
 9. DONE След ресет да се връща към главното меню или да почва нова игра и да показва обобщение на играта
 10. DONE Месидж бокс за оплаквания и препоръки (има линк с контакти и мейл)
 11. DONE След свършване на въпросите разлогва и праща кум логин, да се оправи!
+12. Daily Quiz
+    requirements:
+        a. questions to be from the randomly chosen topic ( from topics available )
+            - chose the topics from these which have enough number of questions only
+            - if questions are more than required then shuffle them and chose first N number
+            - blacklist played topics played till no one left then restart
+        b. only one dayly game per account
+        c. exact number of questions ( 15 - 20 )
+        d. how to determine the 1st place , 2nd place and 3th place or to implement 1st place points for all questions, 2nd place points for 75% of questions and 3th for 50% of questiosn answered.
+        e. create a model to truck each quiz participation ( player, started time, ended time, points etc.) 
+        f. truck if player do a 3 5 7 days streak ( additional points if so)
+        g. update Profie to show number of streaks and 1 / 2 / 3th daily quizz places if so
+        h. implement crone job for restart the daily quiz and change the topic
+            - implement timer showing time of the quiz left
+            - automatically end all games when the quiz ends ( figure out how to deal with the ganes still open)
 
 admin: quizadmin / pass: 123456

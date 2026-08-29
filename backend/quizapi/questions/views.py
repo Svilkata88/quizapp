@@ -89,7 +89,6 @@ def get_question(request, id):
         "category": serialized_category.data,
     })
 
-
 def reset_game(request):
     new_seed = refresh_seed()
     response = JsonResponse({"seed": new_seed})
