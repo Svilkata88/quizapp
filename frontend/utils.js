@@ -111,6 +111,11 @@ function fetchQuestions(url, page, difficulty) {
   );
 }
 
+function fetchDailyQuestions(url) {
+  const normalizedUrl = url.endsWith("/") ? url : `${url}/`;
+  return apiFetch(normalizedUrl).then((response) => response);
+}
+
 function fetchAllQuestions(url) {
   return apiFetch(url).then((response) => response);
 }
@@ -260,6 +265,7 @@ function formatTime(seconds) {
 
 export {
   fetchQuestions,
+  fetchDailyQuestions,
   fetchAllQuestions,
   fetchOwnQuestions,
   fetchOneQuestions,
