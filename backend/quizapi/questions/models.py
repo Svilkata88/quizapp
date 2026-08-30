@@ -70,6 +70,9 @@ class Rating(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
+    def count(self):
+        return self.questions.count()
+
     def __str__(self):
         return self.name
 
