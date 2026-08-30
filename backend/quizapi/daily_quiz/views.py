@@ -44,7 +44,7 @@ def get_current_daily_topic_and_user_daily_quiz(request):
     if daily_topic is None:
         restart_daily_topic()
         daily_topic = redis_client.get("daily_topic")
-    return Response({"daily_topic": daily_topic, "daily_quiz": daily_quiz}, status=status.HTTP_200_OK)
+    return Response({"daily_topic": daily_topic, "is_played": daily_quiz.is_played if daily_quiz else None}, status=status.HTTP_200_OK)
 
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])

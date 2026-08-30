@@ -9,12 +9,14 @@ function DailyQuiz() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [dailyTopic, setDailyTopic] = useState("");
+  const [userDailyQuiz, setUserDailyQuiz] = useState(null);
 
   useEffect(() => {
     setLoading(true);
     fetchDailyTopoic(`${BASE_URL}/api/daily_quiz/daily-topic/`)
       .then((data) => {
         setDailyTopic(data.daily_topic);
+        setUserDailyQuiz(data.daily_quiz);
       })
       .catch((err) => {
         console.error("Failed to fetch daily topic:", err);
@@ -57,7 +59,7 @@ function DailyQuiz() {
       >
         Start
       </button>
-      <div className="">{dailyTopic}</div>
+      <div className="">{userDailyQuiz?.is_played}</div>
     </section>
   );
 }
