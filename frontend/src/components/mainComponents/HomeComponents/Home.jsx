@@ -9,10 +9,11 @@ import UserCard from "./UserCard";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function Home() {
+  const [topFive, setTopFive] = useState([]);
+  const [dailyTopic, setDailyTopic] = useState("");
+  const { logout } = useUserContext();
   const navigate = useNavigate();
   const divRef = useRef(null);
-  const [topFive, setTopFive] = useState([]);
-  const { logout } = useUserContext();
 
   useEffect(() => {
     fetchTopFiveUsers(`${BASE_URL}/api/users/top-five/`)

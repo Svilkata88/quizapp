@@ -1,13 +1,37 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchCategories as fetchDailyTopoic } from "../../../../utils";
+import SmallElementSpinner from "../../others/SmallElementSpinner.jsx";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function DailyQuiz() {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [dailyTopic, setDailyTopic] = useState("");
+
+  useEffect(() => {
+    setLoading(true);
+    fetchDailyTopoic(`${BASE_URL}/api/daily_quiz/daily-topic/`)
+      .then((data) => {
+        setDailyTopic(data.daily_topic);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch daily topic:", err);
+        setDailyTopic("Error fetching daily topic");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [dailyTopic]);
+
   return (
     <section className="text-gray-900 md:text-black dark:text-stone-300 bg-gradient-to-b from-zinc-200/30 to-zinc-400/0 min-h-70 lg:w-[300px] rounded-xl mt-5 mx-auto">
       <h1 className="text-center text-2xl font-bold mt-1 md:mt-0 pt-5">
         Daily quizz!
       </h1>
       <div className="mt-2 ml-2 text-center">
-        Today topic is <span className="font-semibold">Polictics</span>
+        Today topic is {loading ? <SmallElementSpinner /> : dailyTopic}
       </div>
       <div className="flex gap-2 justify-between mx-6 mt-6">
         <div className="w-12 h-12 text-center">
@@ -24,7 +48,7 @@ function DailyQuiz() {
       </div>
       <button
         className="mt-10 block w-fit mx-auto min-w-20 bg-green-300 hover:bg-green-500 px-2 py-1 rounded-4xl cursor-pointer text-black font-bold transition-colors"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/daily-quiz")}
       >
         Start
       </button>

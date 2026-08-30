@@ -38,6 +38,16 @@ def restart_daily_topic():
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
+def get_current_daily_topic():
+    daily_topic = redis_client.get("daily_topic")
+    if daily_topic is None:
+        restart_daily_topic()
+        daily_topic = redis_client.get("daily_topic")
+    return Response({"daily_topic": daily_topic}, status=status.HTTP_200_OK)
+
+@api_view(["GET"])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def get_daily_quiz_questions(request):
     """Sends 20 random questions to froned end for current day"""
 

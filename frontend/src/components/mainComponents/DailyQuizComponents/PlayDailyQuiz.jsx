@@ -62,8 +62,8 @@ function PlayDailyQuiz() {
         start();
       })
       .catch((e) => {
-        if (e.detail === "Invalid page.") {
-          //   handleReset();
+        if (e.error === "You have already played the daily quiz today.") {
+          console.log(e.error);
           navigate("/");
           // inform user that game is refreshed because no more questions
         } else {
@@ -84,10 +84,10 @@ function PlayDailyQuiz() {
         setCorrectlyAnsweredCountOverview(answeredCorrectly.length);
         setDifficultyOverview("Daily Quiz");
         reset();
-        navigate("/game_overview");
+        navigate("/game-overview");
       })
       .catch((e) => {
-        console.error("Error updating daily quiz:", e);
+        console.error(e);
         // Handle the error appropriately, e.g., show a notification to the user
       });
   };
