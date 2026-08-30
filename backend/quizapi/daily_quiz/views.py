@@ -38,7 +38,7 @@ def restart_daily_topic():
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
-def get_current_daily_topic():
+def get_current_daily_topic(request):
     daily_topic = redis_client.get("daily_topic")
     if daily_topic is None:
         restart_daily_topic()
