@@ -31,7 +31,12 @@ function DailyQuiz() {
         Daily quizz!
       </h1>
       <div className="mt-2 ml-2 text-center">
-        Today topic is {loading ? <SmallElementSpinner /> : dailyTopic}
+        Today topic is{" "}
+        {loading ? (
+          <SmallElementSpinner />
+        ) : (
+          <span className="font-semibold">{dailyTopic}</span>
+        )}
       </div>
       <div className="flex gap-2 justify-between mx-6 mt-6">
         <div className="w-12 h-12 text-center">
@@ -52,6 +57,7 @@ function DailyQuiz() {
       >
         Start
       </button>
+      <div className="">{dailyTopic}</div>
     </section>
   );
 }

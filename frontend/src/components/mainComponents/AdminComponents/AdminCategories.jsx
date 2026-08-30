@@ -34,7 +34,31 @@ function AdminCategories() {
         {categories.length > 0 ? (
           categories.map((category, index) => (
             <li key={category.name} className="text-base">
-              {index + 1}. {category.name} - {category.count} questions
+              <Link
+                to={`./${category.name}`}
+                className="text-sky-700 hover:underline"
+              >
+                {index + 1}. {category.name}
+              </Link>
+              <span className="mx-2">|</span>
+              <Link
+                to={`./${category.name}/edit`}
+                className="text-green-700 hover:underline"
+              >
+                Edit
+              </Link>
+              <span className="mx-2">|</span>
+              <Link
+                to={`./${category.name}/delete`}
+                className="text-red-500 hover:underline"
+              >
+                Delete
+              </Link>
+              <span className="mx-2">|</span>
+              <div className="text-sm text-gray-500">
+                {category.count}{" "}
+                {category.count === 1 ? "question" : "questions"}
+              </div>
             </li>
           ))
         ) : (
