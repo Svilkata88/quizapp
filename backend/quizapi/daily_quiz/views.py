@@ -6,6 +6,7 @@ from datetime import date
 from .models import DailyTopic, UserDailyQuiz
 from questions.models import Question, Category
 from questions.serializers import QuestionSerializer
+from django.views.decorators.cache import cache_page
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -38,6 +39,7 @@ def restart_daily_topic():
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
+@cache_page(60 * 5)  
 def get_current_daily_topic_and_user_daily_quiz(request):
     daily_topic = redis_client.get("daily_topic")
     daily_quiz = UserDailyQuiz.objects.filter(user=request.user, for_date=date.today()).first()

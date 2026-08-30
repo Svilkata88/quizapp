@@ -9,14 +9,14 @@ function DailyQuiz() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [dailyTopic, setDailyTopic] = useState("");
-  const [userDailyQuiz, setUserDailyQuiz] = useState(null);
+  const [is_played, setIsPlayed] = useState(null);
 
   useEffect(() => {
     setLoading(true);
     fetchDailyTopoic(`${BASE_URL}/api/daily_quiz/daily-topic/`)
       .then((data) => {
         setDailyTopic(data.daily_topic);
-        setUserDailyQuiz(data.daily_quiz);
+        setIsPlayed(data.is_played);
       })
       .catch((err) => {
         console.error("Failed to fetch daily topic:", err);
@@ -26,19 +26,28 @@ function DailyQuiz() {
         setLoading(false);
       });
   }, [dailyTopic]);
-
+  console.log(is_played);
   return (
-    <section className="text-gray-900 md:text-black dark:text-stone-300 bg-gradient-to-b from-zinc-200/30 to-zinc-400/0 min-h-70 lg:w-[300px] rounded-xl mt-5 mx-auto">
-      <h1 className="text-center text-2xl font-bold mt-1 md:mt-0 pt-5">
+    <section className="text-gray-900 md:text-black dark:text-stone-300 bg-gradient-to-b from-zinc-200/30 to-zinc-400/0 min-h-70 lg:w-[300px] rounded-xl mt-5 mx-auto pt-2">
+      <div
+        className={`${is_played ? "text-red-500 bg-red-300" : "text-green-800 bg-green-300"} w-fit text-xs font-semibold px-2 py-1 rounded-4xl mx-auto`}
+      >
+        {is_played ? "Completed" : "Active"}
+      </div>
+      <h1 className="text-center text-2xl font-bold mt-1 md:mt-0 pt-2">
         Daily quizz!
       </h1>
-      <div className="mt-2 ml-2 text-center">
-        Today topic is{" "}
-        {loading ? (
-          <SmallElementSpinner />
-        ) : (
-          <span className="font-semibold">{dailyTopic}</span>
-        )}
+      <div className="flex mt-2 ml-2 text-center">
+        <div>Today topic is </div>
+        <div className="relative ml-2">
+          {loading ? (
+            <div className="ml-10">
+              <SmallElementSpinner />
+            </div>
+          ) : (
+            <span className="font-semibold">{dailyTopic}</span>
+          )}
+        </div>
       </div>
       <div className="flex gap-2 justify-between mx-6 mt-6">
         <div className="w-12 h-12 text-center">
@@ -59,7 +68,6 @@ function DailyQuiz() {
       >
         Start
       </button>
-      <div className="">{userDailyQuiz?.is_played}</div>
     </section>
   );
 }
