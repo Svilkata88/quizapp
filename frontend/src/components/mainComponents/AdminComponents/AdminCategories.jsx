@@ -34,7 +34,7 @@ function AdminCategories() {
         {categories.length > 0 ? (
           categories.map((category, index) => (
             <li key={category.name} className="text-base">
-              {index + 1}. {category.name}
+              {index + 1}. {category.name} - {category.count} questions
             </li>
           ))
         ) : (

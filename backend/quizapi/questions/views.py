@@ -16,7 +16,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import QuestionSerializer, UpdateQuestionsSerializer, CategorySerializer
 from django.db import transaction
-from django.db.models import Case, When, Value, CharField, F
+from django.db.models import Case, When, Value, CharField, F, Count
 
 
 @api_view(["GET"])
@@ -164,8 +164,12 @@ def create_question_issue(request):
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def category_list(request):
-    categories = Category.objects.all()
-    return JsonResponse(list(categories.values('id','name')), safe=False, status=200)
+    categories = Category.objects.annotate(count=Count("questions"))
+    return JsonResponse(
+        list(categories.values("id", "name", "count")),
+        safe=False,
+        status=200,
+    )
 
 @api_view(["POST"])
 @authentication_classes([JWTAuthentication])
