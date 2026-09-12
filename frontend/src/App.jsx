@@ -27,6 +27,7 @@ import AdminIssues from "./components/mainComponents/AdminComponents/AdminIssues
 import AdminCategories from "./components/mainComponents/AdminComponents/AdminCategories.jsx";
 import CreateAdminCategory from "./components/mainComponents/AdminComponents/CreateAdminCategory.jsx";
 import PlayDailyQuiz from "./components/mainComponents/DailyQuizComponents/PlayDailyQuiz.jsx";
+import PassedDailyQuizzes from "./components/mainComponents/DailyQuizComponents/PassedDailyQuizzes.jsx";
 
 export function App() {
   return (
@@ -35,6 +36,7 @@ export function App() {
         <Route index element={<Home />} />
         <Route path="/play" element={<Play />} />
         <Route path="/daily-quiz" element={<PlayDailyQuiz />} />
+        <Route path="/passed-daily-quizzes" element={<PassedDailyQuizzes />} />
         <Route path="/chose-difficulty" element={<ChoseDifficulty />} />
         <Route path="/game-overview" element={<GameOverview />} />
         <Route path="/info" element={<Info />} />

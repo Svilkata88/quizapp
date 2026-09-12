@@ -271,6 +271,13 @@ function formatTime(seconds) {
   return new Date(seconds * 1000).toISOString().slice(11, 19);
 }
 
+function fetchDailyQuizSummary(url) {
+  return apiFetch(url, {
+    method: "GET",
+    credentials: "include",
+  }).then((response) => response);
+}
+
 export {
   fetchQuestions,
   fetchDailyQuestions,
@@ -278,6 +285,7 @@ export {
   fetchAllQuestions,
   fetchOwnQuestions,
   fetchOneQuestions,
+  fetchDailyQuizSummary,
   apiEditQuestion,
   createQuestion,
   updateQuestions,

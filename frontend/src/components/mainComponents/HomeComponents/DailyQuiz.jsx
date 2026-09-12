@@ -26,7 +26,7 @@ function DailyQuiz() {
         setLoading(false);
       });
   }, [dailyTopic]);
-  console.log(is_played);
+
   return (
     <section className="text-gray-900 md:text-black dark:text-stone-300 bg-gradient-to-b from-zinc-200/30 to-zinc-400/0 min-h-70 lg:w-[300px] rounded-xl mt-5 mx-auto pt-2">
       <div
@@ -37,8 +37,8 @@ function DailyQuiz() {
       <h1 className="text-center text-2xl font-bold mt-1 md:mt-0 pt-2">
         Daily quizz!
       </h1>
-      <div className="flex mt-2 ml-2 text-center">
-        <div>Today topic is </div>
+      <div className="flex mt-2 text-center mx-auto w-fit">
+        <div className="">Today topic is </div>
         <div className="relative ml-2">
           {loading ? (
             <div className="ml-10">
@@ -62,12 +62,24 @@ function DailyQuiz() {
           <img src="/medalThird.png" alt="First place" />5 xp
         </div>
       </div>
-      <button
-        className="mt-10 block w-fit mx-auto min-w-20 bg-green-300 hover:bg-green-500 px-2 py-1 rounded-4xl cursor-pointer text-black font-bold transition-colors"
-        onClick={() => navigate("/daily-quiz")}
-      >
-        Start
-      </button>
+      <div className="flex gap-2 justify-center mx-auto mt-10">
+        <button
+          className={`min-w-20 bg-green-300 hover:bg-green-500 px-2 py-1 rounded-4xl cursor-pointer text-black font-bold transition-colors ${is_played ? "text-gray-500 bg-gray-300 cursor-not-allowed" : ""}`}
+          onClick={() => navigate("/daily-quiz")}
+          disabled={is_played}
+        >
+          Start
+        </button>
+        <button
+          className={`flex items-center bg-amber-200 hover:bg-amber-300 px-2 py-1 pl-5 rounded-4xl cursor-pointer text-black font-bold transition-colors ${is_played ? "text-gray-500 bg-gray-300 cursor-not-allowed" : ""}`}
+          onClick={() => navigate("/passed-daily-quizzes")}
+        >
+          <p>Passed quizzes</p>
+          <div className="w-4 h-5 inline-block mr-1 ml-2">
+            <img src="/arrowRightGreen.png" alt="" className="h-full" />
+          </div>
+        </button>
+      </div>
     </section>
   );
 }

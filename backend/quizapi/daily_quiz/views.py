@@ -3,10 +3,12 @@ import redis
 import random
 import environ
 from datetime import date
-from .models import DailyTopic, UserDailyQuiz
+from .models import DailyQuizSummary, DailyTopic, UserDailyQuiz
 from questions.models import Question, Category
 from questions.serializers import QuestionSerializer
 from django.views.decorators.cache import cache_page
+from django.db.models import F
+from django.utils import timezone
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -34,6 +36,36 @@ def restart_daily_topic():
     DailyTopic.objects.update_or_create(
         for_date=date.today(),
         defaults={"category": daily_category},
+    )
+
+def summarize_daily_quiz(current_date):
+    daily_topic = DailyTopic.objects.select_related("category").get(
+        for_date=current_date
+    )
+    daily_category = daily_topic.category
+
+    users_quizzes = UserDailyQuiz.objects.annotate(
+        time_played=F("end_time") - F("start_time")
+    ).filter(
+        topic=daily_category,
+        for_date=current_date,
+        is_played=True
+    ).order_by('-points_earned', "time_played")
+
+    players_count = users_quizzes.count()
+    first_place_user_quiz = users_quizzes.first() if players_count > 0 else None
+    second_place_user_quiz = users_quizzes[1] if players_count > 1 else None
+    third_place_user_quiz = users_quizzes[2] if players_count > 2 else None
+
+    DailyQuizSummary.objects.update_or_create(
+        topic=daily_category,
+        for_date=current_date,
+        defaults={
+            "players_count": players_count,
+            "first_place_user_quiz": first_place_user_quiz,
+            "second_place_user_quiz": second_place_user_quiz,
+            "third_place_user_quiz": third_place_user_quiz,
+        }
     )
 
 @api_view(["GET"])
@@ -98,7 +130,7 @@ def update_daily_quiz_after_game(request):
 
     daily_quiz.points_earned = int(points_earned)
     daily_quiz.is_played = True
-    daily_quiz.end_time = date.today()
+    daily_quiz.end_time = timezone.now()
     daily_quiz.save()
 
     print(
@@ -107,3 +139,17 @@ def update_daily_quiz_after_game(request):
     )
 
     return Response({"message": "Daily quiz updated successfully."})
+
+@api_view(["GET"])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def get_daily_quizzes_summary(request):
+    try:
+        summary = DailyQuizSummary.objects.all().order_by('-for_date')[:10] 
+    except DailyQuizSummary.DoesNotExist:
+        return Response({"error": "No daily quiz summary found."}, status=status.HTTP_404_NOT_FOUND)
+
+    return Response(
+        {"summary": summary},
+        status=status.HTTP_200_OK
+    )

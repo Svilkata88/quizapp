@@ -20,17 +20,22 @@ class UserDailyQuiz(models.Model):
     points_earned = models.PositiveIntegerField(default=0)
     is_played = models.BooleanField(default=False)
 
-    @classmethod
-    def top_three(cls):
-        """Return the three highest-scoring completed daily quiz attempts.
 
-        Ties are resolved by completion time, with the earliest completion
-        ranking first.
-        """
-        return (
-            cls.objects.filter(is_played=True, end_time__isnull=False)
-            .order_by("-points_earned", "end_time")[:3]
-        )
+class DailyQuizSummary(models.Model):
+    topic=models.ForeignKey(Category, on_delete=models.CASCADE, related_name="summary_daily_quizzes")
+    for_date = models.DateField()
+    players_count = models.PositiveIntegerField(default=0)
+    first_place_user_quiz = models.ForeignKey(UserDailyQuiz, on_delete=models.SET_NULL, null=True, blank=True, related_name="first_place_summary"    )
+    second_place_user_quiz = models.ForeignKey(UserDailyQuiz, on_delete=models.SET_NULL, null=True, blank=True, related_name="second_place_summary")
+    third_place_user_quiz = models.ForeignKey(UserDailyQuiz, on_delete=models.SET_NULL, null=True, blank=True, related_name="third_place_summary")
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["topic", "for_date"],
+                name="unique_daily_quiz_summary_per_topic_and_date",
+            )
+    ]
 
 
 class DailyTopic(models.Model):

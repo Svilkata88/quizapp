@@ -180,4 +180,7 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": crontab(hour=0, minute=0),
         # "schedule": crontab(minute="*/2"),
     },
+    "summarize_daily_quiz_task": {
+        "task": "daily_quiz.tasks.summarize_daily_quiz_task",
+        "schedule": crontab(hour=23, minute=59),}
 }
