@@ -1,19 +1,20 @@
-from urllib import request
 import redis
 import random
 import environ
 from datetime import date
-from .models import DailyQuizSummary, DailyTopic, UserDailyQuiz
+from urllib import request
+from django.db.models import F
+from rest_framework import status
+from django.utils import timezone
+from rest_framework.response import Response
 from questions.models import Question, Category
 from questions.serializers import QuestionSerializer
 from django.views.decorators.cache import cache_page
-from django.db.models import F
-from django.utils import timezone
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from .models import DailyQuizSummary, DailyTopic, UserDailyQuiz
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from backend.quizapi.daily_quiz.serializers import DailyQuizSummarySerializer
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
 env = environ.Env(DEBUG=(bool, False))
 redis_client = redis.from_url(
@@ -149,7 +150,8 @@ def get_daily_quizzes_summary(request):
     except DailyQuizSummary.DoesNotExist:
         return Response({"error": "No daily quiz summary found."}, status=status.HTTP_404_NOT_FOUND)
 
+    serialized_summary = DailyQuizSummarySerializer(summary, many=True)
     return Response(
-        {"summary": summary},
+        {"summary": serialized_summary.data},
         status=status.HTTP_200_OK
     )
