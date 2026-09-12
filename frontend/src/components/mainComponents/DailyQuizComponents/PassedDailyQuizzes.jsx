@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PassedDailyQuizzCard from "./PassedDailyQuizzCard.jsx";
 import Spinner from "../../others/Spinner.jsx";
-import { fetchDailyQuizSummary } from "../../../utils.js";
+import { fetchDailyQuizSummary } from "../../../../utils.js";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
