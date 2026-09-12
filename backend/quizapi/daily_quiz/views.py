@@ -13,7 +13,7 @@ from django.views.decorators.cache import cache_page
 from rest_framework.permissions import IsAuthenticated
 from .models import DailyQuizSummary, DailyTopic, UserDailyQuiz
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from backend.quizapi.daily_quiz.serializers import DailyQuizSummarySerializer
+from .serializers import DailyQuizSummarySerializer
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
 env = environ.Env(DEBUG=(bool, False))
