@@ -1,4 +1,5 @@
 function PassedDailyQuizzCard({ quiz }) {
+  console.log(quiz);
   return (
     <div
       className="

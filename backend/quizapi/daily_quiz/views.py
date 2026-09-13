@@ -146,7 +146,11 @@ def update_daily_quiz_after_game(request):
 @permission_classes([IsAuthenticated])
 def get_daily_quizzes_summary(request):
     try:
-        summary = DailyQuizSummary.objects.all().order_by('-for_date')[:10] 
+        summary = (
+            DailyQuizSummary.objects
+            .all()
+            .order_by('-for_date')[:10]
+        )
     except DailyQuizSummary.DoesNotExist:
         return Response({"error": "No daily quiz summary found."}, status=status.HTTP_404_NOT_FOUND)
 

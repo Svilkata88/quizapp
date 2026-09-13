@@ -42,9 +42,15 @@ function PassedDailyQuizzes() {
       max-h-[50vh] md:max-h-120 2xl:max-h-140
       "
     >
-      {passedDailyQuizzes.map((quizSummary) => (
-        <PassedDailyQuizzCard key={quizSummary.id} quiz={quizSummary} />
-      ))}
+      {passedDailyQuizzes.length !== 0 ? (
+        passedDailyQuizzes.map((quizSummary) => (
+          <PassedDailyQuizzCard key={quizSummary.id} quiz={quizSummary} />
+        ))
+      ) : (
+        <h2 className="text-center text-lg font-semibold text-gray-700 mt-4">
+          No passed daily quizzes found.
+        </h2>
+      )}
     </div>
   );
 }

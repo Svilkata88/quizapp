@@ -22,7 +22,7 @@ class UserDailyQuiz(models.Model):
 
 
 class DailyQuizSummary(models.Model):
-    topic=models.ForeignKey(Category, on_delete=models.CASCADE, related_name="summary_daily_quizzes")
+    topic=models.CharField(max_length=255)
     for_date = models.DateField()
     players_count = models.PositiveIntegerField(default=0)
     first_place_user_quiz = models.ForeignKey(UserDailyQuiz, on_delete=models.SET_NULL, null=True, blank=True, related_name="first_place_summary"    )
