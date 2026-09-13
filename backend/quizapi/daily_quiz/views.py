@@ -59,7 +59,7 @@ def summarize_daily_quiz(current_date):
     third_place_user_quiz = users_quizzes[2] if players_count > 2 else None
 
     DailyQuizSummary.objects.update_or_create(
-        topic=daily_category,
+        topic=daily_category.name,
         for_date=current_date,
         defaults={
             "players_count": players_count,

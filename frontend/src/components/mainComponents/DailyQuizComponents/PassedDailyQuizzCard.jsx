@@ -6,12 +6,12 @@ function PassedDailyQuizzCard({ quiz }) {
     flex flex-col gap-1
     "
     >
-      <h3>{quiz.topic.name}</h3>
+      <h3>{quiz.topic}</h3>
       <p>Date: {quiz.for_date}</p>
       <p>Players: {quiz.players_count}</p>
-      <p>First Place: {quiz.first_place_user_quiz.name}</p>
-      <p>Second Place: {quiz.second_place_user_quiz.name}</p>
-      <p>Third Place: {quiz.third_place_user_quiz.name}</p>
+      <p>First Place: {quiz.first_place_user_quiz}</p>
+      <p>Second Place: {quiz.second_place_user_quiz}</p>
+      <p>Third Place: {quiz.third_place_user_quiz}</p>
     </div>
   );
 }
