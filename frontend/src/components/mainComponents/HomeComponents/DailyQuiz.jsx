@@ -65,7 +65,9 @@ function DailyQuiz() {
       <div className="flex gap-2 justify-center mx-auto mt-10">
         <button
           className={`min-w-20 bg-green-300 hover:bg-green-500 px-2 py-1 rounded-4xl cursor-pointer text-black font-bold transition-colors ${is_played ? "text-gray-500 bg-gray-300 cursor-not-allowed" : ""}`}
-          onClick={() => navigate("/daily-quiz")}
+          onClick={() => {
+            navigate("/daily-quiz");
+          }}
           disabled={is_played}
         >
           Start

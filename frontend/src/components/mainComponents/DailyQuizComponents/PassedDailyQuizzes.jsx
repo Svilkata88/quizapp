@@ -32,9 +32,9 @@ function PassedDailyQuizzes() {
   ) : (
     <div
       className="
-      flex flex-col gap-1 
+      flex gap-1 flex-wrap
       bg-gradient-to-b from-zinc-100 to-zinc-400 
-      mt-10 p-4 pt-0 mx-auto
+      mt-10 p-4 mx-auto
       rounded-lg 
       overflow-hidden overflow-y-auto
       shadow-[var(--blue-shadow)] 

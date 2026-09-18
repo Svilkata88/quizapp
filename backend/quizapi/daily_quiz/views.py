@@ -72,7 +72,6 @@ def summarize_daily_quiz(current_date):
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
-@cache_page(60 * 5)  
 def get_current_daily_topic_and_user_daily_quiz(request):
     daily_topic = redis_client.get("daily_topic")
     daily_quiz = UserDailyQuiz.objects.filter(user=request.user, for_date=date.today()).first()
@@ -108,7 +107,7 @@ def get_daily_quiz_questions(request):
     questions = Question.objects.filter(id__in=ids[:20], status=Question.Status.CONFIRMED)
     serialized_questions = QuestionSerializer(questions, many=True)
 
-    UserDailyQuiz.objects.get_or_create(user=request.user, topic=category, for_date=date.today())
+    UserDailyQuiz.objects.get_or_create(user=request.user, topic=category, for_date=date.today(), is_played=True, defaults={"start_time": timezone.now()})
 
     return Response(serialized_questions.data, status=status.HTTP_200_OK)
     
@@ -130,7 +129,6 @@ def update_daily_quiz_after_game(request):
         )
 
     daily_quiz.points_earned = int(points_earned)
-    daily_quiz.is_played = True
     daily_quiz.end_time = timezone.now()
     daily_quiz.save()
 
