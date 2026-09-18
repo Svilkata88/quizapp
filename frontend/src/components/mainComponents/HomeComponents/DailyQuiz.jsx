@@ -30,9 +30,17 @@ function DailyQuiz() {
   return (
     <section className="text-gray-900 md:text-black dark:text-stone-300 bg-gradient-to-b from-zinc-200/30 to-zinc-400/0 min-h-70 lg:w-[300px] rounded-xl mt-5 mx-auto pt-2">
       <div
-        className={`${is_played ? "text-red-500 bg-red-300" : "text-green-800 bg-green-300"} w-fit text-xs font-semibold px-2 py-1 rounded-4xl mx-auto`}
+        className={`${is_played ? "text-red-500 bg-red-300" : "text-green-800 bg-green-300"} w-fit text-xs font-semibold ${loading ? "bg-transparent" : "px-2 py-1"} rounded-4xl mx-auto mt-2`}
       >
-        {is_played ? "Completed" : "Active"}
+        {loading ? (
+          <div className="relative h-6 mx-auto">
+            <SmallElementSpinner />
+          </div>
+        ) : is_played ? (
+          "Completed"
+        ) : (
+          "Active"
+        )}
       </div>
       <h1 className="text-center text-2xl font-bold mt-1 md:mt-0 pt-2">
         Daily quizz!
