@@ -32,8 +32,8 @@ function PassedDailyQuizzes() {
   ) : (
     <div
       className="
-      flex gap-1 flex-wrap
-      bg-gradient-to-b from-zinc-100 to-zinc-400 
+      flex gap-1 flex-wrap justify-between items-center
+      bg-gray-900/70
       mt-10 p-4 mx-auto
       rounded-lg 
       overflow-hidden overflow-y-auto

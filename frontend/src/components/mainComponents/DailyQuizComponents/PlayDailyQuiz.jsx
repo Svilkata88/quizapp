@@ -1,19 +1,11 @@
 import Answer from "./../QuestonsComponents/Answer.jsx";
 import Spinner from "../../others/Spinner.jsx";
 import NoQuestions from "../../mainComponents/PlayComponents/NoQuestions.jsx";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import {
-  fetchDailyQuestions,
-  updateDailyQuiz,
-  apiEditUser,
-  hideText,
-  showText,
-} from "../../../../utils.js";
+import { fetchDailyQuestions, updateDailyQuiz } from "../../../../utils.js";
 import RatingStars from "../PlayComponents/RatingStars.jsx";
-import Cookies from "js-cookie";
 import { useUserContext } from "../../../hooks/userContext.jsx";
-import { useDifficultyContext } from "../../../hooks/useDifficulty.jsx";
 import GameStats from "../PlayComponents/GameStats.jsx";
 import QuestionInfo from "../PlayComponents/QuestionInfo.jsx";
 import { useTimer } from "../../../hooks/useTimer.jsx";
@@ -22,7 +14,7 @@ import { useGameOverviewContext } from "../../../hooks/useGameOverview.jsx";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function PlayDailyQuiz() {
-  const { user, login, isAuthenticated } = useUserContext();
+  const { isAuthenticated } = useUserContext();
   const {
     setPointsOverview,
     setTimeOverview,
@@ -30,11 +22,8 @@ function PlayDailyQuiz() {
     setDifficultyOverview,
   } = useGameOverviewContext();
   const { logout } = useUserContext();
-  const { difficulty } = useDifficultyContext();
   const { time, start, stop, reset } = useTimer();
 
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
   const [qIndex, setQIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [disabled, setDisabled] = useState(false);
@@ -72,7 +61,7 @@ function PlayDailyQuiz() {
           navigate("/auth/login");
         }
       });
-  }, [questions?.length]);
+  }, []);
 
   const handleReset = () => {
     updateDailyQuiz(`${BASE_URL}/api/daily_quiz/update_daily_quiz/`, {
