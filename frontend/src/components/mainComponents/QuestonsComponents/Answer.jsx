@@ -11,6 +11,7 @@ function Answer({
   setQIndex,
   setAnsweredCorrectly,
   qID,
+  setWrongAnsweredQuestionId,
 }) {
   const [isAnswered, setIsAnswered] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -51,6 +52,7 @@ function Answer({
       correct && !prev.includes(qID) ? [...prev, qID] : prev,
     );
     !correct && stopTimer(); // Stop the timer if the answer is incorrect
+    !correct && setWrongAnsweredQuestionId(qID); // Add to wrongly answered question id if incorrect
 
     setTimeout(() => {
       setPoints((prev) => (correct ? prev + 1 : prev));

@@ -1,9 +1,6 @@
 import { formatTime } from "../../../../utils.js";
-import { useNavigate } from "react-router-dom";
 
 function GameStats({ points, time, handleReset }) {
-  const navigate = useNavigate();
-
   return (
     <section className="flex gap-2 justify-between border border-gray-300 rounded-4xl w-full md:w-3/4 xl:w-1/3 bg-gradient-to-b from-zinc-400/70 to-zinc-600/70 p-1 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)] mt-auto md:left-auto md:top-6 md:right-4">
       <div className="flex gap-1 text-xl font-bold flex items-center border border-gray-300 rounded-4xl px-3 bg-gradient-to-b from-zinc-300 to-zinc-500">
@@ -27,7 +24,6 @@ function GameStats({ points, time, handleReset }) {
         className="bg-blue-500 hover:bg-blue-500/70 text-white font-bold py-2 px-4 rounded-4xl"
         onClick={() => {
           handleReset();
-          navigate("/game-overview");
         }}
       >
         Restart

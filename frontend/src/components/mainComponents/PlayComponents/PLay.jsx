@@ -41,6 +41,7 @@ function Questions() {
   const [points, setPoints] = useState(0);
   const [loading, setLoading] = useState(true);
   const [answeredCorrectly, setAnsweredCorrectly] = useState([]);
+  const [wrongAnsweredQuestionId, setWrongAnsweredQuestionId] = useState(null);
   const question = questions ? questions[qIndex] : {};
   const [rating, setRating] = useState(question?.rating || 0);
   const [isInfoHidden, setInfoIsHidden] = useState(true);
@@ -56,8 +57,8 @@ function Questions() {
     stop();
 
     if (points <= 5) newPoints = user.points + points;
-    else if (5 < points <= 10) newPoints = user.points + points + 2;
-    else if (10 < points <= 15) newPoints = user.points + points + 5;
+    else if (points > 5 && points <= 10) newPoints = user.points + points + 2;
+    else if (points > 10 && points <= 15) newPoints = user.points + points + 5;
     else newPoints = user.points + points + 15;
 
     let xp = Math.floor(newPoints / 10);
@@ -65,7 +66,7 @@ function Questions() {
     // update all answswered questions with +1 to their answered_questions property and +1 to the one answered wrong
     updateQuestions(`${BASE_URL}/api/questions/update-questions/`, {
       answeredCorrectly: answeredCorrectly,
-      answeredWrong: questions[qIndex]?.id,
+      answeredWrong: wrongAnsweredQuestionId,
     }).catch((err) => {
       console.error("Failed to update questions: ", err);
     });
@@ -88,6 +89,7 @@ function Questions() {
             access: Cookies.get("access"),
             seed: Cookies.get("seed"),
           });
+          navigate("/game-overview");
         }
       })
       .catch((err) => {
@@ -221,7 +223,7 @@ function Questions() {
         {/* to be done with map */}
         <Answer
           text={question?.answers[0]?.text}
-          correct={question?.correct_answer.text === question?.answers[0]?.text}
+          correct={question?.correct_answer.id === question?.answers[0]?.id}
           stopTimer={stop}
           disabled={disabled}
           setDisabled={setDisabled}
@@ -231,10 +233,11 @@ function Questions() {
           setPage={setPage}
           setAnsweredCorrectly={setAnsweredCorrectly}
           qID={question?.id}
+          setWrongAnsweredQuestionId={setWrongAnsweredQuestionId}
         />
         <Answer
           text={question?.answers[1]?.text}
-          correct={question?.correct_answer.text === question?.answers[1]?.text}
+          correct={question?.correct_answer.id === question?.answers[1]?.id}
           stopTimer={stop}
           disabled={disabled}
           setDisabled={setDisabled}
@@ -244,10 +247,11 @@ function Questions() {
           setPage={setPage}
           setAnsweredCorrectly={setAnsweredCorrectly}
           qID={question?.id}
+          setWrongAnsweredQuestionId={setWrongAnsweredQuestionId}
         />
         <Answer
           text={question?.answers[2]?.text}
-          correct={question?.correct_answer.text === question?.answers[2]?.text}
+          correct={question?.correct_answer.id === question?.answers[2]?.id}
           stopTimer={stop}
           disabled={disabled}
           setDisabled={setDisabled}
@@ -257,10 +261,11 @@ function Questions() {
           setPage={setPage}
           setAnsweredCorrectly={setAnsweredCorrectly}
           qID={question?.id}
+          setWrongAnsweredQuestionId={setWrongAnsweredQuestionId}
         />
         <Answer
           text={question?.answers[3]?.text}
-          correct={question?.correct_answer.text === question?.answers[3]?.text}
+          correct={question?.correct_answer.id === question?.answers[3]?.id}
           stopTimer={stop}
           disabled={disabled}
           setDisabled={setDisabled}
@@ -270,6 +275,7 @@ function Questions() {
           setPage={setPage}
           setAnsweredCorrectly={setAnsweredCorrectly}
           qID={question?.id}
+          setWrongAnsweredQuestionId={setWrongAnsweredQuestionId}
         />
         {question?.info &&
           disabled &&

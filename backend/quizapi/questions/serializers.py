@@ -34,7 +34,10 @@ class UpdateQuestionsSerializer(serializers.Serializer):
     answeredCorrectly = serializers.ListField(
         child=serializers.IntegerField(), required=False
     )
-    answeredWrong = serializers.IntegerField(required=False)
+    answeredWrong = serializers.IntegerField(
+        required=False,
+        allow_null=True
+    )
 
 
 class QuestionIssueSerializer(serializers.ModelField):
