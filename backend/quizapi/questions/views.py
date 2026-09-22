@@ -42,6 +42,7 @@ def question_list(request):
         return Response({"error": "Invalid seed value"}, status=status.HTTP_400_BAD_REQUEST)  
 
     difficulty = request.GET.get("difficulty")
+    print("difficulty:", difficulty)
 
     ids = get_question_ids(difficulty)
     rnd = random.Random(seed)
@@ -50,9 +51,10 @@ def question_list(request):
     paginator = PageNumberPagination()
     paginator.page_size = PAGE_SIZE
     page_ids = paginator.paginate_queryset(ids, request)
+    print("page_ids:", page_ids)
     
     questions = Question.objects.filter(id__in=page_ids, status=Question.Status.CONFIRMED, difficulty=difficulty)
-    
+    print("questions:", questions)
     serialized_questions = QuestionSerializer(questions, many=True)
 
     response = paginator.get_paginated_response(serialized_questions.data)

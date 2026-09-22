@@ -81,7 +81,7 @@ function DailyQuiz() {
           Start
         </button>
         <button
-          className={`flex items-center bg-amber-200 hover:bg-amber-300 px-2 py-1 pl-5 rounded-4xl cursor-pointer text-black font-bold transition-colors ${is_played ? "text-gray-500 bg-gray-300 cursor-not-allowed" : ""}`}
+          className={`flex items-center bg-amber-200 hover:bg-amber-300 px-2 py-1 pl-5 rounded-4xl cursor-pointer text-black font-bold transition-colors`}
           onClick={() => navigate("/passed-daily-quizzes")}
         >
           <p>Passed quizzes</p>

@@ -1,12 +1,10 @@
 import Answer from "./../QuestonsComponents/Answer.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   fetchQuestions,
   updateQuestions,
   apiEditUser,
-  hideText,
-  showText,
 } from "../../../../utils.js";
 import Spinner from "../../others/Spinner.jsx";
 import RatingStars from "../PlayComponents/RatingStars.jsx";
@@ -51,7 +49,7 @@ function Questions() {
   const roundedRating = (Math.round(rating * 10) / 10 || 0).toFixed(1);
   const navigate = useNavigate();
 
-  const handleReset = () => {
+  const handleReset = (completionPath = "/game-overview") => {
     let newPoints;
 
     stop();
@@ -89,7 +87,7 @@ function Questions() {
             access: Cookies.get("access"),
             seed: Cookies.get("seed"),
           });
-          navigate("/game-overview");
+          navigate(completionPath);
         }
       })
       .catch((err) => {
@@ -121,22 +119,29 @@ function Questions() {
 
   useEffect(() => {
     setLoading(true);
+
     if (!isAuthenticated) {
       navigate("/auth/login");
       return;
     }
+
     const data = fetchQuestions(`${BASE_URL}/api/questions`, page, difficulty);
     data
       .then((res) => {
+        console.log("difficulty:", difficulty);
+        console.log("Fetched questions:", res.results);
+        if (!res.results?.length && page > 1) {
+          handleReset("/play/questions-answered");
+          return;
+        }
+
         setQuestions(res.results);
         setLoading(false);
         start();
       })
       .catch((e) => {
         if (e.detail === "Invalid page.") {
-          handleReset();
-          navigate("/");
-          // inform user that game is refreshed because no more questions
+          handleReset("/play/questions-answered");
         } else {
           logout();
           reset();
@@ -158,9 +163,15 @@ function Questions() {
     }
   }, [question?.id]);
 
-  return loading ? (
-    <Spinner />
-  ) : questions.length > 0 ? (
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (!questions.length || !question?.id) {
+    return <NoQuestions />;
+  }
+
+  return (
     <div className="flex flex-col flex-1 bg-transparent p-2 md:p-10">
       {/* Question Section */}
       <section className="flex flex-col gap-2 items-center">
@@ -288,8 +299,6 @@ function Questions() {
         <GameStats points={points} time={time} handleReset={handleReset} />
       </section>
     </div>
-  ) : (
-    <NoQuestions />
   );
 }
 

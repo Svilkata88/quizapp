@@ -100,7 +100,7 @@ function PlayDailyQuiz() {
         }
 
         const xp = Math.floor(newPoints / 10);
-
+        console.log("Updated userDailyQuiz");
         return apiEditUser(`${BASE_URL}/api/users/profile/edit/${user.id}`, {
           points: newPoints,
           xp: user.xp !== xp ? xp : user.xp,
@@ -114,6 +114,7 @@ function PlayDailyQuiz() {
                 xp: res.xp,
               });
             }
+            console.log("User updated successfully:");
           })
           .catch((err) => {
             console.error("User update failed:", err);
@@ -127,6 +128,8 @@ function PlayDailyQuiz() {
           .then(() => {
             setAnsweredCorrectly([]);
             setWrongAnsweredQuestionId(null);
+            console.log("Questions updated successfully");
+
             navigate("/game-overview");
           })
           .catch((err) => {
@@ -137,6 +140,12 @@ function PlayDailyQuiz() {
         console.error("Error completing daily quiz:", error);
       });
   };
+
+  if (answeredCorrectly.length === questions.length && questions.length > 0) {
+    stop();
+    handleReset();
+    navigate("/game-overview");
+  }
 
   return loading ? (
     <Spinner />

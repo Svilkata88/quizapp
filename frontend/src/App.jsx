@@ -28,13 +28,17 @@ import AdminCategories from "./components/mainComponents/AdminComponents/AdminCa
 import CreateAdminCategory from "./components/mainComponents/AdminComponents/CreateAdminCategory.jsx";
 import PlayDailyQuiz from "./components/mainComponents/DailyQuizComponents/PlayDailyQuiz.jsx";
 import PassedDailyQuizzes from "./components/mainComponents/DailyQuizComponents/PassedDailyQuizzes.jsx";
+import AllQuestionsAnswered from "./components/mainComponents/PlayComponents/AllQuestionsAnswered.jsx";
 
 export function App() {
   return (
     <Routes>
       <Route path="/" element={<Main />}>
         <Route index element={<Home />} />
-        <Route path="/play" element={<Play />} />
+        <Route path="/play">
+          <Route index element={<Play />} />
+          <Route path="questions-answered" element={<AllQuestionsAnswered />} />
+        </Route>
         <Route path="/daily-quiz" element={<PlayDailyQuiz />} />
         <Route path="/passed-daily-quizzes" element={<PassedDailyQuizzes />} />
         <Route path="/chose-difficulty" element={<ChoseDifficulty />} />
