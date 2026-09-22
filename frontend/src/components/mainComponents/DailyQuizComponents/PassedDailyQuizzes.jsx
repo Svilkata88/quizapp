@@ -32,16 +32,20 @@ function PassedDailyQuizzes() {
   ) : (
     <div
       className="
-      flex gap-1 flex-wrap justify-between items-center
+      flex gap-1 flex-wrap justify-start items-center gap-4
       bg-gray-900/70
-      mt-10 p-4 mx-auto
+      p-5 mx-auto
       rounded-lg 
       overflow-hidden overflow-y-auto
       shadow-[var(--blue-shadow)] 
       w-[90vw]
-      max-h-[50vh] md:max-h-120 2xl:max-h-140
+       md:max-h-120 2xl:max-h-140
       "
     >
+      {/* TO FIX ALL DISPLAY SIZES STYLING */}
+      <h2 className="text-center text-xl font-bold mb-4 text-gray-200 w-full">
+        Passed Daily Quizzes
+      </h2>
       {passedDailyQuizzes.length !== 0 ? (
         passedDailyQuizzes.map((quizSummary) => (
           <PassedDailyQuizzCard key={quizSummary.id} quiz={quizSummary} />

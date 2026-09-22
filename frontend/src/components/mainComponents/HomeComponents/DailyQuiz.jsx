@@ -45,7 +45,7 @@ function DailyQuiz() {
       <h1 className="text-center text-2xl font-bold mt-1 md:mt-0 pt-2">
         Daily quizz!
       </h1>
-      <div className="flex mt-2 text-center mx-auto w-fit">
+      <div className="flex mt-2 px-2 text-center mx-auto w-fit">
         <div className="">Today topic is </div>
         <div className="relative ml-2">
           {loading ? (
@@ -53,7 +53,7 @@ function DailyQuiz() {
               <SmallElementSpinner />
             </div>
           ) : (
-            <span className="font-semibold">{dailyTopic}</span>
+            <span className="font-semibold text-amber-200">{dailyTopic}</span>
           )}
         </div>
       </div>

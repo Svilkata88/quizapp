@@ -128,8 +128,6 @@ function Questions() {
     const data = fetchQuestions(`${BASE_URL}/api/questions`, page, difficulty);
     data
       .then((res) => {
-        console.log("difficulty:", difficulty);
-        console.log("Fetched questions:", res.results);
         if (!res.results?.length && page > 1) {
           handleReset("/play/questions-answered");
           return;

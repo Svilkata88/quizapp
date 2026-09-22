@@ -76,17 +76,24 @@ function PlayDailyQuiz() {
       });
   }, []);
 
-  const handleReset = () => {
+  useEffect(() => {
+    if (qIndex >= questions.length && questions.length > 0) {
+      stop();
+      handleReset("/play/questions-answered");
+    }
+  }, [qIndex, questions.length]);
+
+  useEffect(() => {
+    setRating(question?.rating || 0);
+  }, [question]);
+
+  const handleReset = (completionPath = "/game-overview") => {
+    setLoading(true);
+
     return updateDailyQuiz(`${BASE_URL}/api/daily_quiz/update_daily_quiz/`, {
       points_earned: points,
     })
       .then(() => {
-        setPointsOverview(points);
-        setTimeOverview(time);
-        setCorrectlyAnsweredCountOverview(answeredCorrectly.length);
-        setDifficultyOverview("Daily Quiz");
-        reset();
-
         let newPoints;
 
         if (points <= 5) {
@@ -100,52 +107,50 @@ function PlayDailyQuiz() {
         }
 
         const xp = Math.floor(newPoints / 10);
-        console.log("Updated userDailyQuiz");
+
         return apiEditUser(`${BASE_URL}/api/users/profile/edit/${user.id}`, {
           points: newPoints,
-          xp: user.xp !== xp ? xp : user.xp,
+          xp,
           time_played: parseInt(time),
-        })
-          .then((res) => {
-            if (res && res.points) {
-              setUser({
-                ...user,
-                points: res.points,
-                xp: res.xp,
-              });
-            }
-            console.log("User updated successfully:");
-          })
-          .catch((err) => {
-            console.error("User update failed:", err);
-          });
+        });
       })
-      .then(() => {
+      .then((updatedUser) => {
+        setUser((prevUser) => ({
+          ...prevUser,
+          points: updatedUser.points,
+          xp: updatedUser.xp,
+        }));
+
         return updateQuestions(`${BASE_URL}/api/questions/update-questions/`, {
           answeredCorrectly,
           answeredWrong: wrongAnsweredQuestionId,
-        })
-          .then(() => {
-            setAnsweredCorrectly([]);
-            setWrongAnsweredQuestionId(null);
-            console.log("Questions updated successfully");
+        });
+      })
+      .then(() => {
+        // Save completed game statistics
+        setPointsOverview(points);
+        setTimeOverview(time);
+        setCorrectlyAnsweredCountOverview(answeredCorrectly.length);
+        setDifficultyOverview("Daily Quiz");
 
-            navigate("/game-overview");
-          })
-          .catch((err) => {
-            console.error("Failed to update questions: ", err);
-          });
+        // Clear game state
+        setAnsweredCorrectly([]);
+        setWrongAnsweredQuestionId(null);
+
+        // Reset timer for the next game
+        reset();
+
+        console.log("Updated userDailyQuiz");
+        console.log("User updated successfully:");
+        console.log("Questions updated successfully");
+
+        // Leave the game
+        navigate(completionPath);
       })
       .catch((error) => {
         console.error("Error completing daily quiz:", error);
       });
   };
-
-  if (answeredCorrectly.length === questions.length && questions.length > 0) {
-    stop();
-    handleReset();
-    navigate("/game-overview");
-  }
 
   return loading ? (
     <Spinner />
