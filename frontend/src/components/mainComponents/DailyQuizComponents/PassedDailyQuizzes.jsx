@@ -32,29 +32,31 @@ function PassedDailyQuizzes() {
   ) : (
     <div
       className="
-      flex gap-1 flex-wrap justify-start items-center gap-4
+      flex gap-1 flex-wrap justify-start items-center gap-2 md:gap-4 lg:gap-6
       bg-gray-900/70
-      p-5 mx-auto
+      p-5 md:p-8 lg:p-12 mx-auto
       rounded-lg 
       overflow-hidden overflow-y-auto
       shadow-[var(--blue-shadow)] 
-      w-[90vw]
-       md:max-h-120 2xl:max-h-140
+      w-[90vw] 
+  
       "
     >
       {/* TO FIX ALL DISPLAY SIZES STYLING */}
-      <h2 className="text-center text-xl font-bold mb-4 text-gray-200 w-full">
+      <h2 className="text-center text-xl font-bold mb-3 text-gray-200 w-full">
         Passed Daily Quizzes
       </h2>
-      {passedDailyQuizzes.length !== 0 ? (
-        passedDailyQuizzes.map((quizSummary) => (
-          <PassedDailyQuizzCard key={quizSummary.id} quiz={quizSummary} />
-        ))
-      ) : (
-        <h2 className="text-center text-lg font-semibold text-gray-700 mt-4">
-          No passed daily quizzes found.
-        </h2>
-      )}
+      <div className="flex flex-wrap gap-4 md:gap-7 items-center w-full p-1">
+        {passedDailyQuizzes.length !== 0 ? (
+          passedDailyQuizzes.map((quizSummary) => (
+            <PassedDailyQuizzCard key={quizSummary.id} quiz={quizSummary} />
+          ))
+        ) : (
+          <h2 className="text-center text-lg font-semibold text-gray-700 mt-4">
+            No passed daily quizzes found.
+          </h2>
+        )}
+      </div>
     </div>
   );
 }

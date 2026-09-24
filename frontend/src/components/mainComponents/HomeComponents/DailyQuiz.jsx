@@ -19,8 +19,8 @@ function DailyQuiz() {
         setIsPlayed(data.is_played);
       })
       .catch((err) => {
-        console.error("Failed to fetch daily topic:", err);
-        setDailyTopic("Error fetching daily topic");
+        console.error("Please login to see daily topic!", err);
+        setDailyTopic("Please login to see daily topic!");
       })
       .finally(() => {
         setLoading(false);

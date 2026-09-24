@@ -2,11 +2,11 @@ function PassedDailyQuizzCard({ quiz }) {
   return (
     <div
       className="
-      flex flex-col gap-1
-      w-35 h-50 md:w-50 md:h-50
+      flex flex-col gap-1 md:gap-3
+      min-w-32 max-w-44 h-48 md:min-w-44 md:max-w-62 min-h-56 lg:min-w-54 lg:max-w-74 flex-1
       text-xs md:text-sm
       bg-gradient-to-b from-zinc-100/80 to-zinc-500/90
-      border border-gray-300 rounded-lg p-4
+      border border-gray-300 rounded-lg p-3
     "
     >
       <h3>
