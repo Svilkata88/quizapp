@@ -116,18 +116,12 @@ def get_daily_quiz_questions(request):
     rnd.shuffle(ids)
     
     questions = Question.objects.filter(id__in=ids[:20], status=Question.Status.CONFIRMED)
-    serialized_questions = QuestionSerializer(questions, many=True)
-
-    yesterday_daily_quiz = UserDailyQuiz.objects.filter(user=request.user, topic=category, for_date=(date.today() - timedelta(days=1))).first()
-    streak = 0
-    if yesterday_daily_quiz and yesterday_daily_quiz.is_played:
-        streak = yesterday_daily_quiz.streak + 1   
+    serialized_questions = QuestionSerializer(questions, many=True) 
     
     UserDailyQuiz.objects.get_or_create(
         user=request.user,
         topic=category,
         for_date=date.today(),
-        streak=streak,
     )
 
     return Response(serialized_questions.data, status=status.HTTP_200_OK)
@@ -149,9 +143,15 @@ def update_daily_quiz_after_game(request):
             status=status.HTTP_404_NOT_FOUND
         )
 
+    yesterday_daily_quiz = UserDailyQuiz.objects.filter(user=request.user, for_date=(date.today() - timedelta(days=1))).first()
+    streak = 1
+    if yesterday_daily_quiz and yesterday_daily_quiz.is_played:
+        streak = yesterday_daily_quiz.streak + 1  
+
     daily_quiz.points_earned = int(points_earned)
     daily_quiz.end_time = timezone.now()
     daily_quiz.is_played = True
+    daily_quiz.streak = streak
     daily_quiz.save()
 
     print(

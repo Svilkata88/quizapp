@@ -201,7 +201,7 @@ function Profile() {
           </div>
 
           {/* Player statistics section */}
-          <div className="flex flex-col gap-2 md:gap-3">
+          <div className="flex flex-col gap-1  md:gap-2">
             <div className="flex gap-2 items-center h-8">
               <img src="/xp.png" alt="xp" className="w-8 h-8 object-contain" />
               <h2>Xp: {user.xp}</h2>
