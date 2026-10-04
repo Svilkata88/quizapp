@@ -19,6 +19,7 @@ class UserDailyQuiz(models.Model):
     end_time = models.DateTimeField(null=True, blank=True)
     points_earned = models.PositiveIntegerField(default=0)
     is_played = models.BooleanField(default=False)
+    streak = models.PositiveIntegerField(default=0)
 
 
 class DailyQuizSummary(models.Model):

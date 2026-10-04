@@ -1,7 +1,7 @@
 import redis
 import random
 import environ
-from datetime import date
+from datetime import date, timedelta
 from urllib import request
 from django.db.models import F
 from rest_framework import status
@@ -107,10 +107,16 @@ def get_daily_quiz_questions(request):
     questions = Question.objects.filter(id__in=ids[:20], status=Question.Status.CONFIRMED)
     serialized_questions = QuestionSerializer(questions, many=True)
 
+    yesterday_daily_quiz = UserDailyQuiz.objects.filter(user=request.user, topic=category, for_date=(date.today() - timedelta(days=1))).first()
+    streak = 0
+    if yesterday_daily_quiz and yesterday_daily_quiz.is_played:
+        streak = yesterday_daily_quiz.streak + 1   
+    
     UserDailyQuiz.objects.get_or_create(
         user=request.user,
         topic=category,
         for_date=date.today(),
+        streak=streak,
     )
 
     return Response(serialized_questions.data, status=status.HTTP_200_OK)

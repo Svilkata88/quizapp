@@ -105,6 +105,7 @@ function Profile() {
       <section
         className={`${cardBG} flex flex-col md:flex-row items-center gap-5 lg:gap-20 border border-gray-300 !rounded-3xl xl:h-[400px] lg:w-[800px] mx-4 md:mx-auto p-6 shadow-[0px_0px_13px_4px_rgba(52,115,138,1)]`}
       >
+        {/* Left side */}
         <div className="h-40 w-40 md:h-68 md:w-68 lg:h-88 lg:w-88 relative box-border border-2 border-gray-400 rounded-full bg-zinc-400">
           <div className="absolute inset-0 rounded-full overflow-hidden border-2 border-white">
             <img
@@ -131,52 +132,60 @@ function Profile() {
           </button>
         </div>
 
-        <div className="flex gap-2 flex-col justify-start mt-4">
-          <div className="flex gap-2 items-center mb-5 lg:mb-10">
-            <h1
-              className="lg:text-4xl xl:text-4xl"
+        {/* Right side */}
+        <div className="flex gap-2 flex-col justify-start mt-2">
+          {/* Player info section */}
+          <div className="flex gap-2 flex-col items-center mb-3 lg:mb-4">
+            <h2
+              className="lg:text-3xl"
               ref={usernameRef}
-            >{`${user.username}\'s Profile`}</h1>
+            >{`${user.username}\'s Profile`}</h2>
 
-            <form
-              action={handleProfileChange}
-              className="hidden flex gap-1 items-center"
-              ref={userInputRef}
-            >
-              <input
-                type="text"
-                name="username"
-                placeholder={user.username}
-                className="bg-zinc-100 p-1 pl-3 rounded-sm"
-              />
-
-              <div className="flex gap-1 hidden" ref={editButtonsBoxRef}>
-                <button
-                  className="w-8 h-8 cursor-pointer hover:scale-120 transition-transform duration-300 bg-white p-1 rounded-full border-2 border-gray-300 flex items-center justify-center"
-                  type="submit"
-                >
-                  <img src="/ok.png" alt="edit" />
-                </button>
-                <button
-                  className="w-8 h-8 cursor-pointer hover:scale-120 transition-transform duration-300 bg-white p-1 rounded-full border-2 border-gray-300 flex items-center justify-center"
-                  type="button"
-                  onClick={hideShowBtns}
-                >
-                  <img src="/close.png" alt="edit" />
-                </button>
+            <div className="flex gap-2 items-center">
+              <div className="" ref={usernameRef}>
+                username: <span className="lg:text-2xl">{user.username}</span>
               </div>
-            </form>
-            <button
-              className="w-8 h-8 cursor-pointer hover:scale-120 transition-transform duration-300"
-              onClick={hideShowBtns}
-              ref={eidtBtnRef}
-            >
-              <img src="/edit.png" alt="edit" />
-            </button>
+
+              <form
+                action={handleProfileChange}
+                className="hidden flex gap-1 items-center"
+                ref={userInputRef}
+              >
+                <input
+                  type="text"
+                  name="username"
+                  placeholder={user.username}
+                  className="bg-zinc-100 p-1 pl-3 rounded-sm"
+                />
+
+                <div className="flex gap-1 hidden" ref={editButtonsBoxRef}>
+                  <button
+                    className="w-6 h-6 cursor-pointer hover:scale-120 transition-transform duration-300 bg-white p-1 rounded-full border-2 border-gray-300 flex items-center justify-center"
+                    type="submit"
+                  >
+                    <img src="/ok.png" alt="edit" />
+                  </button>
+                  <button
+                    className="w-6 h-6 cursor-pointer hover:scale-120 transition-transform duration-300 bg-white p-1 rounded-full border-2 border-gray-300 flex items-center justify-center"
+                    type="button"
+                    onClick={hideShowBtns}
+                  >
+                    <img src="/close.png" alt="edit" />
+                  </button>
+                </div>
+              </form>
+              <button
+                className="w-6 h-6 cursor-pointer hover:scale-120 transition-transform duration-300"
+                onClick={hideShowBtns}
+                ref={eidtBtnRef}
+              >
+                <img src="/edit.png" alt="edit" />
+              </button>
+            </div>
           </div>
 
-          <div className="flex flex-col gap-2 md:gap-4">
-            {/* Player statistics section */}
+          {/* Player statistics section */}
+          <div className="flex flex-col gap-2 md:gap-3">
             <div className="flex gap-2 items-center h-8">
               <img src="/xp.png" alt="xp" className="w-8 h-8 object-contain" />
               <h2>Xp: {user.xp}</h2>
