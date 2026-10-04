@@ -9,7 +9,6 @@ from django.utils import timezone
 from rest_framework.response import Response
 from questions.models import Question, Category
 from questions.serializers import QuestionSerializer
-from django.views.decorators.cache import cache_page
 from rest_framework.permissions import IsAuthenticated
 from .models import DailyQuizSummary, DailyTopic, UserDailyQuiz
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -80,12 +79,14 @@ def get_current_daily_topic_and_user_daily_quiz(request):
         daily_topic = redis_client.get("daily_topic")
     return Response({"daily_topic": daily_topic, "is_played": daily_quiz.is_played if daily_quiz else None}, status=status.HTTP_200_OK)
 
-@cache_page(60 * 30)
 @api_view(["GET"])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def get_user_streak(request):
-    daily_quiz = UserDailyQuiz.objects.all().order_by('-for_date').filter(user=request.user).first()
+    daily_quiz = UserDailyQuiz.objects.filter(
+        user=request.user,
+        is_played=True,
+    ).order_by('-for_date').first()
     if daily_quiz:
         return Response({"streak": daily_quiz.streak}, status=status.HTTP_200_OK)
     else:

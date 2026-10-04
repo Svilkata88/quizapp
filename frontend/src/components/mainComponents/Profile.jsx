@@ -61,7 +61,7 @@ function Profile() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [user]);
+  }, [user?.id]);
 
   const handleClick = () => {
     fileInputRef.current.click();
