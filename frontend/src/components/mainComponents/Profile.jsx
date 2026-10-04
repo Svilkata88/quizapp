@@ -1,8 +1,9 @@
 import { useUserContext } from "../../hooks/userContext";
 import { useBGContext } from "../../hooks/useBG";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { apiEditUser } from "../../../utils";
 import { formatTime } from "../../../utils";
+import { getUserStreak } from "../../../utils";
 import Cookies from "js-cookie";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -37,6 +38,8 @@ function Profile() {
   } = useBGContext();
   const [isColorsOpen, setIsColorsOpen] = useState(false);
   const [isBgOpen, setIsBgOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [streak, setStreak] = useState(0);
   const [cardBG, setCardBG] = useState(
     localStorage.getItem("cardBG") || DEFAULT_COL,
   );
@@ -46,6 +49,19 @@ function Profile() {
   const userInputRef = useRef(null);
   const editButtonsBoxRef = useRef(null);
   const eidtBtnRef = useRef(null);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    getUserStreak(`${BASE_URL}/api/daily_quiz/user-streak/`)
+      .then((res) => setStreak(res.streak))
+      .catch((err) => {
+        console.error("Failed to fetch user streak:", err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [user]);
 
   const handleClick = () => {
     fileInputRef.current.click();
@@ -213,6 +229,14 @@ function Profile() {
                 className="w-8 h-6 object-contain"
               />
               <h2>Time Played: {formatTime(user.time_played)}s</h2>
+            </div>
+            <div className="flex gap-2 items-center h-8">
+              <img
+                src="/fire.png"
+                alt="fire"
+                className="w-8 h-6 object-contain"
+              />
+              <h2>Streak: {streak}</h2>
             </div>
 
             {/* Card colors section */}

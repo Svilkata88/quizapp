@@ -278,6 +278,13 @@ function fetchDailyQuizSummary(url) {
   }).then((response) => response);
 }
 
+function getUserStreak(url) {
+  return apiFetch(url, {
+    method: "GET",
+    credentials: "include",
+  }).then((response) => response);
+}
+
 function shuffleAnswers(answers) {
   const shuffled = [...answers];
 
@@ -318,4 +325,5 @@ export {
   apiDeleteUser,
   formatTime,
   shuffleAnswers,
+  getUserStreak,
 };
