@@ -236,7 +236,7 @@ function Profile() {
                 alt="fire"
                 className="w-8 h-6 object-contain"
               />
-              <h2>Streak: {streak}</h2>
+              <h2>{`Streak: ${streak} ${streak === 1 ? "day" : "days"}`}</h2>
             </div>
 
             {/* Card colors section */}
@@ -245,7 +245,10 @@ function Profile() {
                 <button
                   type="button"
                   className="flex gap-2 text-md items-center p-2 bg-zinc-200 w-36 h-6 cursor-pointer rounded-full hover:scale-105 transition-transform duration-300 ease-in-out"
-                  onClick={() => setIsColorsOpen(!isColorsOpen)}
+                  onClick={() => {
+                    setIsColorsOpen(!isColorsOpen);
+                    setIsBgOpen(false);
+                  }}
                 >
                   <img
                     src={`${isColorsOpen ? "./arrup.png" : "./arrdown.png"}`}
@@ -357,7 +360,10 @@ function Profile() {
                 <button
                   type="button"
                   className="flex gap-2 text-md items-center p-2 bg-zinc-200 w-36 h-6 cursor-pointer rounded-full hover:scale-105 transition-transform duration-300 ease-in-out"
-                  onClick={() => setIsBgOpen(!isBgOpen)}
+                  onClick={() => {
+                    setIsBgOpen(!isBgOpen);
+                    setIsColorsOpen(false);
+                  }}
                 >
                   <img
                     src={`${isBgOpen ? "./arrup.png" : "./arrdown.png"}`}
@@ -376,13 +382,13 @@ function Profile() {
                     }}
                   ></li>
                   <li
-                    className={`w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('https://res.cloudinary.com/dnnab4vv0/image/upload/v1784735162/Pngtree_3d_cat_as_video_game_15593467_vogekl.png')] bg-cover bg-center`}
+                    className="w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('https://res.cloudinary.com/dnnab4vv0/image/upload/w_200,h_200,c_fill,q_auto,f_auto/Pngtree_3d_cat_as_video_game_15593467_vogekl.png')] bg-cover bg-center"
                     onClick={() => {
                       applyNewBg(`url('${BgChoices.CATBG}')`, `dark`);
                     }}
                   ></li>
                   <li
-                    className={`w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('https://res.cloudinary.com/dnnab4vv0/image/upload/v1785250628/2-d_nxlakw.jpg')] bg-cover bg-center`}
+                    className={`w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('https://res.cloudinary.com/dnnab4vv0/image/upload/w_200,h_200,c_fill,q_auto,f_auto/v1785250628/2-d_nxlakw.jpg')] bg-cover bg-center`}
                     onClick={() => {
                       applyNewBg(
                         aspectRatio > 1
@@ -393,7 +399,7 @@ function Profile() {
                     }}
                   ></li>
                   <li
-                    className={`w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('https://res.cloudinary.com/dnnab4vv0/image/upload/v1785250628/1-d_g0ergt.jpg')] bg-cover bg-center`}
+                    className={`w-14 aspect-[4/3] border border-gray-400 rounded-md cursor-pointer bg-[url('https://res.cloudinary.com/dnnab4vv0/image/upload//w_200,h_200,c_fill,q_auto,f_auto/1-d_g0ergt.jpg')] bg-cover bg-center`}
                     onClick={() => {
                       applyNewBg(
                         aspectRatio > 1
