@@ -2,15 +2,23 @@ import { useState, useEffect } from "react";
 import PassedDailyQuizzCard from "./PassedDailyQuizzCard.jsx";
 import Spinner from "../../others/Spinner.jsx";
 import { fetchDailyQuizSummary } from "../../../../utils.js";
+import { useUserContext } from "../../../hooks/userContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function PassedDailyQuizzes() {
+  const { isAuthenticated } = useUserContext();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [passedDailyQuizzes, setPassedDailyQuizzes] = useState([]);
 
   useEffect(() => {
     setLoading(true);
+    if (!isAuthenticated) {
+      setLoading(false);
+      navigate("/auth/login");
+    }
 
     fetchDailyQuizSummary(`${BASE_URL}/api/daily_quiz/daily_quiz_summary/`)
       .then((data) => {
