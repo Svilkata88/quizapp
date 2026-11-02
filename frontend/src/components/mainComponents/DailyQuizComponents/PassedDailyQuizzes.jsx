@@ -33,7 +33,7 @@ function PassedDailyQuizzes() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [isAuthenticated]);
 
   return loading ? (
     <Spinner />
